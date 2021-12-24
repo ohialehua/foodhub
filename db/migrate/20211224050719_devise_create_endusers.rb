@@ -14,6 +14,11 @@ class DeviseCreateEndusers < ActiveRecord::Migration[5.2]
       ## Rememberable
       t.datetime :remember_created_at
 
+      ##add
+      t.string :name
+      t.text :introduction
+      t.string :profifle_image_id
+
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
       # t.datetime :current_sign_in_at
