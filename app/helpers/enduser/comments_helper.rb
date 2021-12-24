@@ -1,0 +1,2 @@
+module Enduser::CommentsHelper
+end

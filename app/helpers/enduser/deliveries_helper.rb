@@ -1,0 +1,2 @@
+module Enduser::DeliveriesHelper
+end

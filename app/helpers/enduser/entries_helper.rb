@@ -1,0 +1,2 @@
+module Enduser::EntriesHelper
+end

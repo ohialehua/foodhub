@@ -1,0 +1,2 @@
+module Enduser::ItemsHelper
+end
