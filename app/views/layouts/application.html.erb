@@ -26,6 +26,7 @@
                 <li class="nav-item ml-4"><%= link_to "Cart",class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Log out",destroy_enduser_session_path,method: :delete,class:"nav-link" %></li>
               <% elsif store_signed_in? %>
+                <li class="nav-item pt-2">ようこそ、<%= current_store.name %>様！</li>
                 <li class="nav-item ml-4"><%= link_to "Items", class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Customers", class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Orders", class:"nav-link" %></li>
