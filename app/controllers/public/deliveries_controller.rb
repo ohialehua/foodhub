@@ -1,4 +1,6 @@
 class Public::DeliveriesController < ApplicationController
+  before_action :authenticate_enduser!
+
   def index
   end
 

@@ -15,12 +15,12 @@ class DeviseCreateStores < ActiveRecord::Migration[5.2]
       t.datetime :remember_created_at
 
       #add
-      t.string :name
-      t.string :name_kana
-      t.string :post_address
-      t.string :address
-      t.string :phone_number
-      t.text :introduction
+      t.string :name, null: false, default: ""
+      t.string :name_kana, null: false, default: ""
+      t.string :post_address, null: false, default: ""
+      t.string :address, null: false, default: ""
+      t.string :phone_number, null: false, default: ""
+      t.text :introduction, null: false, default: ""
       t.string :profile_image_id
       t.boolean :is_deleted,null: false, default: false
 

@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col m-3">
+      <h2 class="mt-3"><%= current_store.name %>の商品ジャンル一覧　/　追加</h2>
+      <div class="my-5">
+        <%= form_with model:@genre, url: store_genres_path, method: :post, local:true do |f| %>
+          <p>ジャンル名
+          <%= f.text_field :name, placeholder:"ジャンル名" %>
+          <%= f.submit "新規投稿", class:"btn btn-success" %>
+          </p>
+        <% end %>
+      </div>
+      <table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
+          <thead>
+            <tr>
+              <th>ジャンル</th>
+              <th></th>
+            </tr>
+          </thead>
+          <% @genres.each do |genre| %>
+            <tr>
+              <td><%= genre.name %></td>
+              <td><%= link_to "編集する", edit_store_genre_path(genre), class:"btn btn-primary" %></td>
+            </tr>
+            <% end %>
+        </table>
+    </div>
+  </div>
+</div>
+<%= paginate @genres %>

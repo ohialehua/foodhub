@@ -1,1 +1,39 @@
-<h1>店舗商品一覧画面</h1>
+<div class="container">
+ <div class="row">
+  <div class="col m-3">
+    <h2 class="mt-3"><%= current_store.name %>の商品一覧</h2><br>
+    <p class="text-right"><%= link_to "商品を新規登録",new_store_item_path, class:"btn btn-primary text-black" %></p>
+    <table class="table table-borderless table-dark" style="opacity: 0.8;">
+      <thead>
+        <tr>
+          <th scope="col">商品ID</th>
+          <th scope="col">商品名</th>
+          <th scope="col">税抜価格</th>
+          <th scope="col">ジャンル</th>
+          <th></th>
+          <th scope="col">ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @items.each do |item| %>
+        <tr>
+          <th scope="low"><%= item.id %></th>
+          <th scope="low"><%= link_to item.name, store_item_path(item), class:"text-white" %></th>
+          <th scope="low"><%= item.price_before_tax.to_s(:delimited) %>円</th>
+    	    <th scope="low"><%= item.genre.name %></th>
+    	    <th></th>
+    	    <th scope="low">
+    	     <% if item.is_active? == true %>
+					  <span class="badge" style="background:#8BCE9A">販売中</span>
+				   <% else %>
+					  <span class="badge" style="background:#D52438">販売停止中</span>
+				   <% end %>
+				  </th>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+ </div>
+ <%= paginate @items %>
+</div>

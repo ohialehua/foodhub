@@ -9,4 +9,8 @@ class Store < ApplicationRecord
   has_many :coupons, dependent: :destroy
   has_many :markers, dependent: :destroy
   has_many :endusers, through: :markers
+
+  validates :name,presence:true
+  validates :name_kana,presence:true
+  validates :post_address,presence:true,length: { is: 7 }
 end

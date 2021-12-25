@@ -15,8 +15,8 @@ class DeviseCreateEndusers < ActiveRecord::Migration[5.2]
       t.datetime :remember_created_at
 
       ##add
-      t.string :name
-      t.text :introduction
+      t.string :name, null: false, default: ""
+      t.text :introduction, null: false, default: ""
       t.string :profifle_image_id
 
       ## Trackable

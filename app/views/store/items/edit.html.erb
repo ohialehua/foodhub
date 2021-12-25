@@ -1,1 +1,36 @@
-<h1>店舗商品編集画面</h1>
+<div class="row">
+  <div class="col m-3">
+   <h2 class="mt-3">商品編集</h2><br>
+   <div class="row">
+    <div class="mx-auto">
+       <%= form_with model: @item, url: store_item_path(@item), local:true do |f| %>
+       <table class="table table-borderless table-dark" style="opacity: 0.8;">
+       <tr></tr>
+       <th><%= f.label :商品画像 %></th>
+       <td><%= f.attachment_field :image %></td>
+       <tr></tr>
+       <th><%= f.label :商品名 %></th>
+       <td><%= f.text_field :name  %></th>
+       <tr></tr>
+       <th><%= f.label :商品説明 %></th>
+       <td><%= f.text_area :body %></td>
+       <tr></tr>
+       <th><%= f.label :ジャンル %></th>
+       <td><%= f.collection_select(:genre_id, @genres, :id, :name, {prompt: "選択してください"}) %></td>
+       <tr></tr>
+       <th><%= f.label :税抜価格 %></th>
+       <td><%= f.text_field :price_before_tax %>円</td>
+       <tr></tr>
+       <th><%= f.label :販売ステータス %></th>
+       <td><%= f.radio_button :is_active, true %>
+       <%= f.label :is_active, "販売中" %>
+       <%= f.radio_button :is_active, false %>
+       <%= f.label :is_active, "販売停止中" %>
+       </td>
+      </table>
+       <%= f.submit '変更を保存', class: 'btn btn-success' %>
+       <% end %>
+    </div>
+   </div>
+  </div>
+</div>
