@@ -1,13 +1,13 @@
-<h2 class="text-white">会員ログイン</h2>
+<h2 class="mt-5">会員ログイン</h2>
 
 <%= form_with model: @enduser, url: enduser_session_path, local: true do |f| %>
   <table class="table table-borderless table-dark mt-5" style="opacity: 0.8;">
     <tbody>
       <tr>
-        <th>ユーザーネーム</th>
+        <th>メールアドレス</th>
         <td>
           <div class="field">
-            <%= f.text_field :name, autofocus: true, size: 20, autocomplete: "name" %>
+            <%= f.email_field :email, autofocus: true, size: 50, autocomplete: "email" %>
           </div>
         </td>
       </tr>
