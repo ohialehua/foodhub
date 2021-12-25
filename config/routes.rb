@@ -40,7 +40,7 @@ scope module: :store do
   resources :genres,except:[:show,:destroy,:new]
   resources :endusers,except:[:new,:create,:destroy]
   resources :orders,only:[:show,:update]
-  resources :order_items,only:[:update]
+  resources :order_details,only:[:update]
 end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
