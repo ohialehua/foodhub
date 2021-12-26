@@ -3,7 +3,7 @@ class Store::GenresController < ApplicationController
 
   def index
     @genre = Genre.new
-    @genres = Genre.page(params[:page])
+    @genres = current_store.genres
   end
 
   def edit
