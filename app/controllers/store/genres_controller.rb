@@ -11,8 +11,9 @@ class Store::GenresController < ApplicationController
   end
 
   def create
-    genre = Genre.new(genre_params)
-    genre.save
+    @genre = Genre.new(genre_params)
+    @genre.store_id = current_store.id
+    @genre.save
     redirect_to request.referer
   end
 
