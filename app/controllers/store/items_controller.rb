@@ -26,6 +26,17 @@ class Store::ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
+    @genres = current_store.genres
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to item_path(@item)
+    else
+      redirect_to request.referer
+    end
   end
 
   private
