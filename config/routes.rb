@@ -23,8 +23,8 @@ scope module: :store do
     get 'unsubscribe' => 'stores#unsubscribe'
     patch 'withdraw' => 'stores#withdraw'
   end
-  resources :items,except:[:destroy]
   resources :genres,except:[:show,:destroy]
+  resources :items,except:[:destroy]
   resources :endusers,except:[:new,:create,:destroy]
   resources :orders,only:[:show,:update]
   resources :order_details,only:[:update]

@@ -2,32 +2,32 @@ class Store::ItemsController < ApplicationController
   before_action :authenticate_store!
 
   def index
-    @items = Item.page(params[:page])
+    @items = current_store.items.page(params[:page])
   end
-  
+
   def show
     @item = Item.find(params[:id])
   end
 
   def new
     @item = Item.new
-    @genres = Genre.all
+    @genres = current_store.genres
   end
 
   def create
     @item = Item.new(item_params)
     @item.store_id = current_store.id
     if @item.save
-      redirect_to store_item_path(@item)
+      redirect_to item_path(@item)
     else
-      @items = Item.all
-      render :index
+      @genres = current_store.genres
+      render :new
     end
   end
 
   def edit
   end
-  
+
   private
   def item_params
     params.require(:item).permit(:genre_id, :name, :body, :price_before_tax, :image, :is_active)
