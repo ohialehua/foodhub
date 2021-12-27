@@ -22,12 +22,12 @@ scope module: :store do
   resources :stores,only:[:index,:show,:edit] do
     get 'unsubscribe' => 'stores#unsubscribe'
     patch 'withdraw' => 'stores#withdraw'
-    resources :items,except:[:destroy]
-    resources :genres,except:[:show,:destroy]
-    resources :endusers,except:[:new,:create,:destroy]
-    resources :orders,only:[:show,:update]
-    resources :order_details,only:[:update]
   end
+  resources :items,except:[:destroy]
+  resources :genres,except:[:show,:destroy]
+  resources :endusers,except:[:new,:create,:destroy]
+  resources :orders,only:[:show,:update]
+  resources :order_details,only:[:update]
 end
 
 scope module: :public do

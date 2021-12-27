@@ -6,10 +6,6 @@ class Store::GenresController < ApplicationController
     @genres = current_store.genres
   end
 
-  def edit
-    @genre = Genre.find(params[:id])
-  end
-
   def create
     @genre = Genre.new(genre_params)
     @genre.store_id = current_store.id
@@ -17,10 +13,14 @@ class Store::GenresController < ApplicationController
     redirect_to request.referer
   end
 
+  def edit
+    @genre = Genre.find(params[:id])
+  end
+
   def update
-    genre = Genre.find(params[:id])
-    if genre.update(genre_params)
-      redirect_to store_genres_path
+    @genre = Genre.find(params[:id])
+    if @genre.update(genre_params)
+      redirect_to genres_path
     else
       redirect_to request.referer
     end
