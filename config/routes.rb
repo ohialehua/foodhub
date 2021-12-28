@@ -25,8 +25,8 @@ scope module: :store do
   end
   resources :genres,except:[:show,:destroy]
   resources :items,except:[:destroy]
-  resources :endusers,except:[:new,:create,:destroy]
-  resources :orders,only:[:show,:update]
+  resources :markers,except:[:new,:create,:destroy]
+  resources :orders,only:[:index,:show,:update]
   resources :order_details,only:[:update]
 end
 
