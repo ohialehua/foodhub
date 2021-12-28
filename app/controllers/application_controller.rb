@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     elsif resource_or_scope.is_a?(Store)
       store_path(current_store.id)
     else
-      enduser_path(current_enduser.id)
+      endusers_path
     end
   end
 

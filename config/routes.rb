@@ -17,19 +17,6 @@ namespace :admin do
   resources :stores,only:[:index,:show,:edit]
 end
 
-scope module: :store do
-  root to: 'homes#top'
-  resources :stores,only:[:index,:show,:edit] do
-    get 'unsubscribe' => 'stores#unsubscribe'
-    patch 'withdraw' => 'stores#withdraw'
-  end
-  resources :genres,except:[:show,:destroy]
-  resources :items,except:[:destroy]
-  resources :markers,except:[:new,:create,:destroy]
-  resources :orders,only:[:index,:show,:update]
-  resources :order_details,only:[:update]
-end
-
 scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
@@ -43,6 +30,19 @@ scope module: :public do
       resources :deliveries,except:[:show]
     end
   end
+
+scope module: :store do
+  root to: 'homes#top'
+  resources :stores,only:[:index,:show,:edit] do
+    get 'unsubscribe' => 'stores#unsubscribe'
+    patch 'withdraw' => 'stores#withdraw'
+  end
+  resources :genres,except:[:show,:destroy]
+  resources :items,except:[:destroy]
+  resources :markers,except:[:new,:create,:destroy]
+  resources :orders,only:[:index,:show,:update]
+  resources :order_details,only:[:update]
+end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

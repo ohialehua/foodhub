@@ -5,6 +5,7 @@ class Public::EndusersController < ApplicationController
   end
 
   def show
+    @enduser = current_enduser
   end
 
   def edit
