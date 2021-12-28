@@ -2,6 +2,7 @@ class Public::EndusersController < ApplicationController
   before_action :authenticate_enduser!
 
   def index
+    @endusers = Enduser.page(params[:page])
   end
 
   def show
@@ -9,5 +10,11 @@ class Public::EndusersController < ApplicationController
   end
 
   def edit
+  end
+
+  private
+
+  def enduser_params
+    params.require(:enduser).permit(:name, :introduction, :profile_image)
   end
 end
