@@ -32,7 +32,9 @@ end
 scope module: :public do
   root to: 'homes#top'
   get 'about' => 'homes#about'
-  resources :endusers,except:[:destroy]
+  resources :endusers,except:[:destroy] do
+   post 'edit' => 'endusers#edit'
+ end
   resources :items,only:[:index,:show]
   resources :cart_items,except:[:show,:new,:edit]
   delete 'cart_items' => 'cart_items#destroy_all'

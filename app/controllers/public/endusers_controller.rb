@@ -10,6 +10,16 @@ class Public::EndusersController < ApplicationController
   end
 
   def edit
+    @enduser = Enduser.find(params[:id])
+  end
+
+  def update
+    @enduser = Enduser.find(params[:id])
+    if @enduser.update(enduser_params)
+      redirect_to enduser_path(@enduser)
+    else
+      render :edit
+    end
   end
 
   private
