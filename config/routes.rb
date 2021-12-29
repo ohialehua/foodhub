@@ -20,15 +20,14 @@ end
 scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
-    resources :endusers,except:[:destroy] do
-      resources :items,only:[:index,:show]
-      resources :cart_items,except:[:show,:new,:edit]
-      delete 'cart_items' => 'cart_items#destroy_all'
-      post 'orders/confirm' => 'orders#confirm'
-      get 'orders/complete' => 'orders#complete'
-      resources :orders,except:[:edit]
-      resources :deliveries,except:[:show]
-    end
+    resources :endusers,except:[:destroy]
+    resources :items,only:[:index,:show]
+    resources :cart_items,except:[:show,:new,:edit]
+    delete 'cart_items' => 'cart_items#destroy_all'
+    post 'orders/confirm' => 'orders#confirm'
+    get 'orders/complete' => 'orders#complete'
+    resources :orders,except:[:edit]
+    resources :deliveries,except:[:show]
   end
 
 scope module: :store do
