@@ -20,7 +20,7 @@ class Store::GenresController < ApplicationController
   def update
     @genre = Genre.find(params[:id])
     if @genre.update(genre_params)
-      redirect_to genres_path
+      redirect_to store_genres_path
     else
       redirect_to request.referer
     end

@@ -18,7 +18,7 @@ class Store::ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.store_id = current_store.id
     if @item.save
-      redirect_to item_path(@item)
+      redirect_to store_item_path(@item)
     else
       @genres = current_store.genres
       render :new
@@ -33,7 +33,7 @@ class Store::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
-      redirect_to item_path(@item)
+      redirect_to store_item_path(@item)
     else
       redirect_to request.referer
     end
