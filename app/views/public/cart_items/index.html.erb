@@ -1,2 +1,55 @@
-<h1>Enduser::CartItems#index</h1>
-<p>Find me in app/views/enduser/cart_items/index.html.erb</p>
+<div class="container">
+  <div class="col m-3">
+    <h3 class="text-white">ショッピングカート</h3>
+  </div>
+  <div class="col-auto text-right">
+    <%= link_to "カートを空にする", cart_items_path, method: :delete, "data-confirm" => "本当に消しますか?", class:"btn btn-warning ml-4 mb-3" %>
+  </div>
+  <table class="table table-borderless table-dark" style="opacity: 0.8;">
+    <thead>
+      <tr>
+        <th scope="col">商品名</th>
+        <th scope="col">単価（税込）</th>
+        <th scope="col">数量</th>
+        <th scope="col">小計</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td>
+            <%= attachment_image_tag cart_item.item, :image, size: '50x50', fallback: "no-img.png" %>
+            <%= cart_item.item.name %>
+          </td>
+          <td><%= cart_item.item.with_tax_price.to_s(:delimited) + "円" %></td>
+          <td>
+            <%= form_with model: cart_item ,local: true do |f| %>
+              <%= f.select :quantity, *[1..10] %>
+              <%= f.submit "変更", class:"btn btn-light" %>
+            <% end %>
+          </td>
+          <td><%= cart_item.subtotal.to_s(:delimited) + "円" %></td>
+          <td><%= link_to "消去する", cart_item_path(cart_item), method: :delete, "data-confirm" => "本当に消しますか?🥺", class:"btn btn-danger ml-4 mb-3" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="row m-3">
+  <div class="col-4">
+  <%= link_to "買い物を続ける", root_path, class:"btn btn-info ml-4 mb-3" %>
+  </div>
+  <div class="col-4 offset-4">
+    <table class="table table-borderless table-dark" style="opacity: 0.8;">
+      <tr>
+        <td>合計金額</td>
+        <td><%= @total.round.to_s(:delimited) + "円" %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<% if @cart.count != 0 %>
+<p class="text-center"><%= link_to "注文に進む", new_order_path, class:"btn btn-primary ml-4 mb-3" %></p>
+<% end %>
+
