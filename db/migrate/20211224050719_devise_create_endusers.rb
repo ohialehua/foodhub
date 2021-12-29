@@ -18,6 +18,9 @@ class DeviseCreateEndusers < ActiveRecord::Migration[5.2]
       t.string :name, null: false, default: ""
       t.text :introduction, null: false, default: ""
       t.string :profile_image_id
+      t.string :full_name, null: false, default: ""
+      t.string :full_name_kana, null: false, default: ""
+      t.string :phone_number, null: false, default: ""
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false

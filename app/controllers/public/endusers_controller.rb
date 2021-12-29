@@ -25,6 +25,6 @@ class Public::EndusersController < ApplicationController
   private
 
   def enduser_params
-    params.require(:enduser).permit(:name, :introduction, :profile_image)
+    params.require(:enduser).permit(:name, :introduction, :profile_image, :full_name, :full_name_kana, :phone_number)
   end
 end

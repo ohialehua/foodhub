@@ -15,6 +15,24 @@
         <%= f.label :introduction %>
         <%= f.text_area :introduction, class: "form-control introduction" %>
       </div>
+    <% if current_enduser.full_name.blank? %>
+      <div class="form-group">
+        <%= f.label :full_name %>
+        <%= f.text_field :full_name, class: "form-control introduction" %>
+      </div>
+    <% end %>
+    <% if current_enduser.full_name_kana.blank? %>
+      <div class="form-group">
+        <%= f.label :full_name_kana %>
+        <%= f.text_field :full_name_kana, class: "form-control introduction" %>
+      </div>
+    <% end %>
+    <% if current_enduser.phone_number.blank? %>
+      <div class="form-group">
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number, class: "form-control introduction" %>
+      </div>
+    <% end %>
       <div class="form-group">
         <%= f.submit class: 'btn btn-secondary' %>
       </div>

@@ -34,6 +34,8 @@ scope module: :public do
   get 'about' => 'homes#about'
   resources :endusers,except:[:destroy] do
    post 'edit' => 'endusers#edit'
+   get 'add' =>  'endusers#add'
+   post 'add' =>  'endusers#add'
  end
   resources :items,only:[:index,:show]
   resources :cart_items,except:[:show,:new,:edit]

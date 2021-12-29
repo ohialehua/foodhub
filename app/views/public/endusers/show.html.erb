@@ -24,6 +24,24 @@
             <td>紹介文</td>
             <td><%= @enduser.introduction %></td>
           </tr>
+        <% if @enduser == current_enduser %>
+          <tr>
+            <td>氏名</td>
+            <td><%= @enduser.full_name %></td>
+          </tr>
+          <tr>
+            <td>カナ</td>
+            <td><%= @enduser.full_name_kana %></td>
+          </tr>
+          <tr>
+            <td>電話番号</td>
+            <td><%= @enduser.phone_number %></td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= @enduser.email %></td>
+          </tr>
+        <% end %>
         </table>
           <div class="col d-flex aligin-items-center">
             <h4 class="mr-5">会員</h4>

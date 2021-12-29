@@ -44,11 +44,9 @@ ActiveRecord::Schema.define(version: 2021_12_24_050727) do
 
   create_table "deliveries", force: :cascade do |t|
     t.integer "enduser_id", null: false
-    t.string "full_name", default: "", null: false
-    t.string "full_name_kana", default: "", null: false
-    t.string "email", default: "", null: false
     t.string "post_address", default: "", null: false
     t.string "address", default: "", null: false
+    t.string "name", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -62,6 +60,9 @@ ActiveRecord::Schema.define(version: 2021_12_24_050727) do
     t.string "name", default: "", null: false
     t.text "introduction", default: "", null: false
     t.string "profile_image_id"
+    t.string "full_name", default: "", null: false
+    t.string "full_name_kana", default: "", null: false
+    t.string "phone_number", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_endusers_on_email", unique: true
