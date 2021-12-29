@@ -1,2 +1,45 @@
-<h1>Public::Orders#new</h1>
-<p>Find me in app/views/public/orders/new.html.erb</p>
+<ol class="nav mt-3">
+	<li class="nav-form current">入力</li>
+	<li class="arrow">→</li>
+	<li class="nav-form">確認</li>
+	<li class="arrow">→</i></li>
+	<li class="nav-form">完了</li>
+</ol>
+
+<h1 class="text-white">注文情報入力</h1>
+<div class="field mt-3 text-white" style="background-color: #343a40; opacity: 0.8;">
+  <div class="ml-5 pd-5">
+  <h3>支払方法</h3>
+  <%= form_with model: @order, url:orders_confirm_path, local: true do |f| %>
+    <div class="ml-5">
+      <%= f.radio_button :pay_method, @credit_card %>
+      <%= f.label :pay_method, @credit_card_ja %><br>
+      <%= f.radio_button :pay_method, @transfer %>
+      <%= f.label :pay_method, @transfer_ja %>
+    </div>
+  <h3>お届け先</h3>
+    <div class="ml-5">
+      <%= f.radio_button :select_adress, 0, checked: true %>
+      <%= f.label :select_adress, "登録済住所から選択" %><br>
+        <p class="ml-3">
+          <%= f.collection_select :delivery_id, @deliveries, :id, :address %>
+        </p>
+    </div>
+    <div class="ml-5">
+      <%= f.radio_button :select_adress, 1 %>
+      <%= f.label :select_adress, "新しいお届け先" %>
+      <div class="ml-3">
+        <%= f.label :"郵便番号（ハイフンなし）" %>
+        <%= f.text_field :post_address, placeholder: "0000000" %><br>
+        <%= f.label :"住所" %>
+        <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", :size=>"60" %><br>
+        <%= f.label:"宛名" %>
+        <%= f.text_field :name, placeholder: "令和道子" %>
+      </div>
+    </div>
+    <div class="text-center">
+      <%= f.submit "確認画面へ進む",class:"btn btn-info my-3" %>
+    </div>
+  <% end %>
+</div>
+</div>

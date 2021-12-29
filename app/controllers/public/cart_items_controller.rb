@@ -1,6 +1,6 @@
 class Public::CartItemsController < ApplicationController
   before_action :authenticate_enduser!
-  
+
   def index
     @cart = CartItem.all
     @cart_items = current_enduser.cart_items
