@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 2021_12_24_050727) do
     t.integer "store_id", null: false
     t.string "post_address", default: "", null: false
     t.string "address", default: "", null: false
-    t.string "full_name", default: "", null: false
+    t.string "name", default: "", null: false
     t.integer "postage", null: false
     t.integer "total_price", null: false
     t.integer "order_status", default: 0, null: false

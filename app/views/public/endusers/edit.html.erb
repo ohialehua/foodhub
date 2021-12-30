@@ -15,6 +15,9 @@
         <%= f.label :introduction %>
         <%= f.text_area :introduction, class: "form-control introduction" %>
       </div>
+  <% if current_enduser.full_name.blank? || current_enduser.full_name_kana.blank? || current_enduser.phone_number.blank? %>
+    <p>*これより下は個人情報です。一度しか設定できず変更ができないためお気を付けください。なお、本人以外には表示されません。</p>
+  <% end %>
     <% if current_enduser.full_name.blank? %>
       <div class="form-group">
         <%= f.label :full_name %>

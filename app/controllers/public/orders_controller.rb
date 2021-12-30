@@ -15,7 +15,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.postage = 800
     @total_price_except_postage = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
-    @amount_claimed = @total_price_except_postage + @order.postage
+    @total_price = @total_price_except_postage + @order.postage
 
     if params[:order][:select_adress] == "0"
       @delivery = Delivery.find(params[:order][:delivery_id])
@@ -30,12 +30,12 @@ class Public::OrdersController < ApplicationController
     order.enduser_id = current_enduser.id
     if order.save
       current_enduser.cart_items.each do |c|
-        OrderItem.create(order_id: order.id, item_id: c.item_id, order_quantity: c.quantity, price_after_tax: c.item.with_tax_price)
+        OrderDetail.create(order_id: order.id, store_id: c.store_id, item_id: c.item_id, order_quantity: c.quantity, price_after_tax: c.item.with_tax_price)
       end
       current_enduser.cart_items.destroy_all
       redirect_to orders_complete_path
     else
-      redirect_to action: new
+      redirect_to action: "new"
     end
   end
 
@@ -57,6 +57,6 @@ class Public::OrdersController < ApplicationController
 private
 
   def order_params
-    params.require(:order).permit(:enduser_id, :store_id, :postage, :total_price, :order_status, :pay_method,:post_address, :address, :full_name)
+    params.require(:order).permit(:enduser_id, :store_id, :postage, :total_price, :order_status, :pay_method,:post_address, :address, :name)
   end
 end
