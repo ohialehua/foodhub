@@ -67,6 +67,7 @@
   </tr>
 </table>
 <%= form_with model: @order, url: orders_path, local: true do |f| %>
+  <%= f.hidden_field :enduser_id, value: current_enduser.id %>
   <%= f.hidden_field :postage, value: @order.postage %>
   <%= f.hidden_field :total_price, value: @total_price %>
   <%= f.hidden_field :pay_method, value: @order.pay_method %>
