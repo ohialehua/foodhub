@@ -13,4 +13,9 @@ class Store < ApplicationRecord
   validates :name,presence:true
   validates :name_kana,presence:true
   validates :post_address,presence:true,length: { is: 7 }
+
+  def marked_by?(enduser)
+		markers.where(enduser_id: enduser.id).exists?
+	end
+	
 end

@@ -22,7 +22,7 @@ namespace :store do
   resources :stores,only:[:index,:show,:edit]
   resources :genres,except:[:show,:destroy]
   resources :items,except:[:destroy]
-  resources :markers,except:[:new,:create,:destroy]
+  resources :markers,only:[:index]
   resources :orders,only:[:index,:show,:update]
   resources :order_details,only:[:update]
   get 'unsubscribe' => 'stores#unsubscribe'
@@ -37,6 +37,11 @@ scope module: :public do
    get 'add' =>  'endusers#add'
    post 'add' =>  'endusers#add'
  end
+  resources :stores,only:[:index,:show] do
+    delete 'markers' => 'markers#destroy', as: 'unmark'
+    post 'markers' => 'markers#create', as: 'mark'
+  end
+  resources :markers,only:[:index]
   resources :items,only:[:index,:show]
   resources :cart_items,except:[:show,:new,:edit]
   delete 'cart_items' => 'cart_items#destroy_all'
