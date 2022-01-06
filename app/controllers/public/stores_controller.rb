@@ -3,6 +3,7 @@ class Public::StoresController < ApplicationController
 
   def index
     @stores = Store.page(params[:page])
+    @markers = current_enduser.markers
   end
 
   def show

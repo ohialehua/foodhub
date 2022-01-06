@@ -41,7 +41,6 @@ scope module: :public do
     delete 'markers' => 'markers#destroy', as: 'unmark'
     post 'markers' => 'markers#create', as: 'mark'
   end
-  resources :markers,only:[:index]
   resources :items,only:[:index,:show]
   resources :cart_items,except:[:show,:new,:edit]
   delete 'cart_items' => 'cart_items#destroy_all'
