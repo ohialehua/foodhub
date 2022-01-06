@@ -6,6 +6,9 @@ class Public::StoresController < ApplicationController
   end
 
   def show
+    @store = Store.find(params[:id])
+    @items = @store.items.page(params[:page])
+    @genres = @store.genres
   end
 
   private
