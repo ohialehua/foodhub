@@ -1,15 +1,36 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_enduser!
 
+  def new
+    @post = Post.new
+  end
+
+  def create
+    @post = Post.new(post_params)
+    @post.enduser_id = current_enduser.id
+    if @post.save
+      redirect_to posts_path
+    else
+      render :new
+    end
+  end
+
   def index
+    @posts = Post.page(params[:page]).reverse_order
   end
 
   def show
+    @post = Post.find(params[:id])
+    @post_comment = PostComment.new
   end
 
-  def new
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path
   end
-
-  def edit
+  
+  def post_params
+    params.require(:post).permit(:enduser_id, :post_image, :body)
   end
 end
