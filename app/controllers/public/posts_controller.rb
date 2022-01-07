@@ -15,10 +15,6 @@ class Public::PostsController < ApplicationController
     end
   end
 
-  def index
-    @posts = Post.page(params[:page]).reverse_order
-  end
-
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
@@ -29,7 +25,7 @@ class Public::PostsController < ApplicationController
     @post.destroy
     redirect_to posts_path
   end
-  
+
   def post_params
     params.require(:post).permit(:enduser_id, :post_image, :body)
   end

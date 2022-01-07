@@ -1,2 +1,27 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h4>投稿一覧</h4>
+    <% if @posts.present? %>
+      <div class="card-deck py-5">
+      <% @posts.each do |post| %>
+        <div class="card w-50 mx-4 mt-4 shadow-lg">
+          <%= link_to post_path(post) do %>
+            <%= attachment_image_tag post, :post_image, class:"card-img-top"; %>
+          <% end %>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-11 mx-auto">
+              <p class="card-text">説明：<%= post.body %></p>
+              <span><i class="fas fa-user"></i> By <%= post.enduser.name %> ｜ </span>
+              <span><%= link_to "#{post.post_comments.count} コメント", post_path(post), class:"text-dark" %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <%= paginate @posts %>
+    <% else %>
+      <h2>投稿がありません</h2>
+    <% end %>
+  </div>
+</div>
