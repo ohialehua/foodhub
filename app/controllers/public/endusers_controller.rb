@@ -6,7 +6,8 @@ class Public::EndusersController < ApplicationController
   end
 
   def show
-    @enduser = current_enduser
+    @enduser = Enduser.find(params[:id])
+    @posts = @enduser.posts.page(params[:page]).reverse_order
   end
 
   def edit

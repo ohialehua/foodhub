@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col2">
+    <div class="col-md-4">
       <h2 class="">
         <% if @enduser == current_enduser %>
           マイページ
@@ -56,29 +56,27 @@
             <%= link_to "一覧を見る", orders_path, class:"btn btn-info ml-4 mb-3" %>
           </div>
     </div>
-    <div class="col10 ml-5">
+    <div class="col-md-8">
       <h4>投稿一覧</h4>
       <% if @posts.present? %>
-        <div class="card-list-container py-5">
+        <div class="card-deck py-5">
         <% @posts.each do |post| %>
-          <div class="card w-50 mx-auto mt-4 shadow-lg">
+          <div class="card w-50 mx-4 mt-4 shadow-lg">
             <%= link_to post_path(post) do %>
               <%= attachment_image_tag post, :post_image, class:"card-img-top"; %>
             <% end %>
           <div class="card-body">
-            <div class="col-10">
-              <p class="card-title">
-              <%= link_to(post_path(post), class:"text-dark") do %>
-                <strong><i class="far fa-flag"></i><span> <%= post_image.shop_name %></span></strong>
-              <% end %>
-              </p>
-              <p class="card-text">説明：<%= post.body %></p>
+            <div class="row">
+              <div class="col-11 mx-auto">
+                <p class="card-text">説明：<%= post.body %></p>
                 <span><i class="fas fa-user"></i> By <%= post.enduser.name %> ｜ </span>
                 <span><%= link_to "#{post.post_comments.count} コメント", post_path(post), class:"text-dark" %></span>
+              </div>
             </div>
           </div>
-        </div>
+          </div>
         <% end %>
+        </div>
         <%= paginate @posts %>
       <% else %>
         <h2>投稿がありません</h2>
