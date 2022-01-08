@@ -9,7 +9,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.enduser_id = current_enduser.id
     if @post.save
-      redirect_to posts_path
+      redirect_to root_path
     else
       render :new
     end
