@@ -28,6 +28,5 @@ ja:
       signed_out: 'ログアウトしました。'
   errors:
     messages:
-      already_confirmed: 'は既に登録済みです。ログインしてください。'
         one: "エラーが発生したため %{resource} は保存されませんでした:"
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした:"
