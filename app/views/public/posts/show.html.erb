@@ -53,7 +53,7 @@
               <td><%= post_comment.comment %></td>
               <td>
                 <% if post_comment.enduser == current_enduser %>
-                  <%= link_to 'Destroy', post_post_comments_path(post_comment.post, post_comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+                  <%= link_to 'Destroy', post_post_comment_path(post_comment.post, post_comment), method: :delete, local: true, class: "btn btn-sm btn-danger" %>
                 <% end %>
               </td>
             </tr>

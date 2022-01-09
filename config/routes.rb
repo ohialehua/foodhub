@@ -52,7 +52,7 @@ scope module: :public do
   resources :orders,except:[:edit]
   resources :deliveries,except:[:show]
   resources :posts,except:[:edit,:index] do
-    resource :post_comments,only: [:create,:destroy]
+    resources :post_comments,only: [:create,:destroy]
   end
 end
 
