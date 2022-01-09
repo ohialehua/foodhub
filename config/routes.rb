@@ -51,7 +51,9 @@ scope module: :public do
   get 'orders/complete' => 'orders#complete'
   resources :orders,except:[:edit]
   resources :deliveries,except:[:show]
-  resources :posts,except:[:edit,:index]
+  resources :posts,except:[:edit,:index] do
+    resource :post_comments,only: [:create,:destroy]
+  end
 end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

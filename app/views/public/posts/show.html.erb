@@ -1,2 +1,70 @@
-<h1>Enduser::Posts#show</h1>
-<p>Find me in app/views/enduser/posts/show.html.erb</p>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+  		<h2>Post detail</h2>
+  		<table class='table'>
+  		  <tr>
+  		    <td>
+  		      <%= attachment_image_tag(@post, :post_image, :fill, 100, 100, size:'100x100') %>
+  		    </td>
+  		    <td><%= link_to enduser_path(@post.enduser) do %>
+            <%= attachment_image_tag(@post.enduser, :profile_image, :fill, 100, 100, fallback: "no_image.png", size:'70x70') %><br>
+            <%= @post.enduser.name %>
+            <% end %>
+          </td>
+          <td><%= @post.body %></td>
+          <td class="favorite-btn_<%= @post.id %>">
+            <% if @post.favorited_by?(current_enduser) %>
+              <%= link_to enduser_favorites_path(@post), method: :delete, remote: true do %>
+                <p class="favorite_color">♥<%= @post.favorites.count %></p>
+              <% end %>
+            <% else %>
+              <%= link_to enduser_favorites_path(@post), method: :post, remote: true do %>
+                ♥<%= @post.favorites.count %>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
+          </td>
+          <td>
+            <!--<p>閲覧数: %=@post.impressions_count %></p>-->
+          </td>
+        <% if @post.enduser == current_enduser %>
+          <td><%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
+        <% end %>
+        </tr>
+      </table>
+      <div class="comment_index">
+        <h4>Post Comments</h4>
+      <table class='table'>
+        <tbody>
+          <% @post.post_comments.each do |post_comment| %>
+            <tr>
+              <td>
+              <%= link_to enduser_path(post_comment.enduser) do %>
+                <%= attachment_image_tag(post_comment.enduser, :profile_image, :fill, 100, 100, fallback: "no_image.png") %><br>
+                <%= post_comment.enduser.name %>
+              <% end %>
+              </td>
+              <td><%= post_comment.comment %></td>
+              <td>
+                <% if post_comment.enduser == current_enduser %>
+                  <%= link_to 'Destroy', post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      </div>
+　　　　<%= form_with model:[@post, @comment] do |f| %>
+　　　　<%= f.text_area :comment %>
+        <%= f.submit "送信" %>
+        <% end %>
+    </div>
+  </div>
+</div>
