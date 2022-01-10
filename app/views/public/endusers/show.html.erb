@@ -11,10 +11,12 @@
         <div class="col-3 d-inline-block mb-3">
           <%= attachment_image_tag(@enduser, :profile_image, size:"100x100", fallback: "no_image.png") %>
         </div>
+      <% if current_enduser == @enduser %>
         <div class="col-8 d-inline-block text-right">
           <h4 class="">登録情報</h4>
-          <%= link_to "編集", edit_enduser_path, class:"btn btn-primary ml-3" %>
+          <%= link_to "編集", edit_enduser_path(@enduser), class:"btn btn-primary ml-3" %>
         </div>
+      <% end %>
         <table class="table table-borderless table-dark" style="opacity: 0.8;">
           <tr>
             <td>ユーザーネーム</td>
