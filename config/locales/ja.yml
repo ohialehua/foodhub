@@ -4,3 +4,15 @@ ja:
       pay_method:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
+      order_status:
+        payment_waiting: "入金待ち"
+        payment_finish: "入金確認"
+        production: "製作中"
+        ready_to_delivery: "発送準備中"
+        delivery_finish: "発送完了"
+    order_detail:
+      product_status:
+        not_yet: "着手不可"
+        waiting: "制作待ち"
+        working: "製作中"
+        complete: "制作完了"
