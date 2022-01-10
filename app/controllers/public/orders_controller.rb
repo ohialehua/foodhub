@@ -28,7 +28,7 @@ class Public::OrdersController < ApplicationController
   def create
     order = Order.new(order_params)
     order.enduser_id = current_enduser.id
-    if order.save
+    if order.save!
       current_enduser.cart_items.each do |c|
         OrderDetail.create(order_id: order.id, item_id: c.item_id, order_quantity: c.quantity, price_after_tax: c.item.with_tax_price)
       end
@@ -57,6 +57,6 @@ class Public::OrdersController < ApplicationController
 private
 
   def order_params
-    params.require(:order).permit(:enduser_id, :store_id, :postage, :total_price, :order_status, :pay_method,:post_address, :address, :name)
+    params.require(:order).permit(:enduser_id, :postage, :total_price, :order_status, :pay_method,:post_address, :address, :name)
   end
 end

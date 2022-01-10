@@ -64,3 +64,4 @@ ja:
         one: "エラーが発生したため %{resource} は保存されませんでした"
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした"
         not_saved: "エラーが発生したため %{resource} は保存されませんでした"
+        record_invalid: "バリデーションに失敗しました: %{errors}"

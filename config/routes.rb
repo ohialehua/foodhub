@@ -49,7 +49,7 @@ scope module: :public do
   delete 'cart_items' => 'cart_items#destroy_all'
   post 'orders/confirm' => 'orders#confirm'
   get 'orders/complete' => 'orders#complete'
-  resources :orders,except:[:edit]
+  resources :orders,except:[:edit,:update,:destroy]
   resources :deliveries,except:[:show]
   resources :posts,except:[:edit,:index] do
     resources :post_comments,only: [:create,:destroy]

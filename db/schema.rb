@@ -129,7 +129,6 @@ ActiveRecord::Schema.define(version: 2021_12_24_050727) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "enduser_id", null: false
-    t.integer "store_id", null: false
     t.string "post_address", default: "", null: false
     t.string "address", default: "", null: false
     t.string "name", default: "", null: false

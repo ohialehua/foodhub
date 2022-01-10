@@ -3,7 +3,6 @@ class CreateOrders < ActiveRecord::Migration[5.2]
     create_table :orders do |t|
 
       t.integer :enduser_id, null: false
-      t.integer :store_id, null: false
       t.string :post_address, null: false, default: ""
       t.string :address, null: false, default: ""
       t.string :name, null: false, default: ""

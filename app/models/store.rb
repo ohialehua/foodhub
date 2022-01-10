@@ -17,5 +17,5 @@ class Store < ApplicationRecord
   def marked_by?(enduser)
 		markers.where(enduser_id: enduser.id).exists?
 	end
-	
+
 end

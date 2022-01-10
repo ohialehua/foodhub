@@ -1,8 +1,7 @@
 class Order < ApplicationRecord
 
-  belongs_to :store
   belongs_to :enduser
-  has_many :order_items
+  has_many :order_details
   has_many :items,through: :order_items
 
   enum pay_method: { credit_card: 0, transfer: 1 }

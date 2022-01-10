@@ -23,7 +23,7 @@ class Enduser < ApplicationRecord
   has_many :entries
   has_many :messages
   has_many :rooms, through: :entries
-  
+
   attachment :profile_image, destroy: false
 
 

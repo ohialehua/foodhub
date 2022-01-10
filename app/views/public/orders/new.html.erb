@@ -12,7 +12,7 @@
 <div class="field mt-3 text-white" style="background-color: #343a40; opacity: 0.8;">
   <div class="ml-5 pd-5">
   <h3>支払方法</h3>
-  <%= form_with model: @order, url:orders_confirm_path, local: true do |f| %>
+  <%= form_with model: @order, url: orders_confirm_path, local: true do |f| %>
     <div class="ml-5">
       <%= f.radio_button :pay_method, @credit_card %>
       <%= f.label :pay_method, @credit_card_ja %><br>
