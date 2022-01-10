@@ -1,3 +1,39 @@
+<div class="container px-5 px-sm-0 mt-5">
+  <div class="row">
+    <div class="col-md-1 mr-5">
+      <div class="d-inline-flex">
+        <%= paginate @followings, :param_name => 'following_page' %>
+        <%= paginate @followers, :param_name => 'follower_page' %>
+      </div>
+      <div class="mt-3  d-inline-flex">
+        <table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
+          <tbody>
+            <tr>
+              <th class="text-center"><h6>followings</h6></th>
+            </tr>
+          <% @followings.each do |following| %>
+            <tr>
+              <td><%= link_to following.name, enduser_path(following), class:"text-white" %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
+          <tbody>
+          　<tr>
+              <th class="text-center"><h6>followers</h6></th>
+            </tr>
+          <% @followers.each do |follower| %>
+            <tr>
+              <td><%= link_to follower.name, enduser_path(follower), class:"text-white" %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <div class="col-md-1"></div>
+ <div class="col-md-9 mx-auto">
 <table class='table'>
   <thead>
     <tr>
@@ -29,3 +65,6 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @endusers, :param_name => 'enduser_page' %>
+</div>
+</div>

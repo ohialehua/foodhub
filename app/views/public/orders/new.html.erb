@@ -8,10 +8,10 @@
 	<li class="nav-form">完了</li>
 </ol>
 
-<h1 class="text-white">注文情報入力</h1>
+<h1 class="">注文情報入力</h1>
 <div class="field mt-3 text-white" style="background-color: #343a40; opacity: 0.8;">
   <div class="ml-5 pd-5">
-  <h3>支払方法</h3>
+  <h3 class="pt-3">支払方法</h3>
   <%= form_with model: @order, url: orders_confirm_path, local: true do |f| %>
     <div class="ml-5">
       <%= f.radio_button :pay_method, @credit_card %>
@@ -20,9 +20,9 @@
       <%= f.label :pay_method, @transfer_ja %>
     </div>
   <h3>お届け先</h3>
-    <div class="ml-5">
+    <div class="ml-5 text-dark">
       <%= f.radio_button :select_adress, 0, checked: true %>
-      <%= f.label :select_adress, "登録済住所から選択" %><br>
+      <%= f.label :select_adress, "登録済住所から選択", class:"text-white" %><br>
         <p class="ml-3">
           <%= f.collection_select :delivery_id, @deliveries, :id, :address %>
         </p>
