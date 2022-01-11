@@ -5,7 +5,7 @@
     <p class="text-right"><%= link_to "新規投稿",new_post_path, class:"btn btn-primary text-black" %></p>
       <div class="card-deck py-5">
       <% @posts.each do |post| %>
-        <div class="card col-4 w-50 mx-4 mt-4 shadow-lg">
+        <div class="card col-4 col-md-3 w-50 mx-4 mt-4 shadow-lg">
           <%= link_to post_path(post) do %>
             <%= attachment_image_tag post, :post_image, size:'200x200', class:"card-img-top" %>
           <% end %>
