@@ -19,14 +19,17 @@ end
 
 namespace :store do
   root to: 'homes#top'
-  resources :stores,only:[:index,:show,:edit]
+  resources :stores,only:[:edit]
+  get 'unsubscribe' => 'stores#unsubscribe'
+  patch 'withdraw' => 'stores#withdraw'
   resources :genres,except:[:show,:destroy]
-  resources :items,except:[:destroy]
+  resources :items,except:[:index,:destroy]
+  resources :posts,except:[:edit,:index] do
+    resources :post_comments,only: [:create,:destroy]
+  end
   resources :markers,only:[:index]
   resources :orders,only:[:index,:show,:update]
   resources :order_details,only:[:update]
-  get 'unsubscribe' => 'stores#unsubscribe'
-  patch 'withdraw' => 'stores#withdraw'
 end
 
 scope module: :public do

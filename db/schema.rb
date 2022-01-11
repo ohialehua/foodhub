@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 2021_12_24_050727) do
   end
 
   create_table "post_comments", force: :cascade do |t|
+    t.integer "store_id", null: false
     t.integer "enduser_id", null: false
     t.integer "post_id", null: false
     t.text "comment", default: "", null: false
@@ -149,6 +150,7 @@ ActiveRecord::Schema.define(version: 2021_12_24_050727) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "store_id", null: false
     t.integer "enduser_id", null: false
     t.string "post_image_id", null: false
     t.text "body", default: "", null: false

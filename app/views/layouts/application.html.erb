@@ -38,8 +38,6 @@
                 <li class="nav-item ml-4"><%= link_to "Stores", class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Log out",destroy_admin_session_path,method: :delete,class:"nav-link" %></li>
               <% else %>
-                <li class="nav-item ml-4"><%= link_to "About", class:"nav-link" %></li>
-                <li class="nav-item ml-4"><%= link_to "Items", class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Sign up",new_enduser_registration_path,class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Log in",new_enduser_session_path,class:"nav-link" %></li>
               <% end %>

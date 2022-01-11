@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     if resource_or_scope.is_a?(Admin)
       admin_root_path
     elsif resource_or_scope.is_a?(Store)
-      store_store_path(current_store.id)
+      store_root_path
     else
       endusers_path
     end

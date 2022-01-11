@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
 
+  belongs_to :store
   belongs_to :enduser
 	has_many :favorites, dependent: :destroy
 	has_many :post_comments, dependent: :destroy
