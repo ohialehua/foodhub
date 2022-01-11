@@ -8,7 +8,7 @@ class Enduser < ApplicationRecord
   has_many :stores, through: :markers
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
 
   has_many :cart_items
   has_many :items, through: :cart_items

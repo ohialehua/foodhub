@@ -1,0 +1,57 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+  		<h2>Post detail</h2>
+      <table class='table'>
+  		  <tr>
+  		    <td>
+  		      <%= attachment_image_tag(@post, :post_image, :fill, 100, 100, size:'100x100') %>
+  		    </td>
+  		    <td>
+            <%= attachment_image_tag(@post.store, :profile_image_id, :fill, 100, 100, fallback: "no_image.png", size:'70x70') %><br>
+            <%= @post.store.name %>
+          </td>
+          <td><%= @post.body %></td>
+          <td>
+            <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
+          </td>
+          <td>
+            <!--<p>閲覧数: %=@post.impressions_count %></p>-->
+          </td>
+        </tr>
+      </table>
+      <div class="comment_index">
+        <h4>Post Comments</h4>
+      <table class='table'>
+        <tbody>
+          <% @post.post_comments.each do |post_comment| %>
+            <tr>
+              <td>
+                <%= attachment_image_tag(post_comment.store, :profile_image_id, :fill, 100, 100, fallback: "no_image.png", size:'50x50') %><br>
+                <% if post_comment.enduser_id.present? %>
+                  <%= post_comment.enduser.name %>
+                <% else %>
+                  <%= post_comment.store.name %>
+                <% end %>
+              </td>
+              <td><%= post_comment.comment %></td>
+              <td>
+                <% if post_comment.store == current_store %>
+                  <%= link_to 'Destroy', store_post_post_comment_path(post_comment.post, post_comment), method: :delete, local: true, class: "btn btn-sm btn-danger" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      </div>
+　　　　<%= form_with model:[@post, @comment], url: store_post_post_comments_path(@post), local: true do |f| %>
+　　　　<%= f.text_area :comment %>
+        <%= f.submit "送信" %>
+        <% end %>
+    </div>
+  </div>
+</div>

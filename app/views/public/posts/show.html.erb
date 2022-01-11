@@ -5,6 +5,7 @@
     </div>
     <div class='col-md-8 offset-md-1'>
   		<h2>Post detail</h2>
+  		<% if @post.enduser_id.present? %>
   		<table class='table'>
   		  <tr>
   		    <td>
@@ -38,6 +39,38 @@
         <% end %>
         </tr>
       </table>
+    <% else %>
+      <table class='table'>
+  		  <tr>
+  		    <td>
+  		      <%= attachment_image_tag(@post, :post_image, :fill, 100, 100, size:'100x100') %>
+  		    </td>
+  		    <td><%= link_to store_path(@post.store) do %>
+            <%= attachment_image_tag(@post.store, :profile_image_id, :fill, 100, 100, fallback: "no_image.png", size:'70x70') %><br>
+            <%= @post.store.name %>
+            <% end %>
+          </td>
+          <td><%= @post.body %></td>
+          <td class="favorite-btn_<%= @post.id %>">
+            <% if @post.favorited_by?(current_enduser) %>
+              <%= link_to enduser_favorites_path(@post), method: :delete, remote: true do %>
+                <p class="favorite_color">♥<%= @post.favorites.count %></p>
+              <% end %>
+            <% else %>
+              <%= link_to enduser_favorites_path(@post), method: :post, remote: true do %>
+                ♥<%= @post.favorites.count %>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
+          </td>
+          <td>
+            <!--<p>閲覧数: %=@post.impressions_count %></p>-->
+          </td>
+        </tr>
+      </table>
+    <% end %>
       <div class="comment_index">
         <h4>Post Comments</h4>
       <table class='table'>
@@ -45,9 +78,16 @@
           <% @post.post_comments.each do |post_comment| %>
             <tr>
               <td>
-              <%= link_to enduser_path(post_comment.enduser) do %>
-                <%= attachment_image_tag(post_comment.enduser, :profile_image, :fill, 100, 100, fallback: "no_image.png", size:'50x50') %><br>
-                <%= post_comment.enduser.name %>
+              <% if post_comment.enduser_id.present? %>
+                <%= link_to enduser_path(post_comment.enduser) do %>
+                  <%= attachment_image_tag(post_comment.enduser, :profile_image, :fill, 100, 100, fallback: "no_image.png", size:'50x50') %><br>
+                  <%= post_comment.enduser.name %>
+                <% end %>
+              <% else %>
+                <%= link_to store_path(post_comment.store) do %>
+                  <%= attachment_image_tag(post_comment.store, :profile_image_id, :fill, 100, 100, fallback: "no_image.png", size:'50x50') %><br>
+                  <%= post_comment.store.name %>
+                <% end %>
               <% end %>
               </td>
               <td><%= post_comment.comment %></td>

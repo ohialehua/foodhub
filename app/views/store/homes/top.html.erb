@@ -88,22 +88,24 @@
     <div class="col-md-11">
       <h4>投稿一覧</h4>
       <p class="text-right"><%= link_to "新規投稿",new_store_post_path, class:"btn btn-primary text-black" %></p>
-        <div class="card-deck py-5">
+        <div class="card-deck py-5 row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
         <% @posts.each do |post| %>
-          <div class="card w-50 mx-4 mt-4 shadow-lg">
-            <%= link_to post_path(post) do %>
-              <%= attachment_image_tag post, :post_image, class:"card-img-top"; %>
+        <div class="col">
+          <div class="card mx-auto mt-4 shadow-lg">
+            <%= link_to store_post_path(post) do %>
+              <%= attachment_image_tag post, :post_image, size:'200x200', class:"card-img-top"; %>
             <% end %>
           <div class="card-body">
             <div class="row">
               <div class="col-11 mx-auto">
                 <p class="card-text">説明：<%= post.body %></p>
-                <span><i class="fas fa-user"></i> By <%= post.enduser.name %> ｜ </span>
+                <span><i class="fas fa-user"></i> By <%= post.store.name %> ｜ </span>
                 <span><%= link_to "#{post.post_comments.count} コメント", store_post_path(post), class:"text-dark" %></span>
               </div>
             </div>
           </div>
           </div>
+        </div>
         <% end %>
         </div>
         <%= paginate @posts, :param_name => 'post_page' %>
