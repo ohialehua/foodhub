@@ -45,16 +45,12 @@
           </tr>
         <% end %>
         </table>
-          <div class="col d-flex aligin-items-center">
-            <h4 class="mr-5">会員</h4>
-            <%= link_to "一覧を見る", endusers_path, class:"btn btn-info ml-4 mb-3" %>
-          </div>
         <% if current_enduser == @enduser %>
-          <div class="col d-flex aligin-items-center">
+          <div class="col-5 d-inline-block aligin-items-center">
             <h4 class="mt-1">配送先</h4>
             <%= link_to "一覧を見る", deliveries_path, class:"btn btn-info ml-5 mb-3 " %>
           </div>
-          <div class="col d-flex aligin-items-center">
+          <div class="col-5 d-inline-block aligin-items-center">
             <h4>注文履歴</h4>
             <%= link_to "一覧を見る", orders_path, class:"btn btn-info ml-4 mb-3" %>
           </div>
@@ -65,9 +61,9 @@
       <% if @posts.present? %>
         <div class="card-deck py-5">
         <% @posts.each do |post| %>
-          <div class="card w-50 mx-4 mt-4 shadow-lg">
+          <div class="card col-4 mx-4 mt-4 shadow-lg">
             <%= link_to post_path(post) do %>
-              <%= attachment_image_tag post, :post_image, class:"card-img-top"; %>
+              <%= attachment_image_tag post, :post_image, size:'200x200', class:"card-img-top"; %>
             <% end %>
           <div class="card-body">
             <div class="row">
