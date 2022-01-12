@@ -48,8 +48,8 @@ scope module: :public do
     post 'markers' => 'markers#create', as: 'mark'
   end
   resources :items,only:[:index,:show]
-  resources :cart_items,except:[:show,:new,:edit]
   delete 'cart_items' => 'cart_items#destroy_all'
+  resources :cart_items,except:[:index,:show,:new,:edit]
   post 'orders/confirm' => 'orders#confirm'
   get 'orders/complete' => 'orders#complete'
   resources :orders,except:[:edit,:update,:destroy]

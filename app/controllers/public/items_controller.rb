@@ -10,5 +10,6 @@ class Public::ItemsController < ApplicationController
     @cart_item = CartItem.new
     @cart_items = current_enduser.cart_items
     @total = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
+    @store = @item.store
   end
 end
