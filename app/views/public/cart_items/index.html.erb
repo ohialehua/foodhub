@@ -49,7 +49,7 @@
     </table>
   </div>
 </div>
-<% if @cart.count != 0 %>
+<% if @cart_items.count != 0 %>
 <p class="text-center"><%= link_to "注文に進む", new_order_path, class:"btn btn-primary ml-4 mb-3" %></p>
 <% end %>
 

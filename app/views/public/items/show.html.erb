@@ -1,19 +1,64 @@
-<div class="container px-5 px-sm-0 mt-5">
+<div class="px-5 mt-5">
   <div class="row">
-    <div class="col-2">
+    <div class="col-md-4">
+      <h3 class="">ショッピングカート</h3>
+      <div class="col-auto text-right">
+        <%= link_to "カートを空にする", cart_items_path, method: :delete, "data-confirm" => "本当に消しますか?", class:"btn btn-warning ml-4 mb-3" %>
+      </div>
+      <table class="table table-borderless table-dark" style="opacity: 0.8;">
+        <thead>
+          <tr>
+            <th scope="col">商品名</th>
+            <th scope="col">単価（税込）</th>
+            <th scope="col">数量</th>
+            <th scope="col">小計</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td>
+              <%= attachment_image_tag cart_item.item, :image, size: '50x50', fallback: "no-img.png" %>
+              <%= cart_item.item.name %>
+            </td>
+            <td><%= cart_item.item.with_tax_price.to_s(:delimited) + "円" %></td>
+            <td class="text-dark">
+              <%= form_with model: cart_item, local: true do |f| %>
+                <%= f.select :quantity, *[1..20] %>
+                <%= f.submit "変更", class:"btn btn-light" %>
+              <% end %>
+            </td>
+            <td><%= cart_item.subtotal.to_s(:delimited) + "円" %></td>
+            <td><%= link_to "消去する", cart_item_path(cart_item), method: :delete, "data-confirm" => "本当に消しますか?🥺", class:"btn btn-danger ml-4 mb-3" %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <table class="table table-borderless table-dark" style="opacity: 0.8;">
+        <tr>
+          <td>合計金額</td>
+          <td><%= @total.round.to_s(:delimited) + "円" %></td>
+        </tr>
+      </table>
+      <% if @cart_items.count != 0 %>
+        <p class="text-center"><%= link_to "注文に進む", new_order_path, class:"btn btn-primary ml-4 mb-3" %></p>
+      <% end %>
     </div>
-    <div class="col-10">
+    <div class="col-md-8">
       <div class="row">
-        <div class="col-7 text-right">
-          <%= attachment_image_tag @item, :image, size: "350x340", fallback: "no_image.png" %>
+        <div class="col-md-6 text-center">
+          <h4 class="text-left"><strong><%= @item.name %></strong></h4>
+          <%= attachment_image_tag @item, :image, size: "350x340", fallback: "no_image.png" %><br>
+          <h4 class="text-right"><%= (@item.with_tax_price).to_s(:delmited) %><span>円（税込）</span></h4>
         </div>
-        <div class="col-5 text-center mt-5">
-          <h2><%= @item.name %></h2>
-          <div>
-            <%= @item.body %>
+        <div class="col-md-5 offset-1">
+          <h4><strong>紹介文</strong></h4>
+          <div class="m-3">
+            <h4><%= @item.body %></h4>
           </div>
-          <h4><%= (@item.with_tax_price).to_s(:delmited) %><span>円（税込）</span></h4>
-          <% if @item.is_active == true %>
+          <div class="text-right mb-5">
+            <% if @item.is_active == true %>
             <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true do |f| %>
               <%= f.hidden_field :item_id, value: @item.id %>
               <%= f.hidden_field :enduser_id, value: current_enduser.id %>
@@ -23,9 +68,10 @@
           <% else %>
             <h4>販売停止中です</h4>
           <% end %>
+          </div>
         </div>
-        <div class="col-12 pr-5 text-right">
-          <%= link_to "一覧に戻る", items_path, class:"btn btn-info" %>
+        <div class="col-md-12 text-right">
+          <%= link_to "買い物を続ける", items_path, class:"btn btn-info ml-4 mb-3" %>
         </div>
       </div>
     </div>

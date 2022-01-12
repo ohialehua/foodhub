@@ -8,5 +8,7 @@ class Public::ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @cart_item = CartItem.new
+    @cart_items = current_enduser.cart_items
+    @total = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
   end
 end
