@@ -12,6 +12,8 @@ class Store < ApplicationRecord
   has_many :markers, dependent: :destroy
   has_many :endusers, through: :markers
 
+  attachment :profile_image, destroy: false
+
   validates :name,presence:true
   validates :name_kana,presence:true
   validates :post_address,presence:true,length: { is: 7 }

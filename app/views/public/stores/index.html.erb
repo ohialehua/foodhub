@@ -32,7 +32,7 @@
   <tbody>
     <% @stores.each do |store| %>
       <tr>
-        <td><%= attachment_image_tag(store, :profile_image_id, size:"50x50", fallback: "no_image.png") %></td>
+        <td><%= attachment_image_tag(store, :profile_image, :fill, 100, 100, size:"50x50", fallback: "no_image.png") %></td>
         <td><%= store.name %></td>
         <td><p>フォロワー数:<%= store.markers.count %></p></td>
         <td>

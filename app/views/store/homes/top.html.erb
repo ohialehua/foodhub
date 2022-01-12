@@ -5,7 +5,7 @@
           <%= @store.name %> 店舗詳細
       </h2>
         <div class="col-3 d-inline-block mb-3">
-          <%= attachment_image_tag(@store, :profile_image_id, size:"100x100", fallback: "no_image.png") %>
+          <%= attachment_image_tag(@store, :profile_image, :fill, 100, 100, size:"100x100", fallback: "no_image.png") %>
         </div>
         <div class="col-4 d-inline-block text-right">
           <h4 class="">登録情報</h4>

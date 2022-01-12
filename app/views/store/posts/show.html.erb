@@ -11,7 +11,7 @@
   		      <%= attachment_image_tag(@post, :post_image, :fill, 100, 100, size:'100x100') %>
   		    </td>
   		    <td>
-            <%= attachment_image_tag(@post.store, :profile_image_id, :fill, 100, 100, fallback: "no_image.png", size:'70x70') %><br>
+            <%= attachment_image_tag(@post.store, :profile_image, :fill, 100, 100, fallback: "no_image.png", size:'70x70') %><br>
             <%= @post.store.name %>
           </td>
           <td><%= @post.body %></td>
@@ -30,7 +30,7 @@
           <% @post.post_comments.each do |post_comment| %>
             <tr>
               <td>
-                <%= attachment_image_tag(post_comment.store, :profile_image_id, :fill, 100, 100, fallback: "no_image.png", size:'50x50') %><br>
+                <%= attachment_image_tag(post_comment.store, :profile_image, :fill, 100, 100, fallback: "no_image.png", size:'50x50') %><br>
                 <% if post_comment.enduser_id.present? %>
                   <%= post_comment.enduser.name %>
                 <% else %>

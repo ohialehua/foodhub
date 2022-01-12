@@ -19,7 +19,7 @@ end
 
 namespace :store do
   root to: 'homes#top'
-  resources :stores,only:[:edit]
+  resources :stores,only:[:edit,:update]
   get 'unsubscribe' => 'stores#unsubscribe'
   patch 'withdraw' => 'stores#withdraw'
   resources :genres,except:[:show,:destroy]
