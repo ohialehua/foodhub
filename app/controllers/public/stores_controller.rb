@@ -8,8 +8,9 @@ class Public::StoresController < ApplicationController
 
   def show
     @store = Store.find(params[:id])
-    @items = @store.items.page(params[:page])
     @genres = @store.genres
+    @items = @store.items.page(params[:item_page]).per(9)
+    @posts = @store.posts.page(params[:post_page])
   end
 
   private
