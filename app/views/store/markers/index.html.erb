@@ -1,1 +1,16 @@
-<h1>店舗フォロワー一覧画面</h1>
+<div class="container px-5 px-sm-0 mt-5">
+  <div class="row">
+    <h2>フォロワー一覧</h2>
+        <table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
+          <tbody>
+          <% @markers.each do |marker| %>
+            <tr>
+              <td><%= attachment_image_tag(marker.enduser, :profile_image, :fill, 100, 100, size:"30x30", fallback: "no_image.png") %></td>
+              <td><%= link_to marker.enduser.name, store_marker_path(marker), class:"text-white" %></td>
+              <td><%= marker.enduser.orders.count %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>

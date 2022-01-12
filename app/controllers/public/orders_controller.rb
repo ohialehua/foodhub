@@ -13,7 +13,8 @@ class Public::OrdersController < ApplicationController
   def confirm
     @cart_items = current_enduser.cart_items
     @order = Order.new(order_params)
-    @order.postage = 800
+    @store_amount = @cart_items.joins(:item).select(:store_id).distinct.count
+    @order.postage = 200*@store_amount
     @total_price_except_postage = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
     @total_price = @total_price_except_postage + @order.postage
 

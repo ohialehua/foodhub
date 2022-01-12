@@ -9,10 +9,11 @@
 </ol>
 
 <h1 class="">注文情報確認</h1>
-<div class="col-7 d-inline-block">
+<div class="col-md-7 d-inline-block">
 <table class="table table-borderless table-dark" style="opacity: 0.8;">
   <thead class="thead-dark">
     <tr>
+      <th>店舗名</th>
       <th>商品名</th>
       <th>単価(税込)</th>
       <th>数量</th>
@@ -22,7 +23,8 @@
   <tbody>
     <% @cart_items.each do |c| %>
       <tr class="text-right">
-        <th class="text-center"><%= c.item.name %></th>
+        <th><%= c.item.store.name %></th>
+        <td class="text-center"><%= c.item.name %></td>
         <td><%= c.item.with_tax_price.to_s(:delimited) %>円</td>
         <td><%= c.quantity %></td>
         <td><%= c.subtotal.to_s(:delimited) %>円</td>
@@ -32,7 +34,7 @@
 </table>
 </div>
 
-<div class="col-3 d-inline-block">
+<div class="col-md-3 d-inline-block">
 <table class="table table-borderless table-dark text-right" style="opacity: 0.8;">
   <tbody>
     <tr>
@@ -47,7 +49,7 @@
     </tr>
     <tr>
       <th class="table-dark">請求金額</th>
-      <th><%= @total_price.to_s(:delimited) %>円</th>
+      <td><strong><%= @total_price.to_s(:delimited) %>円</strong></td>
     </tr>
   </tbody>
 </table>
