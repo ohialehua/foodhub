@@ -8,7 +8,7 @@ class Store::MarkersController < ApplicationController
   def show
     @marker = Marker.find(params[:id])
     @enduser = @marker.enduser
-    @orders = @enduser.orders.joins(:order_details).where(order_details: {store_id:current_store}).distinct
+    @orders = current_store.orders.where(enduser_id:@enduser).distinct
   end
 
   private

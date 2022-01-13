@@ -6,6 +6,7 @@ class Store < ApplicationRecord
 
   has_many :items, dependent: :destroy
   has_many :order_details
+  has_many :orders, through: :order_details
   has_many :genres, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
