@@ -1,25 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <h2 class="">
-          <%= @enduser.name %> さんのプロフィール
-      </h2>
-        <div class="col-3 d-inline-block mb-3">
-          <%= attachment_image_tag(@enduser, :profile_image, size:"100x100", fallback: "no_image.png") %>
-        </div>
-        <table class="table table-borderless table-dark" style="opacity: 0.8;">
-          <tr>
-            <td>ユーザーネーム</td>
-            <td><%= @enduser.name %></td>
-          </tr>
-          <tr>
-            <td>紹介文</td>
-            <td><%= @enduser.introduction %></td>
-          </tr>
-        </table>
-    </div>
-    <div class="col-md-8">
-    <h3 class="">注文履歴一覧</h3>
+    <div class="col-md-11">
+    <h3 class=""><%= @enduser.name %> さんの注文履歴一覧</h3>
+    <% if @orders.present? %>
 		  <table class="table table-borderless table-dark mt-5" style="opacity: 0.8;">
 		    <thead class="thead-dark">
           <tr>
@@ -32,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-        <% if @orders.present? %>
+        <% @sum_store_total_price = 0 %>
         <% @orders.each do |order| %>
           <tr>
             <td><%= order.created_at.strftime("%Y/%m/%d") %></td>
@@ -43,23 +26,31 @@
             <td>
             <% @store_total_price = 200 %>
 			    	<% order.order_details.each do |order_detail| %>
-			    	  <% if order_detail.item.store.name == current_store.name %>
-			        	<%= order_detail.item.name %>×<%= order_detail.order_quantity %>
+			    	  <% if order_detail.store.name == current_store.name %>
+			        	<%= order_detail.item.name %>×<%= order_detail.order_quantity %><br>
 			        	<% @store_total_price += order_detail.subtotal %>
 			        <% end %>
 			    	<% end %>
 		      	</td>
-            <td><%= @store_total_price.to_s(:delimited) %>円</td>
+            <td>
+              <%= @store_total_price.to_s(:delimited) %>円
+              <% @sum_store_total_price += @store_total_price %>
+            </td>
             <td><%= order.order_status_i18n %></td>
             <td><%= link_to "表示する", store_order_path(order), class:'btn btn-primary text-white' %></td>
           </tr>
         <% end %>
+          <tr class="text-dark" style="background-color: yellow;">
+            <th colspan="2" class="text-center">当店の利用回数：</th>
+            <th><%= @orders.count %>回</th>
+            <th>購入総額：</th>
+            <th colspan="2" class="text-center"><%= @sum_store_total_price.to_s(:delimited) %>円</th>
+          </tr>
         </tbody>
       </table>
-        <%= paginate @orders %>
-        <% else %>
-          <h2>当店での購入履歴がありません</h2>
-        <% end %>
+    <% else %>
+      <h2>当店での購入履歴がありません。</h2>
+    <% end %>
     </div>
   </div>
 </div>

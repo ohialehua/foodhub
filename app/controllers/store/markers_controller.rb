@@ -3,13 +3,12 @@ class Store::MarkersController < ApplicationController
 
   def index
     @markers = current_store.markers.page(params[:page])
-    @orders = Order.where(store_id:current_store)
   end
 
   def show
     @marker = Marker.find(params[:id])
     @enduser = @marker.enduser
-    @orders = @marker.enduser.orders.page(params[:page])
+    @orders = @enduser.orders.joins(:order_details).where(order_details: {store_id:current_store}).distinct
   end
 
   private

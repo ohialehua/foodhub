@@ -6,7 +6,6 @@
     <tr>
       <td>注文日</td>
       <td>配送先</td>
-      <td>購入店舗名</td>
       <td>注文商品</td>
       <td>支払金額</td>
       <td>ステータス</td>
@@ -22,22 +21,20 @@
             <%= order.name %><br>
       </td>
       <td>
-				<% order.order_details.each do |order_detail| %>
-				<%= order_detail.item.store.name %></br>
-				<% end %>
-			</td>
-      <td>
-				<% order.order_details.each do |order_detail| %>
-				<%= order_detail.item.name %>×<%= order_detail.order_quantity %></br>
-				<% end %>
-			</td>
-      <td><%= order.total_price.to_s(:delimited) %>円</td>
+        <% @store_total_price = 200 %>
+			  <% order.order_details.each do |order_detail| %>
+			    <% if order_detail.store.name == current_store.name %>
+			      <%= order_detail.item.name %>×<%= order_detail.order_quantity %><br>
+			      <% @store_total_price += order_detail.subtotal %>
+			    <% end %>
+			  <% end %>
+		  </td>
+      <td><%= @store_total_price.to_s(:delimited) %>円</td>
       <td><%= order.order_status_i18n %></td>
-      <td><%= link_to "表示する", order_path(order), class:'btn btn-primary text-white' %></td>
+      <td><%= link_to "表示する", store_order_path(order), class:'btn btn-primary text-white' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 </div>
 </div>
-<%= paginate @orders %>

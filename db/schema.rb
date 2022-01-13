@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2021_12_24_050727) do
   create_table "order_details", force: :cascade do |t|
     t.integer "order_id", null: false
     t.integer "item_id", null: false
+    t.integer "store_id", null: false
     t.integer "order_quantity", null: false
     t.integer "price_after_tax", null: false
     t.integer "product_status", default: 0, null: false
