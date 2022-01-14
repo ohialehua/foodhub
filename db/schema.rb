@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_24_050727) do
+ActiveRecord::Schema.define(version: 2022_01_13_141518) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -120,7 +120,6 @@ ActiveRecord::Schema.define(version: 2021_12_24_050727) do
   create_table "order_details", force: :cascade do |t|
     t.integer "order_id", null: false
     t.integer "item_id", null: false
-    t.integer "store_id", null: false
     t.integer "order_quantity", null: false
     t.integer "price_after_tax", null: false
     t.integer "product_status", default: 0, null: false
@@ -135,7 +134,6 @@ ActiveRecord::Schema.define(version: 2021_12_24_050727) do
     t.string "name", default: "", null: false
     t.integer "postage", null: false
     t.integer "total_price", null: false
-    t.integer "order_status", default: 0, null: false
     t.integer "pay_method", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -168,6 +166,14 @@ ActiveRecord::Schema.define(version: 2021_12_24_050727) do
 
   create_table "rooms", force: :cascade do |t|
     t.integer "enduser_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "store_orders", force: :cascade do |t|
+    t.integer "store_id", null: false
+    t.integer "order_id", null: false
+    t.integer "order_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

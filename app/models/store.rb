@@ -5,8 +5,8 @@ class Store < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items, dependent: :destroy
-  has_many :order_details
-  has_many :orders, through: :order_details
+  has_many :store_orders
+  has_many :orders, through: :store_orders
   has_many :genres, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
