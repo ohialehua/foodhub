@@ -30,20 +30,25 @@ class Public::OrdersController < ApplicationController
     order = Order.new(order_params)
     order.enduser_id = current_enduser.id
     if order.save
-      current_enduser.cart_items.each do |c|
-        OrderDetail.create(order_id: order.id, item_id: c.item_id, order_quantity: c.quantity, price_after_tax: c.item.with_tax_price)
-      end
-      current_enduser.cart_items.destroy_all
+      ActiveRecord::Base.transaction do
 
-      # StoreOrderモデルの作成
-      @order_details = order.order_details
-      @order_details.each do |od|
-        @store = od.store
-        if @store.store_orders.where(order_id:order).count == 0
-          StoreOrder.create(order_id: order.id, store_id: od.item.store_id)
+        # OrderDetailモデルの作成
+        current_enduser.cart_items.each do |c|
+          OrderDetail.create(order_id: order.id, item_id: c.item_id, order_quantity: c.quantity, price_after_tax: c.item.with_tax_price)
         end
+        current_enduser.cart_items.destroy_all
+        #
+
+        # StoreOrderモデルの作成
+        @order_details = order.order_details
+        @order_details.each do |od|
+          @store = od.store
+          if @store.store_orders.where(order_id:order).count == 0
+            StoreOrder.create(order_id: order.id, store_id: od.item.store_id)
+          end
+        end
+        #
       end
-      #
       redirect_to orders_complete_path
     else
       redirect_to action: "new"
