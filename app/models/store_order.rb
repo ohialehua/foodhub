@@ -1,6 +1,7 @@
 class StoreOrder < ApplicationRecord
 
   has_many :order_details
+  belongs_to :enduser
   belongs_to :store
   belongs_to :order
 

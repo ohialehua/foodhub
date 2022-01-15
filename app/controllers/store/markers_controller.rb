@@ -8,7 +8,10 @@ class Store::MarkersController < ApplicationController
   def show
     @marker = Marker.find(params[:id])
     @enduser = @marker.enduser
-    @orders = current_store.orders.where(enduser_id:@enduser).distinct
+    # フォロワーの店毎の注文から自分の店のものを取得
+    # @store_orders = @enduser.store_orders.where(store_id:current_store)
+    # フォロワーの注文から自分の店の注文を取得
+    @orders = @enduser.orders.joins(:store_orders).where(store_orders: {store_id:current_store})
   end
 
   private

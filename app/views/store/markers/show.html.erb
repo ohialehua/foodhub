@@ -36,8 +36,8 @@
               <%= @store_total_price.to_s(:delimited) %>円
               <% @sum_store_total_price += @store_total_price %>
             </td>
-            <td><%= order.order_status_i18n %></td>
-            <td><%= link_to "表示する", store_order_path(order), class:'btn btn-primary text-white' %></td>
+            <td><%= order.store_orders.find_by(store_id:current_store).order_status_i18n %></td>
+            <td><%= link_to "表示する", store_store_order_path(order), class:'btn btn-primary text-white' %></td>
           </tr>
         <% end %>
           <tr class="text-dark" style="background-color: yellow;">

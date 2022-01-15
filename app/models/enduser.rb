@@ -14,6 +14,7 @@ class Enduser < ApplicationRecord
   has_many :items, through: :cart_items
   has_many :deliveries
   has_many :orders
+  has_many :store_orders
 
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy

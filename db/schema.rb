@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2022_01_13_141518) do
 
   create_table "order_details", force: :cascade do |t|
     t.integer "order_id", null: false
+    t.integer "store_order_id", null: false
     t.integer "item_id", null: false
     t.integer "order_quantity", null: false
     t.integer "price_after_tax", null: false
@@ -171,6 +172,7 @@ ActiveRecord::Schema.define(version: 2022_01_13_141518) do
   end
 
   create_table "store_orders", force: :cascade do |t|
+    t.integer "enduser_id", null: false
     t.integer "store_id", null: false
     t.integer "order_id", null: false
     t.integer "order_status", default: 0, null: false

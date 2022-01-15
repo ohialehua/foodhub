@@ -12,7 +12,7 @@
             <tr>
               <td><%= attachment_image_tag(marker.enduser, :profile_image, :fill, 100, 100, size:"30x30", fallback: "no_image.png") %></td>
               <td><%= link_to marker.enduser.name, store_marker_path(marker), class:"text-white" %></td>
-              <td><%= marker.enduser.orders.joins(:order_details).where(order_details: {store_id:current_store}).distinct.count %></td>
+              <td><%= marker.enduser.orders.joins(:store_orders).where(store_orders: {store_id:current_store}).distinct.count %></td>
             </tr>
           <% end %>
           </tbody>

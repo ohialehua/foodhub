@@ -28,7 +28,7 @@ namespace :store do
     resources :post_comments,only: [:create,:destroy]
   end
   resources :markers,only:[:index,:show]
-  resources :orders,only:[:index,:show,:update]
+  resources :store_orders,only:[:index,:show,:update]
   resources :order_details,only:[:update]
 end
 

@@ -35,12 +35,17 @@ class Public::OrdersController < ApplicationController
         cart_items.each do |c|
           # StoreOrderモデルの作成
           @store = c.item.store
+          store_order_id = nil  #条件分岐する前に登録する
           if @store.store_orders.where(order_id:order).count == 0
-            StoreOrder.create(order_id: order.id, store_id: c.item.store_id)
+            store_order = StoreOrder.create(enduser_id: current_enduser.id, order_id: order.id, store_id: c.item.store_id)
+            store_order_id = store_order.id
+          else
+            store_order_id = @store.store_orders.where(order_id:order).first.id
+            #すでに店舗ごとの注文がある場合、この注文の店舗ごとの注文の一番目を取得
           end
           #
           # OrderDetailモデルの作成
-          OrderDetail.create(order_id: order.id, item_id: c.item_id, order_quantity: c.quantity, price_after_tax: c.item.with_tax_price)
+          OrderDetail.create(store_order_id: store_order_id, order_id: order.id, item_id: c.item_id, order_quantity: c.quantity, price_after_tax: c.item.with_tax_price)
           #
         end
         cart_items.destroy_all

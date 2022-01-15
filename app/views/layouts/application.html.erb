@@ -31,7 +31,7 @@
                 <li class="nav-item pt-2">ようこそ、<%= current_store.name %>様！</li>
                 <li class="nav-item ml-4"><%= link_to "Mypage", store_root_path, class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Customers", store_markers_path, class:"nav-link" %></li>
-                <li class="nav-item ml-4"><%= link_to "Orders", store_orders_path, class:"nav-link" %></li>
+                <li class="nav-item ml-4"><%= link_to "Orders", store_store_orders_path, class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Genre", store_genres_path, class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Log out",destroy_store_session_path,method: :delete,class:"nav-link" %></li>
               <% elsif admin_signed_in? %>
