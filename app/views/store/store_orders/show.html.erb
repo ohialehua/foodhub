@@ -7,31 +7,31 @@
           <tbody>
             <tr>
               <td>注文日</td>
-              <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+              <td><%= @store_order.created_at.strftime("%Y/%m/%d") %></td>
             </tr>
             <tr>
               <td>フリガナ<br>注文者氏名</td>
               <td>
-                <%= @order.enduser.full_name_kana %><br>
-                <%= @order.enduser.full_name %>
+                <%= @store_order.order.enduser.full_name_kana %><br>
+                <%= @store_order.order.enduser.full_name %>
               </td>
             </tr>
             <tr>
               <td>配送先住所<br><br>宛名</td>
-              <td>〒<%= @order.post_address %><br>
-                  <%= @order.address %><br>
-                  <%= @order.name %>
+              <td>〒<%= @store_order.order.post_address %><br>
+                  <%= @store_order.order.address %><br>
+                  <%= @store_order.order.name %>
               </td>
             </tr>
             <tr>
               <td>支払方法</td>
-              <td><%= @order.pay_method_i18n %></td>
+              <td><%= @store_order.order.pay_method_i18n %></td>
             </tr>
             <tr>
               <td>注文ステータス</td>
               <td>
-	              <%= form_with(model: @order, url: store_order_path(@order),method: :patch, local: true, class: "form-row") do |f| %>
-                <%= f.select :order_status, Order.order_statuses_i18n.invert, {}, class:"mr-5 text-dark"  %>
+	              <%= form_with(model: @store_order, url: store_store_order_path(@store_order),method: :patch, local: true, class: "form-row") do |f| %>
+                <%= f.select :order_status, StoreOrder.order_statuses_i18n.invert, {}, class:"mr-5 text-dark"  %>
                 <%= f.submit "更新",class: "btn btn-warning ml-3" %>
                 <% end %>
               </td>

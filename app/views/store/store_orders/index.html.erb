@@ -13,25 +13,25 @@
     </tr>
     </thead>
     <tbody>
-    <% @orders.each do |order| %>
+    <% @store_orders.each do |store_order| %>
     <tr>
-      <td><%= order.created_at.strftime("%Y/%m/%d") %></td>
-      <td>〒<%= order.post_address %><br>
-            <%= order.address %><br>
-            <%= order.name %><br>
+      <td><%= store_order.created_at.strftime("%Y/%m/%d") %></td>
+      <td>〒<%= store_order.order.post_address %><br>
+            <%= store_order.order.address %><br>
+            <%= store_order.order.name %><br>
       </td>
       <td>
         <% @store_total_price = 200 %>
-			  <% order.order_details.each do |order_detail| %>
-			    <% if order_detail.store.name == current_store.name %>
+			  <% store_order.order_details.each do |order_detail| %>
+			    <% if order_detail.store_order.store.name == current_store.name %>
 			      <%= order_detail.item.name %>×<%= order_detail.order_quantity %><br>
 			      <% @store_total_price += order_detail.subtotal %>
 			    <% end %>
 			  <% end %>
 		  </td>
       <td><%= @store_total_price.to_s(:delimited) %>円</td>
-      <td><%= order.order_status_i18n %></td>
-      <td><%= link_to "表示する", store_order_path(order), class:'btn btn-primary text-white' %></td>
+      <td><%= store_order.order_status_i18n %></td>
+      <td><%= link_to "表示する", store_store_order_path(store_order), class:'btn btn-primary text-white' %></td>
       </tr>
     <% end %>
   </tbody>

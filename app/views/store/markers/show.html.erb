@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-11">
     <h3 class=""><%= @enduser.name %> さんの注文履歴一覧</h3>
-    <% if @orders.present? %>
+    <% if @store_orders.present? %>
 		  <table class="table table-borderless table-dark mt-5" style="opacity: 0.8;">
 		    <thead class="thead-dark">
           <tr>
@@ -16,17 +16,18 @@
         </thead>
         <tbody>
         <% @sum_store_total_price = 0 %>
-        <% @orders.each do |order| %>
+        <% @store_orders.each do |store_order| %>
           <tr>
-            <td><%= order.created_at.strftime("%Y/%m/%d") %></td>
-            <td>〒<%= order.post_address %><br>
-              <%= order.address %><br>
-              <%= order.name %><br>
+            <td><%= store_order.order.created_at.strftime("%Y/%m/%d") %></td>
+            <td>〒<%= store_order.order.post_address %><br>
+              <%= store_order.order.address %><br>
+              <%= store_order.order.name %><br>
             </td>
             <td>
+            <!--お店ごとに200円の配送料-->
             <% @store_total_price = 200 %>
-			    	<% order.order_details.each do |order_detail| %>
-			    	  <% if order_detail.store.name == current_store.name %>
+			    	<% store_order.order.order_details.each do |order_detail| %>
+			    	  <% if order_detail.store_order.store.name == current_store.name %>
 			        	<%= order_detail.item.name %>×<%= order_detail.order_quantity %><br>
 			        	<% @store_total_price += order_detail.subtotal %>
 			        <% end %>
@@ -36,13 +37,13 @@
               <%= @store_total_price.to_s(:delimited) %>円
               <% @sum_store_total_price += @store_total_price %>
             </td>
-            <td><%= order.store_orders.find_by(store_id:current_store).order_status_i18n %></td>
-            <td><%= link_to "表示する", store_store_order_path(order), class:'btn btn-primary text-white' %></td>
+            <td><%= store_order.order.store_orders.find_by(store_id:current_store).order_status_i18n %></td>
+            <td><%= link_to "表示する", store_store_order_path(store_order), class:'btn btn-primary text-white' %></td>
           </tr>
         <% end %>
           <tr class="text-dark" style="background-color: yellow;">
             <th colspan="2" class="text-center">当店の利用回数：</th>
-            <th><%= @orders.count %>回</th>
+            <th><%= @store_orders.count %>回</th>
             <th>購入総額：</th>
             <th colspan="2" class="text-center"><%= @sum_store_total_price.to_s(:delimited) %>円</th>
           </tr>
