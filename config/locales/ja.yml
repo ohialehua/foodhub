@@ -13,7 +13,7 @@ ja:
         delivery_finish: "発送完了"
     order_detail:
       product_status:
-        not_yet: "着手不可"
+        not_yet: "入金前"
         waiting: "制作待ち"
         working: "製作中"
         complete: "制作完了"

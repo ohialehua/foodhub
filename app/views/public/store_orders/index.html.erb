@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col m-3">
-    <h3 class="">注文履歴一覧</h3>
+    <h3 class="">店舗別注文履歴一覧</h3>
 		<table class="table table-borderless table-dark mt-5" style="opacity: 0.8;">
 		  <thead class="thead-dark">
     <tr>
@@ -22,23 +22,17 @@
             <%= order.name %><br>
       </td>
       <td>
-				<% order.store_orders.each do |store_order| %>
-				  <%= store_order.store.name %>
-				  <% store_order.order_details.each do |order_detail| %>
-				    <% order_detail %></br>
-				  <% end %>
+				<% order.order_details.each do |order_detail| %>
+				<%= order_detail.item.store.name %></br>
 				<% end %>
 			</td>
       <td>
-        <% order.store_orders.each do |store_order| %>
-				  <% store_order.order_details.each do |order_detail| %>
-				    <%= order_detail.item.name %>×<%= order_detail.order_quantity %></br>
-				  <% end %>
+				<% order.order_details.each do |order_detail| %>
+				<%= order_detail.item.name %>×<%= order_detail.order_quantity %></br>
 				<% end %>
 			</td>
       <td><%= order.total_price.to_s(:delimited) %>円</td>
-      <td></td>
-      <td><%= link_to "表示する", order_path(order), class:'btn btn-primary text-white' %></td>
+      <td><%= link_to "表示する", store_orders_path, class:'btn btn-primary text-white' %></td>
       </tr>
     <% end %>
   </tbody>

@@ -35,7 +35,7 @@ class Public::OrdersController < ApplicationController
         cart_items.each do |c|
           # StoreOrderモデルの作成
           @store = c.item.store
-          store_order_id = nil  #条件分岐する前に登録する
+          store_order_id = nil  #条件分岐する前に登録しておくとnullでのエラーがなくなる
           if @store.store_orders.where(order_id:order).count == 0
             store_order = StoreOrder.create(enduser_id: current_enduser.id, order_id: order.id, store_id: c.item.store_id)
             store_order_id = store_order.id
@@ -60,7 +60,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders=current_enduser.orders.page(params[:page])
+    @orders = current_enduser.orders.page(params[:page])
   end
 
   def show
@@ -68,6 +68,7 @@ class Public::OrdersController < ApplicationController
     redirect_to new_order_path
     else
       @order = Order.find(params[:id])
+      @store_orders = @order.store_orders
     end
   end
 
