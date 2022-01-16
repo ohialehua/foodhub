@@ -3,89 +3,83 @@
   	<h3 class="">注文履歴詳細</h3>
   	<div class="row">
   	  <div class="col-7 mt-4">
-  	<h5 class="mt-6"><strog class="text-white">注文情報</strog></h5>
-  	<table class="table table-borderless table-dark" style="opacity: 0.8;">
-    <tbody>
-     <tr>
-      <td>注文日</td>
-      <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
-     </tr>
-     <tr>
-      <td>配送先</td>
-      <td>〒<%= @order.post_address %><br>
-            <%= @order.address %><br>
-            <%= @order.name %>
-      </td>
-     </tr>
-     <tr>
-      <td>支払方法</td>
-      <td><%= @order.pay_method_i18n %></td>
-     </tr>
-     <tr>
-      <td>ステータス</td>
-      <td>
-
-
-        <% if @store_orders.order_statuses == "発送完了" %>
-          すべての商品が発送されました。
-        <% else %>
-          まだ発送されていない商品があります。
-        <% end %>
-      </td>
-     </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="col-4 mt-4">
-  <h5 class="mt-6"><strog class="text-white">請求情報</strog></h5>
-  <table class="table table-borderless table-dark" style="opacity: 0.8;">
-    <tbody>
-      <tr>
-       <th class="table-dark">商品合計</th>
-       <td><%= (@order.total_price - @order.postage).to_s(:delimited) %>円</td>
-      </tr>
-      <tr>
-       <th class="table-dark">送料</th>
-       <td><%= @order.postage %>円</td>
-      </tr>
-      <tr>
-       <th class="table-dark">ご請求額</th>
-       <th><%= @order.total_price.to_s(:delimited) %>円</th>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
-
-<div class="row row-cols-1 row-cols-md-2 row-eq-height">
-<% @store_orders.each do |store_order| %>
-  <div class="col">
-    <label class="mt-3 mr-5"><%= store_order.store.name %>での注文内容</label>
-
-
-    <% if store_order.order_status == "発送完了" %>
-      <label class="text-danger text-right ml-5">注文状況：<%= store_order.order_status_i18n %></label>
-    <% else %>
-      <label class="text-danger text-right ml-5">注文状況：<%= store_order.order_status_i18n %></label>
-    <% end %>
-    <table class="table table-borderless table-dark" style="opacity: 0.8;">
+  	    <h5 class="mt-6"><strog class="text-white">注文情報</strog></h5>
+      	<table class="table table-borderless table-dark" style="opacity: 0.8;">
+          <tbody>
             <tr>
-              <td>商品</td>
-              <td>単価(税込)</td>
-              <td>個数</td>
-              <td>製作状況</td>
-              <td>小計</td>
+              <td>注文日</td>
+              <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
             </tr>
+            <tr>
+              <td>配送先</td>
+              <td>
+                〒<%= @order.post_address %><br>
+                <%= @order.address %><br>
+                <%= @order.name %>
+              </td>
+            </tr>
+            <tr>
+              <td>支払方法</td>
+              <td><%= @order.pay_method_i18n %></td>
+            </tr>
+            <tr>
+              <td>ステータス</td>
+              <td><%= @order_status %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-4 mt-4">
+        <h5 class="mt-6"><strog class="text-white">請求情報</strog></h5>
+        <table class="table table-borderless table-dark" style="opacity: 0.8;">
+          <tbody>
+            <tr>
+              <th class="table-dark">商品合計</th>
+              <td><%= (@order.total_price - @order.postage).to_s(:delimited) %>円</td>
+            </tr>
+            <tr>
+              <th class="table-dark">送料</th>
+              <td><%= @order.postage %>円</td>
+            </tr>
+            <tr>
+              <th class="table-dark">ご請求額</th>
+              <th><%= @order.total_price.to_s(:delimited) %>円</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-eq-height">
+    <% @store_orders.each do |store_order| %>
+      <div class="col">
+        <label class="mt-3 mr-5"><%= store_order.store.name %>での注文内容</label>
+
+        <!--店舗ごとの注文において、製作ステータスに"製作完了"以外のものがあればtrueを返す。-->
+      <% if store_order.order_details.where(product_status: [0, 1, 2,]).any? %>
+        <label class="text-danger text-right ml-5">注文状況：<%= store_order.order_status_i18n %></label>
+      <% else %>
+        <label class="text-right ml-5">注文状況：<%= store_order.order_status_i18n %></label>
+      <% end %>
+      <!---->
+        <table class="table table-borderless table-dark" style="opacity: 0.8;">
+          <tr>
+            <td>商品</td>
+            <td>単価(税込)</td>
+            <td>個数</td>
+            <td>製作状況</td>
+            <td>小計</td>
+          </tr>
         <% @store_total = 0 %>
-    　　<% store_order.order_details.each do |order_detail| %>
-       　　<tr>
+        <% store_order.order_details.each do |order_detail| %>
+          <tr>
             <td><%= order_detail.item.name %></td>
             <td><%= order_detail.item.with_tax_price.to_s(:delimited) %>円</td>
             <td><%= order_detail.order_quantity %></td>
             <td><%= order_detail.product_status_i18n %></td>
             <td class="text-right"><%= order_detail.subtotal.to_s(:delimited) %>円</td>
-              <% @store_total += order_detail.subtotal %>
+            <% @store_total += order_detail.subtotal %>
           </tr>
         <% end %>
           <tr class="text-dark" style="background-color: yellow;">
@@ -93,9 +87,9 @@
             <th>：</th>
             <th class="text-right"><%= @store_total.to_s(:delimited) %>円</th>
           </tr>
-    </table>
- </div>
- <% end %>
-</div>
-</div>
+        </table>
+      </div>
+    <% end %>
+    </div>
+  </div>
 </div>

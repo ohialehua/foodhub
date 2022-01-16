@@ -60,7 +60,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_enduser.orders.page(params[:page])
+    @orders = current_enduser.orders.page(params[:page]).reverse_order
   end
 
   def show
@@ -69,6 +69,14 @@ class Public::OrdersController < ApplicationController
     else
       @order = Order.find(params[:id])
       @store_orders = @order.store_orders
+
+      # 注文ステータスに"発送完了"以外のものがあればtrueを返す。
+      if  @store_orders.where(order_status: [0, 1, 2, 3]).any?
+        @order_status = "まだ発送されていない商品があります。"
+      else
+        @order_status = "すべての商品が発送されました。"
+      end
+      #
     end
   end
 

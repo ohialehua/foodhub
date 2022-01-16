@@ -37,7 +37,17 @@
 				<% end %>
 			</td>
       <td><%= order.total_price.to_s(:delimited) %>円</td>
-      <td></td>
+    <!--注文ステータスに"発送完了"以外のものがあればtrueを返す。-->
+    <% if order.store_orders.where(order_status: [0, 1, 2, 3]).any? %>
+      <td class="text-warning">
+          まだ発送されていない商品があります。
+      </td>
+    <% else %>
+      <td class="text-success">
+          すべての商品が発送されました。
+      </td>
+    <% end %>
+    <!---->
       <td><%= link_to "表示する", order_path(order), class:'btn btn-primary text-white' %></td>
       </tr>
     <% end %>

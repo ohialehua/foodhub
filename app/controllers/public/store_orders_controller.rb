@@ -1,6 +1,7 @@
 class Public::StoreOrdersController < ApplicationController
   def index
-    @store_orders = current_enduser.store_orders
+    @store = Store.find(params[:store_id])
+    @store_orders = current_enduser.store_orders.where(store_id:@store)
   end
 
   private
