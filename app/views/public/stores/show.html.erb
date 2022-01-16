@@ -53,6 +53,7 @@
       </table>
 
       <h3 class=""><%= @store.name %>での注文履歴</h3>
+    <% if @store_orders.any? %>
 		  <table class="table table-borderless table-dark mt-5" style="opacity: 0.8;">
 		    <thead class="thead-dark">
           <tr>
@@ -83,10 +84,14 @@
         <% end %>
         </tbody>
       </table>
+    <% else %>
+      <h4>&ensp;注文履歴がありません。</h4>
+    <% end %>
     </div>
 
     <div class="col-lg-7 pl-5">
       <h2 class="mt-5 mb-3">商品一覧</h2>
+    <% if @items.any? %>
       <div class="row row-cols-2 row-cols-md-3 row-eq-height">
       <% @items.each do |item| %>
         <div class="col">
@@ -109,8 +114,12 @@
           <%= paginate @items, :param_name => 'item_page' %>
         </div>
       </div>
+    <% else %>
+      <h3><br>&ensp;商品がありません。</h3>
+    <% end %>
 
       <h2>投稿一覧</h2>
+    <% if @posts.any? %>
       <div class="card-deck py-5 row row-cols-2 row-cols-md-3 row-eq-height">
         <% @posts.each do |post| %>
         <div class="col">
@@ -134,6 +143,9 @@
         <%= paginate @posts, :param_name => 'post_page' %>
         </div>
       </div>
+    <% else %>
+      <h3><br>&ensp;投稿がありません。</h3>
+    <% end %>
     </div>
     <div class="col-md-11">
     </div>

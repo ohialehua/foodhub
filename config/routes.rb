@@ -53,7 +53,6 @@ scope module: :public do
   post 'orders/confirm' => 'orders#confirm'
   get 'orders/complete' => 'orders#complete'
   resources :orders,except:[:edit,:update,:destroy]
-  resources :store_orders,only:[:show,:index]
   resources :deliveries,except:[:show]
   resources :posts,except:[:edit,:index] do
     resources :post_comments,only: [:create,:destroy]
