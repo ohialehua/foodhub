@@ -19,39 +19,32 @@
       </div>
     </div>
     <div class="col-10">
-      <div class="row">
-<h2>店舗</h2>
-<table class='table'>
-  <thead>
-    <tr>
-      <th>店舗画像</th>
-      <th>店舗名</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @stores.each do |store| %>
-      <tr>
-        <td><%= attachment_image_tag(store, :profile_image, :fill, 100, 100, size:"50x50", fallback: "no_image.png") %></td>
-        <td><%= store.name %></td>
-        <td><p>フォロワー数:<%= store.markers.count %></p></td>
-        <td>
-          <% if store.marked_by?(current_enduser) %>
-            <%= link_to store_unmark_path(store), method: :delete, local: true do %>
-              <p style="color: #eeee00">★</p>
+      <h2 class="mt-5">加盟店一覧</h2>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+      <% @stores.each do |store| %>
+        <div class="col">
+          <div class="card mx-auto mt-4 bg-dark text-white">
+            <%= link_to store_path(store) do %>
+              <%= attachment_image_tag store, :profile_image, size:"200x200", class:"card-img-top", fallback:"no_image.png" %>
             <% end %>
-          <% else %>
-            <%= link_to store_mark_path(store), method: :post, local: true do %>
-              ★
-            <% end %>
-          <% end %>
-        </td>
-        <td><%= link_to 'Show', store_path(store) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <div class="card-body">
+              <div class="card-title d-inline-flex">
+                <%= link_to store.name, store_path(store), class:"text-white mr-3" %>
+                <% if store.marked_by?(current_enduser) %>
+                  <%= link_to store_unmark_path(store), method: :delete, local: true do %>
+                    <p style="color: #eeee00">★</p>
+                  <% end %>
+                <% else %>
+                  <%= link_to store_mark_path(store), method: :post, local: true do %>
+                    <p>★</p>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="card-text">
+                <p>フォロワー数：&ensp;<%= store.markers.count %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
       </div>
-    </div>
-  </div>
-</div>
