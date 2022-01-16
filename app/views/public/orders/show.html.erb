@@ -35,16 +35,16 @@
         <table class="table table-borderless table-dark" style="opacity: 0.8;">
           <tbody>
             <tr>
-              <th class="table-dark">商品合計</th>
-              <td><%= (@order.total_price - @order.postage).to_s(:delimited) %>円</td>
+              <th>商品合計</th>
+              <td class="text-right"><%= (@order.total_price - @order.postage).to_s(:delimited) %>円</td>
             </tr>
             <tr>
-              <th class="table-dark">送料</th>
-              <td><%= @order.postage %>円</td>
+              <th>送料</th>
+              <td class="text-right"><%= @order.postage %>円</td>
             </tr>
             <tr>
-              <th class="table-dark">ご請求額</th>
-              <th><%= @order.total_price.to_s(:delimited) %>円</th>
+              <th>ご請求額</th>
+              <th class="text-right"><%= @order.total_price.to_s(:delimited) %>円</th>
             </tr>
           </tbody>
         </table>
