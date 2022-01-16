@@ -1,88 +1,117 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <h2 class="">
-          <%= @store.name %> 詳細ページ
-      </h2>
-        <div class="col-3 d-inline-block mb-3">
-          <%= attachment_image_tag(@store, :profile_image, :fill, 100, 100, size:"100x100", fallback: "no_image.png") %>
-        </div>
-        <table class="table table-borderless table-dark" style="opacity: 0.8;">
-          <tr>
-            <td>店舗名</td>
-            <td><%= @store.name %></td>
-          </tr>
-          <tr>
-            <td>カナ</td>
-            <td><%= @store.name_kana %></td>
-          </tr>
-          <tr>
-            <td>紹介文</td>
-            <td><%= @store.introduction %></td>
-          </tr>
-          <tr>
-            <td>郵便番号</td>
-            <td><%= @store.post_address %></td>
-          </tr>
-          <tr>
-            <td>住所</td>
-            <td><%= @store.address %></td>
-          </tr>
-          <tr>
-            <td>電話番号</td>
-            <td><%= @store.phone_number %></td>
-          </tr>
-          <tr>
-            <td>メールアドレス</td>
-            <td><%= @store.email %></td>
-          </tr>
-        </table>
-        <div class="mt-3">
-        <table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
-          <thead>
-            <tr>
-              <th class="text-center"><h5>ジャンル</h5></th>
-            </tr>
-          </thead>
-          <tbody>
-          <% @genres.each do |genre| %>
-            <tr>
-              <td><%= genre.name %></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
+    <div class="col-lg-5">
+      <h2 class=""><%= @store.name %> 詳細ページ</h2>
+      <div class="col-3 d-inline-block mb-3">
+        <%= attachment_image_tag(@store, :profile_image, :fill, 100, 100, size:"100x100", fallback: "no_image.png") %>
       </div>
+
+      <table class="table table-borderless table-dark" style="opacity: 0.8;">
+        <tr>
+          <td>店舗名</td>
+          <td><%= @store.name %></td>
+        </tr>
+        <tr>
+          <td>カナ</td>
+          <td><%= @store.name_kana %></td>
+        </tr>
+        <tr>
+          <td>紹介文</td>
+          <td><%= @store.introduction %></td>
+        </tr>
+        <tr>
+          <td>郵便番号</td>
+          <td><%= @store.post_address %></td>
+        </tr>
+        <tr>
+          <td>住所</td>
+          <td><%= @store.address %></td>
+        </tr>
+        <tr>
+          <td>電話番号</td>
+          <td><%= @store.phone_number %></td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= @store.email %></td>
+        </tr>
+      </table>
+
+      <table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
+        <thead>
+          <tr>
+            <th class="text-center"><h5>ジャンル</h5></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @genres.each do |genre| %>
+          <tr>
+            <td><%= genre.name %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <h3 class=""><%= @store.name %>での注文履歴</h3>
+		  <table class="table table-borderless table-dark mt-5" style="opacity: 0.8;">
+		    <thead class="thead-dark">
+          <tr>
+            <td>注文日</td>
+            <td>配送先</td>
+            <td>注文商品</td>
+            <td>支払金額</td>
+          </tr>
+        </thead>
+        <tbody>
+        <% @store_orders.each do |store_order| %>
+          <tr>
+            <td><%= store_order.created_at.strftime("%Y/%m/%d") %></td>
+            <td>
+              〒<%= store_order.order.post_address %><br>
+              <%= store_order.order.address %><br>
+              <%= store_order.order.name %><br>
+            </td>
+            <td>
+            <% @store_order_total_price = 0 %>
+				    <% store_order.order_details.each do |order_detail| %>
+				      <%= order_detail.item.name %>×<%= order_detail.order_quantity %></br>
+				      <% @store_order_total_price += order_detail.subtotal %>
+				    <% end %>
+			      </td>
+            <td><%= @store_order_total_price.to_s(:delimited) %>円</td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
-    <div class="col-md-8">
-            <h2 class="mt-5 mb-3">商品一覧</h2>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-eq-height">
-          <% @items.each do |item| %>
-             <div class="col">
-               <div class="card mx-auto mt-4 bg-dark text-white">
-                 <%= link_to item_path(item) do %>
-                   <%= attachment_image_tag item, :image, size:"200x200", class:"card-img-top", fallback:"no-img.png" %>
-                  <% end %>
-                    <div class="card-body">
-                      <div class="card-title">
-                        <%= link_to item.name, item_path(item), class:"text-white" %>
-                      </div>
-                        <div class="card-text">
-                         <%= (item.with_tax_price).to_s(:delmited) + "円" %>
-                        </div>
-                    </div>
-               </div>
-             </div>
-          <% end %>
-          <div class="d-flex pagenation justify-content-center mt-5 mb-3">
-            <%= paginate @items, :param_name => 'item_page' %>
+
+    <div class="col-lg-7 pl-5">
+      <h2 class="mt-5 mb-3">商品一覧</h2>
+      <div class="row row-cols-2 row-cols-md-3 row-eq-height">
+      <% @items.each do |item| %>
+        <div class="col">
+          <div class="card mx-auto mt-4 bg-dark text-white">
+            <%= link_to item_path(item) do %>
+              <%= attachment_image_tag item, :image, size:"200x200", class:"card-img-top", fallback:"no-img.png" %>
+            <% end %>
+            <div class="card-body">
+              <div class="card-title">
+                <%= link_to item.name, item_path(item), class:"text-white" %>
+              </div>
+              <div class="card-text">
+                <%= (item.with_tax_price).to_s(:delmited) + "円" %>
+              </div>
+            </div>
           </div>
         </div>
+      <% end %>
+        <div class="d-flex pagenation justify-content-center mt-5 mb-3">
+          <%= paginate @items, :param_name => 'item_page' %>
+        </div>
       </div>
-    </div>
-    <div class="col-md-11">
+
       <h2>投稿一覧</h2>
-        <div class="card-deck py-5 row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+      <div class="card-deck py-5 row row-cols-2 row-cols-md-3 row-eq-height">
         <% @posts.each do |post| %>
         <div class="col">
           <div class="card mx-auto mt-4 shadow-lg">
@@ -91,8 +120,8 @@
             <% end %>
           <div class="card-body">
             <div class="row">
-              <div class="col-11 mx-auto">
-                <p class="card-text">説明：<%= post.body %></p>
+              <div class="col-12 mx-auto">
+                <p class="card-text">説明：<%= post.body.truncate(10) %></p>
                 <span><i class="fas fa-user"></i> By <%= post.store.name %> ｜ </span>
                 <span><%= link_to "#{post.post_comments.count} コメント", post_path(post), class:"text-dark" %></span>
               </div>
@@ -103,6 +132,10 @@
         <% end %>
         </div>
         <%= paginate @posts, :param_name => 'post_page' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-11">
     </div>
     </div>
   </div>

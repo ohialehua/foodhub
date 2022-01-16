@@ -1,7 +1,9 @@
 class Public::StoreOrdersController < ApplicationController
   def index
-    @store = Store.find(params[:store_id])
-    @store_orders = current_enduser.store_orders.where(store_id:@store)
+    @markers = current_enduser.markers
+    @markers.each do |marker|
+      @store_orders = marker.store.store_orders.where(enduser_id:current_enduser)
+    end
   end
 
   private

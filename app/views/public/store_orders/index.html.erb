@@ -14,29 +14,28 @@
     </tr>
     </thead>
     <tbody>
-    <% @orders.each do |order| %>
+    <% @store_orders.each do |store_order| %>
     <tr>
-      <td><%= order.created_at.strftime("%Y/%m/%d") %></td>
-      <td>〒<%= order.post_address %><br>
-            <%= order.address %><br>
-            <%= order.name %><br>
+      <td><%= store_order.created_at.strftime("%Y/%m/%d") %></td>
+      <td>〒<%= store_order.order.post_address %><br>
+            <%= store_order.order.address %><br>
+            <%= store_order.order.name %><br>
       </td>
       <td>
-				<% order.order_details.each do |order_detail| %>
+				<% store_order.order_details.each do |order_detail| %>
 				<%= order_detail.item.store.name %></br>
 				<% end %>
 			</td>
       <td>
-				<% order.order_details.each do |order_detail| %>
+				<% store_order.order_details.each do |order_detail| %>
 				<%= order_detail.item.name %>×<%= order_detail.order_quantity %></br>
 				<% end %>
 			</td>
-      <td><%= order.total_price.to_s(:delimited) %>円</td>
-      <td><%= link_to "表示する", store_orders_path, class:'btn btn-primary text-white' %></td>
+      <td><%= store_order.order.total_price.to_s(:delimited) %>円</td>
+      <td><%= link_to "表示する", store_order_path(store_order), class:'btn btn-primary text-white' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 </div>
 </div>
-<%= paginate @orders %>

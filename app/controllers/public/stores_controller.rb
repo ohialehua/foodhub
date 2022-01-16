@@ -11,6 +11,7 @@ class Public::StoresController < ApplicationController
     @genres = @store.genres
     @items = @store.items.page(params[:item_page]).per(9)
     @posts = @store.posts.page(params[:post_page])
+    @store_orders = @store.store_orders.where(enduser_id:current_enduser)
   end
 
   private
