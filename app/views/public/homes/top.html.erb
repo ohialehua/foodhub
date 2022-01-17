@@ -21,10 +21,12 @@
               <% else %>
                 <span><i class="fas fa-user"></i> By <%= post.store.name %> ｜ </span>
               <% end %>
-                <p><%= link_to "#{post.post_comments.count} コメント", post_path(post), class:"text-dark" %></p>
-                <div class="favorite-btn_<%= post.id %> ml-3">
-                  <%= render 'public/favorites/favorite-btn', post: post %>
-                </div>
+                <% if enduser_signed_in? %>
+                  <p><%= link_to "#{post.post_comments.count} コメント", post_path(post), class:"text-dark" %></p>
+                  <div class="favorite-btn_<%= post.id %> ml-3">
+                    <%= render 'public/favorites/favorite-btn', post: post %>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>
