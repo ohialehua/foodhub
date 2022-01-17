@@ -2,7 +2,7 @@ class Public::ItemsController < ApplicationController
   before_action :authenticate_enduser!
 
   def index
-    @items = Item.page(params[:page])
+    @items = Item.sort(params[:selection]).page(params[:page])
     @markers = current_enduser.markers
   end
 

@@ -24,4 +24,20 @@ class Store < ApplicationRecord
 		markers.where(enduser_id: enduser.id).exists?
 	end
 
+	def self.sort(selection)
+	  if selection == 'markers'
+	    @stores = Store.joins(:markers).group(:id).order(Arel.sql('count(store_id) desc'))
+	  elsif selection == 'items'
+	    @stores = Store.joins(:items).group(:id).order(Arel.sql('count(store_id) desc'))
+	  elsif selection == 'posts'
+	    @stores = Store.joins(:posts).group(:id).order(Arel.sql('count(store_id) desc'))
+	  elsif selection == 'old'
+	    @stores = Store.all.order(created_at: :ASC)
+	  elsif selection == 'new'
+	    @stores = Store.all.order(created_at: :DESC)
+	  else
+      @stores = Store.all.order(created_at: :DESC)
+    end
+	end
+
 end

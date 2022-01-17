@@ -2,7 +2,7 @@ class Public::StoresController < ApplicationController
   before_action :authenticate_enduser!
 
   def index
-    @stores = Store.page(params[:page])
+    @stores = Store.sort(params[:selection]).page(params[:page])
     @markers = current_enduser.markers
   end
 
