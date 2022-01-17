@@ -18,6 +18,14 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = PostComment.new
+    if @post.enduser_id.present?  #条件分岐させないとfalseのとき@genresがnilになる
+      @enduser = @post.enduser
+      @followings = @enduser.followings.page(params[:following_page])
+      @followers = @enduser.followers.page(params[:follower_page])
+    else
+      @store = @post.store
+      @genres = @store.genres
+    end
   end
 
   def destroy

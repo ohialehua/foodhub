@@ -8,25 +8,10 @@
           <%= @enduser.name %> さんのプロフィール
         <% end %>
       </h2>
-        <div class="col-3 d-inline-block mb-3">
-          <%= attachment_image_tag(@enduser, :profile_image, size:"100x100", fallback: "no_image.png") %>
-        </div>
-      <% if current_enduser == @enduser %>
-        <div class="col-8 d-inline-block text-right">
-          <h4 class="">登録情報</h4>
-          <%= link_to "編集", edit_enduser_path(@enduser), class:"btn btn-primary ml-3" %>
-        </div>
-      <% end %>
-        <table class="table table-borderless table-dark" style="opacity: 0.8;">
-          <tr>
-            <td>ユーザーネーム</td>
-            <td><%= @enduser.name %></td>
-          </tr>
-          <tr>
-            <td>紹介文</td>
-            <td><%= @enduser.introduction %></td>
-          </tr>
+      <%= render 'show', enduser: @enduser %>
         <% if @enduser == current_enduser %>
+        <label>これより下は自分にしか表示されません</label>
+        <table class="table table-dark" style="opacity: 0.8;">
           <tr>
             <td>氏名</td>
             <td><%= @enduser.full_name %></td>
@@ -43,8 +28,8 @@
             <td>メールアドレス</td>
             <td><%= @enduser.email %></td>
           </tr>
-        <% end %>
         </table>
+        <% end %>
         <% if current_enduser == @enduser %>
           <div class="col-5 d-inline-block aligin-items-center">
             <h4 class="mt-1">配送先</h4>

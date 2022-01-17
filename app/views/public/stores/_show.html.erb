@@ -1,0 +1,49 @@
+<div class="col-3 d-inline-block mb-3">
+  <%= attachment_image_tag(store, :profile_image, :fill, 100, 100, size:"100x100", fallback: "no_image.png") %>
+</div>
+
+<table class="table table-borderless table-dark" style="opacity: 0.8;">
+  <tr>
+    <td>店舗名</td>
+    <td><%= store.name %></td>
+  </tr>
+  <tr>
+    <td>カナ</td>
+    <td><%= store.name_kana %></td>
+  </tr>
+  <tr>
+    <td>紹介文</td>
+    <td><%= store.introduction %></td>
+  </tr>
+  <tr>
+    <td>郵便番号</td>
+    <td><%= store.post_address %></td>
+  </tr>
+  <tr>
+    <td>住所</td>
+    <td><%= store.address %></td>
+  </tr>
+  <tr>
+    <td>電話番号</td>
+    <td><%= store.phone_number %></td>
+  </tr>
+  <tr>
+    <td>メールアドレス</td>
+    <td><%= store.email %></td>
+  </tr>
+</table>
+
+<table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
+  <thead>
+    <tr>
+      <th class="text-center"><h5>ジャンル</h5></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% genres.each do |genre| %>
+    <tr>
+      <td><%= genre.name %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
