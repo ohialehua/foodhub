@@ -3,27 +3,33 @@
     <div class="col-md-3">
         <%= paginate @followings, :param_name => 'following_page' %>
       <div class="mt-3" style="width: 80%;">
-        <table class="table table-borderless table-dark text-center mb-5" style="opacity: 0.8;">
+        <table class="table table-borderless table-dark table-hover text-center mb-5" style="opacity: 0.8;">
           <tbody>
             <tr>
               <th class="text-center"><h5>followings</h5></th>
             </tr>
           <% @followings.each do |following| %>
             <tr>
-              <td><%= link_to following.name, enduser_path(following), class:"text-white" %></td>
+              <td>
+                <%= attachment_image_tag(following, :profile_image, size:"30x30", fallback: "no_image.png") %>
+                <%= link_to following.name, enduser_path(following), class:"text-white" %>
+              </td>
             </tr>
           <% end %>
           </tbody>
         </table>
         <%= paginate @followers, :param_name => 'follower_page' %>
-        <table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
+        <table class="table table-borderless table-dark table-hover text-center" style="opacity: 0.8;">
           <tbody>
           　<tr>
               <th class="text-center"><h5>followers</h5></th>
             </tr>
           <% @followers.each do |follower| %>
             <tr>
-              <td><%= link_to follower.name, enduser_path(follower), class:"text-white" %></td>
+              <td>
+                <%= attachment_image_tag(follower, :profile_image, size:"30x30", fallback: "no_image.png") %>
+                <%= link_to follower.name, enduser_path(follower), class:"text-white" %>
+              </td>
             </tr>
           <% end %>
           </tbody>
@@ -51,13 +57,13 @@
         <% else %>
         <td>
           <% if current_enduser.follower?(enduser) %>
-            <%= link_to "フォロー外す", enduser_relationships_path(enduser.id), method: :delete %>
+            <%= link_to "フォローを外す", enduser_relationships_path(enduser.id), class:"text-danger", method: :delete %>
           <% else %>
             <%= link_to "フォローする", enduser_relationships_path(enduser.id), method: :post %>
           <% end %>
         </td>
         <% end %>
-        <td><%= link_to 'Show', enduser_path(enduser), class: "user_#{enduser.id}" %></td>
+        <td><%= link_to 'Show', enduser_path(enduser) %></td>
       </tr>
     <% end %>
   </tbody>

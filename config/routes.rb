@@ -39,8 +39,6 @@ scope module: :public do
    post 'edit' => 'endusers#edit'
    get 'add' =>  'endusers#add'
    post 'add' =>  'endusers#add'
-   delete 'favorites' => 'favorites#destroy'
-   post 'favorites' => 'favorites#create'
    resource :relationships,only: [:create,:destroy]
  end
   resources :stores,only:[:index,:show] do
@@ -56,6 +54,7 @@ scope module: :public do
   resources :deliveries,except:[:show]
   resources :posts,except:[:edit,:index] do
     resources :post_comments,only: [:create,:destroy]
+    resource :favorites,only: [:create,:destroy]
   end
 end
 

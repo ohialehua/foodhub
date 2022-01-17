@@ -1,0 +1,9 @@
+<% if post.favorited_by?(current_enduser) %>
+  <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
+    <p class="text-danger">♥<%= post.favorites.count %></p>
+  <% end %>
+<% else %>
+  <%= link_to post_favorites_path(post), method: :post, remote: true do %>
+    <p>♥<%= post.favorites.count %></p>
+  <% end %>
+<% end %>
