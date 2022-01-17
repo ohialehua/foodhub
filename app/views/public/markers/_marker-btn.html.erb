@@ -1,0 +1,9 @@
+<% if store.marked_by?(current_enduser) %>
+  <%= link_to store_markers_path(store), method: :delete, remote: true do %>
+    <p style="color: #eeee00">★</p>
+  <% end %>
+<% else %>
+  <%= link_to store_markers_path(store), method: :post, remote: true do %>
+    <p>★</p>
+  <% end %>
+<% end %>

@@ -1,21 +1,8 @@
 <div class="container px-5 px-sm-0 mt-5">
   <div class="row">
     <div class="col-2">
-      <div class="mt-3">
-        <table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
-          <thead>
-            <tr>
-              <th class="text-center"><h4>お気に入り店舗一覧</h4></th>
-            </tr>
-          </thead>
-          <tbody>
-          <% @markers.each do |marker| %>
-            <tr>
-              <td><%= link_to marker.store.name, store_path(marker.store), class:"text-white" %></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
+      <div class="marker-index mt-3">
+        <%= render "public/markers/marker-index", markers: @markers %>
       </div>
     </div>
     <div class="col-10">
@@ -30,17 +17,11 @@
             <div class="card-body">
               <div class="card-title d-inline-flex">
                 <%= link_to store.name, store_path(store), class:"text-white mr-3" %>
-                <% if store.marked_by?(current_enduser) %>
-                  <%= link_to store_unmark_path(store), method: :delete, local: true do %>
-                    <p style="color: #eeee00">★</p>
-                  <% end %>
-                <% else %>
-                  <%= link_to store_mark_path(store), method: :post, local: true do %>
-                    <p>★</p>
-                  <% end %>
-                <% end %>
+                <div class="marker-btn_<%= store.id %>">
+                  <%= render "public/markers/marker-btn", store: store %>
+                </div>
               </div>
-              <div class="card-text">
+              <div class="markers_count_<%= store.id %> card-text">
                 <p>フォロワー数：&ensp;<%= store.markers.count %></p>
               </div>
             </div>

@@ -1,0 +1,14 @@
+<table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
+  <thead>
+    <tr>
+      <th class="text-center"><h4>お気に入り店舗一覧</h4></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% markers.each do |marker| %>
+    <tr>
+      <td><%= link_to marker.store.name, store_path(marker.store), class:"text-white" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

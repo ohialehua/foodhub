@@ -27,7 +27,7 @@ namespace :store do
   resources :posts,except:[:edit,:index] do
     resources :post_comments,only: [:create,:destroy]
   end
-  resources :markers,only:[:index,:show]
+  resources :markers,only:[:index,:show], as: 'follower'
   resources :store_orders,only:[:index,:show,:update]
   resources :order_details,only:[:update]
 end
@@ -42,8 +42,7 @@ scope module: :public do
    resource :relationships,only: [:create,:destroy]
  end
   resources :stores,only:[:index,:show] do
-    delete 'markers' => 'markers#destroy', as: 'unmark'
-    post 'markers' => 'markers#create', as: 'mark'
+    resource :markers,only:[:create,:destroy]
   end
   resources :items,only:[:index,:show]
   delete 'cart_items' => 'cart_items#destroy_all'
