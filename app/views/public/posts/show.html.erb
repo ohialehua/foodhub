@@ -18,15 +18,7 @@
           </td>
           <td><%= @post.body %></td>
           <td class="favorite-btn_<%= @post.id %>">
-            <% if @post.favorited_by?(current_enduser) %>
-              <%= link_to enduser_favorites_path(@post), method: :delete, remote: true do %>
-                <p class="favorite_color">♥<%= @post.favorites.count %></p>
-              <% end %>
-            <% else %>
-              <%= link_to enduser_favorites_path(@post), method: :post, remote: true do %>
-                ♥<%= @post.favorites.count %>
-              <% end %>
-            <% end %>
+            <%= render 'public/favorites/favorite-btn', post: @post %>
           </td>
           <td>
             <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>
@@ -52,15 +44,7 @@
           </td>
           <td><%= @post.body %></td>
           <td class="favorite-btn_<%= @post.id %>">
-            <% if @post.favorited_by?(current_enduser) %>
-              <%= link_to enduser_favorites_path(@post), method: :delete, remote: true do %>
-                <p class="favorite_color">♥<%= @post.favorites.count %></p>
-              <% end %>
-            <% else %>
-              <%= link_to enduser_favorites_path(@post), method: :post, remote: true do %>
-                ♥<%= @post.favorites.count %>
-              <% end %>
-            <% end %>
+            <%= render 'public/favorites/favorite-btn', post: @post %>
           </td>
           <td>
             <p class="comments_count">コメント数: <%= @post.post_comments.count %></p>

@@ -13,7 +13,7 @@
           <% end %>
         <div class="card-body">
           <div class="row">
-            <div class="col-11 mx-auto">
+            <div class="col-12 mx-auto">
               <p class="card-text">説明：<%= post.body.truncate(9) %></p>
               <div class="d-inline-flex">
               <% if post.enduser_id.present? %>
@@ -21,11 +21,11 @@
               <% else %>
                 <span><i class="fas fa-user"></i> By <%= post.store.name %> ｜ </span>
               <% end %>
-                <div class="favorite-btn_<%= post.id %>">
+                <p><%= link_to "#{post.post_comments.count} コメント", post_path(post), class:"text-dark" %></p>
+                <div class="favorite-btn_<%= post.id %> ml-3">
                   <%= render 'public/favorites/favorite-btn', post: post %>
                 </div>
               </div>
-              <p><%= link_to "#{post.post_comments.count} 件のコメント", post_path(post), class:"text-dark" %></p>
             </div>
           </div>
         </div>
