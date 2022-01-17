@@ -1,0 +1,28 @@
+<h4>Post Comments</h4>
+<table class='table'>
+  <tbody>
+  <% post.post_comments.each do |post_comment| %>
+    <tr>
+      <td>
+      <% if post_comment.enduser_id.present? %>
+        <%= link_to enduser_path(post_comment.enduser) do %>
+          <%= attachment_image_tag(post_comment.enduser, :profile_image, :fill, 100, 100, fallback: "no_image.png", size:'50x50') %><br>
+          <%= post_comment.enduser.name %>
+        <% end %>
+      <% else %>
+        <%= link_to store_path(post_comment.store) do %>
+          <%= attachment_image_tag(post_comment.store, :profile_image, :fill, 100, 100, fallback: "no_image.png", size:'50x50') %><br>
+          <%= post_comment.store.name %>
+        <% end %>
+      <% end %>
+      </td>
+      <td><%= post_comment.comment %></td>
+      <td>
+      <% if post_comment.enduser == current_enduser %>
+        <%= link_to 'Destroy', post_post_comment_path(post_comment.post, post_comment), method: :delete, local: true, class: "btn btn-sm btn-danger" %>
+      <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
