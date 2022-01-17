@@ -1,3 +1,3 @@
-$(".markers_count_<%= @store.id %>").html("フォロワー数：&ensp;<%= @store.markers.count %>");
+$(".markers_count_<%= @store.id %>").html("<p>フォロワー数：&ensp;<%= @store.markers.count %></p>");
 $('.marker-btn_<%= @store.id %>').html("<%= j(render "public/markers/marker-btn", store: @store) %>");
 <!--$('.marker-index').html("%= j(render "public/markers/marker-index", markers: @markers) %>");-->
