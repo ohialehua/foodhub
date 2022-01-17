@@ -3,7 +3,10 @@
     <div class="col">
     <h4>投稿一覧</h4>
     <p class="text-right"><%= link_to "新規投稿",new_post_path, class:"btn btn-primary text-black" %></p>
-    <!--%= select_tag '', options_for_select([['いいねが多い順','likes'],['閲覧が多い順','PV'],['新しい順','new'],['古い順','old']],-->
+    <%= form_with model: @post, url: root_path, method: :get, local: true do |f| %>
+      <%= f.select :selection, [['いいねが多い順','likes'],['閲覧が多い順','PV'],['新しい順','new'],['古い順','old']] %>
+      <%= f.submit %>
+    <% end %>
       <div class="card-deck py-5 row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
       <% @posts.each do |post| %>
       <div class="col">

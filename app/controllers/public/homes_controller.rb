@@ -1,6 +1,6 @@
 class Public::HomesController < ApplicationController
 
   def top
-    @posts = Post.page(params[:page]).reverse_order
+    @posts = Post.sort(params[:selection]).page(params[:page])
   end
 end
