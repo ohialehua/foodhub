@@ -1,5 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_enduser!
+  impressionist :actions => [:show]
 
   def new
     @post = Post.new

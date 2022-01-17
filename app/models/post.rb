@@ -23,4 +23,6 @@ class Post < ApplicationRecord
       @posts = Post.left_joins(:week_favorites).group(:id).order(Arel.sql('count(post_id) desc'))
     end
 	end
+
+	is_impressionable counter_cache: true
 end
