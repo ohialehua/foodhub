@@ -100,10 +100,13 @@
             <% end %>
           <div class="card-body">
             <div class="row">
-              <div class="col-11 mx-auto">
-                <p class="card-text">説明：<%= post.body %></p>
-                <span><i class="fas fa-user"></i> By <%= post.store.name %> ｜ </span>
-                <span><%= link_to "#{post.post_comments.count} コメント", store_post_path(post), class:"text-dark" %></span>
+              <div class="col-12 mx-auto">
+                <p class="card-text">説明：<%= post.body.truncate(10) %></p>
+                <div class="d-inline-flex">
+                  <span><i class="fas fa-user"></i> <%= post.store.name %> ｜ </span>
+                  <p><i class="fas fa-comment">  <%= link_to "#{post.post_comments.count}", store_post_path(post), class:"text-dark" %></i></p>
+                  <p class="text-danger ml-3"><i class="fas fa-heart"></i>  <%= post.favorites.count %></p>
+                </div>
               </div>
             </div>
           </div>
