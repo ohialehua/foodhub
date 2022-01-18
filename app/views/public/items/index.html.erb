@@ -1,6 +1,7 @@
 <div class="container px-5 px-sm-0">
-  <h2 class="mt-5">商品一覧</h2>
-  <h3 class="mt-5">ランキング</h3>
+  <div class="row mt-5">
+    <div class="col-md-10">
+      <h3 class="mt-5">ランキング</h3>
   <div class="row row-cols-3 row-cols-lg-5 row-eq-height">
   <% @rank_items.each.with_index(1) do |item, i| %>
     <div class="col mx-auto my-5">
@@ -14,7 +15,7 @@
         <label>第<%= i %>位</label>
       <div class="card bg-dark text-white">
         <%= link_to item_path(item) do %>
-          <%= attachment_image_tag item, :image, size:"150x150", class:"card-img-top", fallback:"no_image.png" %>
+          <%= attachment_image_tag item, :image, :fill, 200, 200, size:"150x150", class:"card-img-top", fallback:"no_image.png" %>
         <% end %>
         <div class="card-body">
           <div class="card-title">
@@ -28,8 +29,7 @@
     </div>
   <% end %>
   </div>
-  <div class="row mt-5">
-    <div class="col-md-10">
+      <h2 class="mt-5">商品一覧</h2>
       <%= form_with model: @item, url: items_path, method: :get, class:"text-right mt-5", local: true do |f| %>
         <%= f.select :selection, [['人気順','bought'],['新しい順','new'],['古い順','old']], { include_blank: "選択してください" } %>
         <%= f.submit "sort" %>
