@@ -2,7 +2,7 @@ class Store::MarkersController < ApplicationController
   before_action :authenticate_store!
 
   def index
-    @markers = current_store.markers.page(params[:page])
+    @markers = Marker.sort(params[:selection]).page(params[:page])
   end
 
   def show

@@ -1,6 +1,11 @@
 <div class="container px-5 px-sm-0 mt-5">
+  <h2>フォロワー一覧</h2>
   <div class="row">
-    <h2>フォロワー一覧</h2>
+    <div class="col-md-11">
+    <%= form_with model: @marker, url: store_markers_path, method: :get, class:"text-right mb-3", local: true do |f| %>
+      <%= f.select :selection, [['新しい順','new'],['古い順','old']], { include_blank: "選択してください" } %>
+      <%= f.submit "sort" %>
+    <% end %>
         <table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
           <thead>
             <td></td>
@@ -18,4 +23,5 @@
           </tbody>
         </table>
       </div>
+    </div>
     </div>
