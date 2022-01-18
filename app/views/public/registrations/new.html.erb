@@ -1,7 +1,12 @@
-<h2 class="text-white">新規ユーザー登録</h2>
+<h2 class="">新規ユーザー登録</h2>
 
 <%= form_with model: @enduser, url: enduser_registration_path, local: true do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
+  <div class="text-right">
+    <label>
+      加盟店の方は<%= link_to "こちら", new_store_registration_path %>から新規登録してください
+    </label>
+  </div>
   <table class="table table-borderless table-dark" style="opacity: 0.8;">
     <tbody>
       <tr>
@@ -16,7 +21,7 @@
         <div class="field">
           <th>メールアドレス</th>
           <td colspan="2">
-            <%= f.email_field :email, size: 78, autofocus: true, autocomplete: "email" %>
+            <%= f.email_field :email, size: 60, autofocus: true, autocomplete: "email" %>
           </td>
         </div>
       </tr>
@@ -50,6 +55,5 @@
     </tbody>
   </table>
 <% end %>
-
-<t5>既に登録済みの方</t5>
-<%= render "public/shared/links" %>からログインしてください。
+<h5 class="text-center mt-5">既に登録済みの方は</h5>
+<p class="text-center"><%= render "public/shared/links" %>からログインしてください</p>

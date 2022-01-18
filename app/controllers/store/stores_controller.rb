@@ -25,6 +25,12 @@ class Store::StoresController < ApplicationController
   def unsubscribe
   end
 
+  def withdraw
+    current_store.update(is_deleted: true)
+    reset_session
+    redirect_to root_path
+  end
+
   private
   def store_params
     params.require(:store).permit(:email,:name,:name_kana,:post_address,:address,:phone_number,:introduction,:profile_image,:is_deleted)

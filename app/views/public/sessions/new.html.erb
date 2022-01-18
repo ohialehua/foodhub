@@ -1,7 +1,12 @@
 <h2 class="mt-5">会員ログイン</h2>
 
+  <div class="text-right">
+    <label>
+      加盟店の方は<%= link_to "こちら", new_store_session_path %>からログインしてください
+    </label>
+  </div>
 <%= form_with model: @enduser, url: enduser_session_path, local: true do |f| %>
-  <table class="table table-borderless table-dark mt-5" style="opacity: 0.8;">
+  <table class="table table-borderless table-dark" style="opacity: 0.8;">
     <tbody>
       <tr>
         <th>メールアドレス</th>
