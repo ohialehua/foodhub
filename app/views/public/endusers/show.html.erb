@@ -44,25 +44,9 @@
     <div class="col-md-8">
       <h4>投稿一覧</h4>
       <% if @posts.present? %>
-        <div class="card-deck py-5">
-        <% @posts.each do |post| %>
-          <div class="card col-4 mx-4 mt-4 shadow-lg">
-            <%= link_to post_path(post) do %>
-              <%= attachment_image_tag post, :post_image, size:'200x200', class:"card-img-top"; %>
-            <% end %>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-11 mx-auto">
-                <p class="card-text">説明：<%= post.body %></p>
-                <span><i class="fas fa-user"></i> By <%= post.enduser.name %> ｜ </span>
-                <span><%= link_to "#{post.post_comments.count} コメント", post_path(post), class:"text-dark" %></span>
-              </div>
-            </div>
-          </div>
-          </div>
-        <% end %>
+        <div class="card-deck py-5 row row-cols-2 row-cols-lg-3 row-eq-height">
+          <%= render 'public/posts/index', posts: @posts %>
         </div>
-        <%= paginate @posts %>
       <% else %>
         <h2>投稿がありません</h2>
         <% if @enduser == current_enduser %>

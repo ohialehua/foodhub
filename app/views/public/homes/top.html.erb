@@ -7,37 +7,8 @@
       <%= f.select :selection, [['いいねが多い順','likes'],['閲覧が多い順','PV'],['新しい順','new'],['古い順','old']], { include_blank: "選択してください" } %>
       <%= f.submit "sort" %>
     <% end %>
-      <div class="card-deck py-5 row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
-      <% @posts.each do |post| %>
-      <div class="col">
-        <div class="card mx-4 mt-4 shadow-lg">
-          <%= link_to post_path(post) do %>
-            <%= attachment_image_tag post, :post_image, size:'200x200', class:"card-img-top" %>
-          <% end %>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 mx-auto">
-              <p class="card-text">説明：<%= post.body.truncate(9) %></p>
-              <div class="d-inline-flex">
-              <% if post.enduser_id.present? %>
-                <span><i class="fas fa-user"></i> By <%= post.enduser.name %> ｜ </span>
-              <% else %>
-                <span><i class="fas fa-user"></i> By <%= post.store.name %> ｜ </span>
-              <% end %>
-                <% if enduser_signed_in? %>
-                  <p><%= link_to "#{post.post_comments.count} コメント", post_path(post), class:"text-dark" %></p>
-                  <div class="favorite-btn_<%= post.id %> ml-3">
-                    <%= render 'public/favorites/favorite-btn', post: post %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-      <% end %>
-      <%= paginate @posts %>
+    <div class="card-deck py-5 row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+      <%= render 'public/posts/index', posts: @posts %>
     </div>
   </div>
 </div>

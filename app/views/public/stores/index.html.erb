@@ -1,17 +1,12 @@
 <div class="container px-5 px-sm-0 mt-5">
   <div class="row">
-    <div class="col-2">
-      <div class="marker-index mt-3">
-        <%= render "public/markers/marker-index", markers: @markers %>
-      </div>
-    </div>
-    <div class="col-10">
+    <div class="col-md-10">
       <h2 class="mt-5">加盟店一覧</h2>
       <%= form_with model: @store, url: stores_path, method: :get, class:"text-right mt-5", local: true do |f| %>
         <%= f.select :selection, [['フォロワーが多い順','markers'],['商品が多い順','items'],['投稿が多い順','posts'],['古い順','old'],['新しい順','new']], { include_blank: "選択してください" } %>
         <%= f.submit "sort" %>
       <% end %>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
       <% @stores.each do |store| %>
         <div class="col">
           <div class="card mx-auto mt-4 bg-dark text-white">
@@ -33,3 +28,11 @@
         </div>
       <% end %>
       </div>
+    </div>
+    <div class="col-md-2">
+      <div class="marker-index mt-3">
+        <%= render "public/markers/marker-index", markers: @markers %>
+      </div>
+    </div>
+  </div>
+</div>
