@@ -1,29 +1,41 @@
 <div class="container px-5 px-sm-0">
-  <div class="row">
+  <h2 class="mt-5">商品一覧</h2>
+  <h3 class="mt-5">ランキング</h3>
+  <div class="row row-cols-3 row-cols-lg-5 row-eq-height">
+  <% @rank_items.each.with_index(1) do |item, i| %>
+    <div class="col mx-auto my-5">
+      <% if i == 1 %>
+        <i class="fas fa-crown" style="color:#DBB400"></i>
+      <% elsif i == 2 %>
+        <i class="fas fa-crown" style="color:#b0b0b0"></i>
+      <% elsif i == 3 %>
+        <i class="fas fa-crown" style="color:#b15a2b"></i>
+      <% end %>
+        <label>第<%= i %>位</label>
+      <div class="card bg-dark text-white">
+        <%= link_to item_path(item) do %>
+          <%= attachment_image_tag item, :image, size:"150x150", class:"card-img-top", fallback:"no_image.png" %>
+        <% end %>
+        <div class="card-body">
+          <div class="card-title">
+            <%= item.store.name %> ： <%= link_to item.name, item_path(item), class:"text-white" %>
+          </div>
+          <div class="card-text text-right">
+            <%= (item.with_tax_price).to_s(:delmited) + "円" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+  <div class="row mt-5">
     <div class="col-md-10">
-      <h2 class="mt-5">商品一覧</h2>
       <%= form_with model: @item, url: items_path, method: :get, class:"text-right mt-5", local: true do |f| %>
         <%= f.select :selection, [['人気順','bought'],['新しい順','new'],['古い順','old']], { include_blank: "選択してください" } %>
         <%= f.submit "sort" %>
       <% end %>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
-      <% @items.each do |item| %>
-        <div class="col">
-          <div class="card mx-auto mt-4 bg-dark text-white">
-            <%= link_to item_path(item) do %>
-              <%= attachment_image_tag item, :image, size:"200x200", class:"card-img-top", fallback:"no-img.png" %>
-            <% end %>
-            <div class="card-body">
-              <div class="card-title">
-                <%= link_to item.name, item_path(item), class:"text-white" %>
-              </div>
-              <div class="card-text">
-                <%= (item.with_tax_price).to_s(:delmited) + "円" %>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
+        <%= render 'public/items/index', items: @items %>
       </div>
       <div class="d-flex pagenation justify-content-center mt-5 mb-3">
         <%= paginate @items %>

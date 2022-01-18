@@ -3,6 +3,7 @@ class Public::ItemsController < ApplicationController
 
   def index
     @items = Item.sort(params[:selection]).page(params[:page])
+    @rank_items = Item.find(OrderDetail.group(:item_id).order('count(item_id) desc').limit(5).pluck(:item_id))
     @markers = current_enduser.markers
   end
 
