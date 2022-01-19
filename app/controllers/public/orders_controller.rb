@@ -24,6 +24,15 @@ class Public::OrdersController < ApplicationController
       @order.address = @delivery.address
       @order.name = @delivery.name
     end
+
+    if params[:order][:pay_method] == "0"
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp::Charge.create(
+      :amount => params[:amount],
+      :card => params['payjp-token'],
+      :currency => 'jpy'
+      )
+    end
   end
 
   def create

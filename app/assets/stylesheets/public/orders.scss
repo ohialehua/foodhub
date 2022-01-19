@@ -1,3 +1,36 @@
 // Place all the styles related to the public/orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+ol {
+  list-style: none;
+}
+
+.step-form{
+  width:50px;
+  height:50px;
+  line-height:50px;
+  font-size:15px;
+  text-align:center;
+  border-radius:50%;
+  font-weight:bold;
+  background-color:#D0C2BA;
+  margin:0px 10px;
+
+}
+.step .current{
+  background-color: #00ffcc;
+}
+
+.step{
+  display:flex;
+  justify-content:center;
+  margin-bottom:10px;
+  margin-right:50px;
+}
+
+.arrow{
+  text-align:center;
+  height:50px;
+  line-height:50px;
+  font-size: 30px;
+}

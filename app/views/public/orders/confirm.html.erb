@@ -1,14 +1,14 @@
-<ol class="nav mt-3">
-    <li class="nav-form">注文</li>
+<ol class="step mt-3 mb-5">
+  <li class="step-form"><%= link_to "注文", items_path, class:"text-dark" %></li>
 	<li class="arrow">→</li>
-	<li class="nav-form">入力</li>
+	<li class="step-form"><%= link_to "入力", new_order_path, class:"text-dark" %></li>
 	<li class="arrow">→</li>
-	<li class="nav-form current">確認</li>
+	<li class="step-form current">確認</li>
 	<li class="arrow">→</li>
-	<li class="nav-form">完了</li>
+	<li class="step-form text-dark">完了</li>
 </ol>
 
-<h1 class="">注文情報確認</h1>
+<h2 class="mt-5">注文情報確認</h2>
 <div class="col-md-7 d-inline-block">
 <table class="table table-borderless table-dark" style="opacity: 0.8;">
   <thead class="thead-dark">
@@ -48,8 +48,8 @@
       </td>
     </tr>
     <tr>
-      <th class="table-dark">請求金額</th>
-      <td><strong><%= @total_price.to_s(:delimited) %>円</strong></td>
+      <th class="table-dark text-warning">請求金額</th>
+      <td class="text-warning"><strong><%= @total_price.to_s(:delimited) %>円</strong></td>
     </tr>
   </tbody>
 </table>
@@ -76,7 +76,18 @@
   <%= f.hidden_field :post_address, value: @order.post_address %>
   <%= f.hidden_field :address, value: @order.address %>
   <%= f.hidden_field :name, value: @order.name %>
-  <div class="text-center">
-  <%= f.submit "注文を確定する", class:"btn btn-success" %>
-  </div>
+  <% if params[:order][:pay_method] == "0" %>
+    <div class="text-center">
+      <script
+        type="text/javascript"
+        src="https://checkout.pay.jp"
+        class="payjp-button"
+        data-key="<%= ENV["PAYJP_PUBLIC_KEY"] %>">
+      </script>
+    </div>
+  <% else %>
+    <div class="text-center">
+      <%= f.submit "注文を確定する", class:"btn btn-success" %>
+    </div>
+  <% end %>
 <% end %>

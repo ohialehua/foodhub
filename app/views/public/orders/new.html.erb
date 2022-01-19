@@ -1,14 +1,14 @@
-<ol class="nav mt-3">
-  <li class="nav-form">注文</li>
+<ol class="step mt-3 mb-5">
+  <li class="step-form"><%= link_to "注文", items_path, class:"text-dark" %></li>
 	<li class="arrow">→</li>
-	<li class="nav-form current">入力</li>
+	<li class="step-form current">入力</li>
 	<li class="arrow">→</li>
-	<li class="nav-form">確認</li>
+	<li class="step-form text-dark">確認</li>
 	<li class="arrow">→</i></li>
-	<li class="nav-form">完了</li>
+	<li class="step-form text-dark">完了</li>
 </ol>
 
-<h1 class="">注文情報入力</h1>
+<h2 class="mt-5">注文情報入力</h2>
 <div class="field mt-3 text-white" style="background-color: #343a40; opacity: 0.8;">
   <div class="ml-5 pd-5">
   <h3 class="pt-3">支払方法</h3>
@@ -34,7 +34,7 @@
         <%= f.label :"郵便番号（ハイフンなし）" %>
         <%= f.text_field :post_address, placeholder: "0000000" %><br>
         <%= f.label :"住所" %>
-        <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", :size=>"60" %><br>
+        <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", :size=>"50" %><br>
         <%= f.label:"宛名" %>
         <%= f.text_field :name, placeholder: "令和道子" %>
       </div>
