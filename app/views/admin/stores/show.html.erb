@@ -9,7 +9,7 @@
           <%= f.radio_button :is_deleted, 'true' %>
           <%= f.label :is_deleted, '有効', value: false %>
           <%= f.radio_button :is_deleted, 'false' %>
-          <%= f.submit "編集する",class:"btn btn-info my-5 ml-3" %>
+          <%= f.submit "編集する", "data-confirm" => "    WARNING！！   本当に変更しますか？",class:"btn btn-sm btn-warning my-5 ml-3" %>
         </div>
         <% end %>
       </div>
