@@ -76,7 +76,8 @@
         <td></td>
         <td>
           <div class="actions">
-            <%= f.submit "新規登録", class: "btn btn-success" %>
+            <%= f.submit "新規登録","data-confirm" => "セキュリティ保護のため登録内容を一度管理者が確認します。
+問題なかった場合改めてメールでご案内致しますので少々お待ち下さい。", class: "btn btn-success" %>
           </div>
         </td>
       </tr>

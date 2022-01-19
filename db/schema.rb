@@ -220,7 +220,7 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
     t.string "phone_number", default: "", null: false
     t.text "introduction", default: "", null: false
     t.string "profile_image_id"
-    t.boolean "is_deleted", default: false, null: false
+    t.boolean "is_deleted", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_stores_on_email", unique: true

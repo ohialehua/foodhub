@@ -22,7 +22,7 @@ class DeviseCreateStores < ActiveRecord::Migration[5.2]
       t.string :phone_number, null: false, default: ""
       t.text :introduction, null: false, default: ""
       t.string :profile_image_id
-      t.boolean :is_deleted,null: false, default: false
+      t.boolean :is_deleted,null: false, default: true
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
