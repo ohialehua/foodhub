@@ -9,12 +9,26 @@ class Admin::StoresController < ApplicationController
   end
 
   def update
-    store = Store.find(params[:id])
-    store.update(store_params)
+    @store = Store.find(params[:id])
+    @store.update(store_params)
+    if @store.is_deleted == false
+    p "------------"
+      Admin::AdminMailer.with(store: @store).welcome_email.deliver
+    p "------------"
+    else
+    p "------------"
+      Admin::AdminMailer.with(store: @store).warning_email.deliver
+    p "------------"
+    end
     redirect_to request.referer
   end
 
-   private
+  def welcome_email
+    @store = params[:store]
+    AdminMailer.with(store: @store).welcome_email.deliver
+  end
+
+  private
 
   def store_params
     params.require(:store).permit(:is_deleted)

@@ -7,6 +7,13 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name,:name_kana,:post_address,:address,:phone_number])
   end
 
+  def after_sign_up_path_for(resource)
+    if resource.is_a?(Store)
+      root_path
+      flash[:notice] = "管理者がアカウントを有効化しましたらメールを送らせていただきます。しばらくお待ちください。"
+    end
+  end
+
   def after_sign_in_path_for(resource_or_scope)
     if resource_or_scope.is_a?(Admin)
       admin_root_path
