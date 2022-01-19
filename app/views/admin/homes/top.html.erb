@@ -1,2 +1,37 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<div class="container px-5 px-sm-0 mt-5">
+  <div class="row">
+    <div class="col-md-10">
+      <h2 class="mt-5">加盟店一覧</h2>
+      <%= form_with model: @store, url: admin_root_path, method: :get, class:"text-right mt-5", local: true do |f| %>
+        <%= f.select :selection, [['フォロワーが多い順','markers'],['商品が多い順','items'],['投稿が多い順','posts'],['古い順','old'],['新しい順','new']], { include_blank: "選択してください" } %>
+        <%= f.submit "sort" %>
+      <% end %>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>name</th>
+            <th>status</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @stores.each do |store| %>
+          <tr>
+            <td><%= attachment_image_tag(store, :profile_image, :fill, 100, 100, size:"50x50", fallback: "no_image.png") %></td>
+            <td><%= store.name %></td>
+          <% if store.is_deleted? == true %>
+            <td class="text-danger">無効</td>
+            <td></td>
+          <% else %>
+            <td class="text-success">有効</td>
+            <td><p>フォロワー数:<%= store.markers.count %></p></td>
+          <% end %>
+            <td><%= link_to 'Show', admin_store_path(store) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
