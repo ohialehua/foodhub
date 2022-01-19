@@ -24,15 +24,6 @@ class Public::OrdersController < ApplicationController
       @order.address = @delivery.address
       @order.name = @delivery.name
     end
-
-    if params[:order][:pay_method] == "0"
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-      :amount => params[:amount],
-      :card => params['payjp-token'],
-      :currency => 'jpy'
-      )
-    end
   end
 
   def create
@@ -58,6 +49,15 @@ class Public::OrdersController < ApplicationController
           #
         end
         cart_items.destroy_all
+        #カード決済
+        if params[:order][:pay_method] == "credit_card"
+          Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+          Payjp::Charge.create(
+            :amount => params[:order][:total_price],
+            :card => params['payjp-token'],
+            :currency => 'jpy'
+          )
+        end
       end
       redirect_to orders_complete_path
     else

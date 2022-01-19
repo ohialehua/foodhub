@@ -76,7 +76,7 @@
   <%= f.hidden_field :post_address, value: @order.post_address %>
   <%= f.hidden_field :address, value: @order.address %>
   <%= f.hidden_field :name, value: @order.name %>
-  <% if params[:order][:pay_method] == "0" %>
+  <% if params[:order][:pay_method] == "credit_card" %>
     <div class="text-center">
       <script
         type="text/javascript"

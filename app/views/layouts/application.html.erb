@@ -22,14 +22,14 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
               <% if enduser_signed_in? %>
-                <li class="nav-item pt-2">ようこそ、<%= current_enduser.name %>様！</li>
+                <li class="nav-item mt-4">ようこそ、<%= current_enduser.name %>様！</li>
                 <li class="nav-item ml-4"><%= link_to "My page",enduser_path(current_enduser), class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Users",endusers_path, class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Stores",stores_path, class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Items",items_path, class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Log out",destroy_enduser_session_path,method: :delete,class:"nav-link" %></li>
               <% elsif store_signed_in? %>
-                <li class="nav-item pt-2">ようこそ、<%= current_store.name %>様！</li>
+                <li class="nav-item mt-4">ようこそ、<%= current_store.name %>様！</li>
                 <li class="nav-item ml-4"><%= link_to "Mypage", store_root_path, class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Customers", store_markers_path, class:"nav-link" %></li>
                 <li class="nav-item ml-4"><%= link_to "Orders", store_store_orders_path, class:"nav-link" %></li>
