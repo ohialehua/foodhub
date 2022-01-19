@@ -1,2 +1,73 @@
-<h1>Admin::Stores#show</h1>
-<p>Find me in app/views/admin/stores/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-5">
+      <div class="d-inline-flex">
+        <h2 class=""><%= @store.name %> 詳細ページ</h2>
+        <%= form_with model:@store, url: admin_store_path(@store), local: true do |f| %>
+        <div class="ml-5">
+          <%= f.label :is_deleted, '無効', value: true %>
+          <%= f.radio_button :is_deleted, 'true' %>
+          <%= f.label :is_deleted, '有効', value: false %>
+          <%= f.radio_button :is_deleted, 'false' %>
+          <%= f.submit "編集する",class:"btn btn-info my-5 ml-3" %>
+        </div>
+        <% end %>
+      </div>
+      <%= render 'public/stores/show', store: @store, genres: @genres %>
+    </div>
+    <div class="col-lg-7 pl-5">
+      <h2 class="mt-5 mb-3">商品一覧</h2>
+    <% if @items.any? %>
+      <div class="row row-cols-2 row-cols-md-3 row-eq-height">
+      <% @items.each do |item| %>
+        <div class="col">
+          <div class="card mx-auto mt-4 bg-dark shadow-lg text-white">
+            <%= attachment_image_tag item, :image, size:"200x200", class:"card-img-top", fallback:"no-img.png" %>
+            <div class="card-body">
+              <div class="card-title">
+                <%= item.name %>
+              </div>
+              <div class="card-text">
+                <%= (item.with_tax_price).to_s(:delmited) + "円" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+        <div class="d-flex pagenation justify-content-center mt-5 mb-3">
+          <%= paginate @items, :param_name => 'item_page' %>
+        </div>
+      </div>
+    <% else %>
+      <h3><br>&ensp;商品がありません。</h3>
+    <% end %>
+
+      <h2>投稿一覧</h2>
+    <% if @posts.any? %>
+      <div class="card-deck py-5 row row-cols-2 row-cols-md-3 row-eq-height">
+        <% @posts.each do |post| %>
+        <div class="col">
+          <div class="card mx-auto mt-4 bg-dark shadow-lg text-white">
+            <%= attachment_image_tag post, :post_image, size:'200x200', class:"card-img-top"; %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 mx-auto">
+                  <p class="card-text">説明：<%= post.body %></p>
+                  <div class="d-inline-flex">
+                    <span><i class="fas fa-user"></i> By <%= post.store.name %> ｜ </span>
+                    <span><%= post.post_comments.count %> コメント</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+        <%= paginate @posts, :param_name => 'post_page' %>
+    <% else %>
+      <h3><br>&ensp;投稿がありません。</h3>
+    <% end %>
+    </div>
+  </div>
+</div>

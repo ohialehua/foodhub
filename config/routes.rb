@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
 namespace :admin do
   root to: 'homes#top'
-  resources :stores,only:[:show,:edit]
+  resources :stores,only:[:show,:update]
 end
 
 namespace :store do

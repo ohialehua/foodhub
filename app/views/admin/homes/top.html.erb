@@ -20,7 +20,7 @@
           <tr>
             <td><%= attachment_image_tag(store, :profile_image, :fill, 100, 100, size:"50x50", fallback: "no_image.png") %></td>
             <td><%= store.name %></td>
-          <% if store.is_deleted? == true %>
+          <% if store.is_deleted == true %>
             <td class="text-danger">無効</td>
             <td></td>
           <% else %>

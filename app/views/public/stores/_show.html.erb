@@ -11,6 +11,16 @@
     <td>カナ</td>
     <td><%= store.name_kana %></td>
   </tr>
+<% if admin_signed_in? %>
+  <tr>
+    <td>カウント</td>
+  <% if store.is_deleted == true %>
+    <td class="text-danger">無効</td>
+  <% else %>
+    <td class="text-success"> 有効</td>
+  <% end %>
+  </tr>
+<% end %>
   <tr>
     <td>紹介文</td>
     <td><%= store.introduction %></td>
