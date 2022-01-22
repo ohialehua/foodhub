@@ -47,24 +47,12 @@
         </div>
       </nav>
     </header>
-    <% if current_page?(root_path) %>
-      <main class="mb-auto top">
+    <main class="mb-auto">
+      <div class="container">
         <%= render "layouts/flash_message" %>
         <%= yield %>
-      </main>
-    <% elsif current_page?(about_path) %>
-      <main class="mb-auto about">
-        <%= render "layouts/flash_message" %>
-        <%= yield %>
-      </main>
-    <% else %>
-       <main class="mb-auto">
-          <div class="container">
-            <%= render "layouts/flash_message" %>
-            <%= yield %>
-          </div>
-        </main>
-      <% end %>
+      </div>
+    </main>
     <footer class="py-3">
       <div class="container text-center text-black">
         <p>© Copyright 2022 Foodhub All rights reserved.</p>

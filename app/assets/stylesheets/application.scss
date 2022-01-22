@@ -36,3 +36,9 @@
 .pagination>li>a:hover {
   border-radius: 15px;    /*角を丸くする*/
 }
+
+.alert,.alert-notice {
+  color: $white;
+  text-align: center;
+  background-color:#696969 ;
+}
