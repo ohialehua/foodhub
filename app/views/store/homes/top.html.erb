@@ -109,9 +109,10 @@
               <div class="col-12 mx-auto">
                 <p class="card-text">説明：<%= post.body.truncate(10) %></p>
                 <div class="d-inline-flex">
-                  <span><i class="fas fa-user"></i> <%= post.store.name %> ｜ </span>
+                  <span><i class="fas fa-utensils"></i> <%= post.store.name %> ｜ </span>
                   <p><i class="fas fa-comment">  <%= link_to "#{post.post_comments.count}", store_post_path(post), class:"text-dark" %></i></p>
-                  <p class="text-danger ml-3"><i class="fas fa-heart"></i>  <%= post.favorites.count %></p>
+                  <p class="text-danger ml-3"><i class="fas fa-heart">  <%= post.favorites.count %></i></p>
+                  <p class="ml-2"><i class="fas fa-eye"> <%= post.impressions_count %></i></p>
                 </div>
               </div>
             </div>

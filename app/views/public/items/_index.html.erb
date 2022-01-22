@@ -1,4 +1,5 @@
 <% items.each do |item| %>
+<% if item.store.is_deleted == false %>
 <div class="col">
   <div class="card mx-auto mt-4 bg-dark text-white">
     <%= link_to item_path(item) do %>
@@ -14,4 +15,5 @@
     </div>
   </div>
 </div>
+<% end %>
 <% end %>

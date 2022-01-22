@@ -3,12 +3,6 @@
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <h5 class="text-dark bg-light p-4 mb-0">画像投稿フォーム</h5>
       <div class="form-body p-4">
-        <% if @post.errors.any? %>
-          <%= @post.errors.count %>件のエラーが発生しました
-          <% @post.errors.full_messages.each do |message| %>
-            <%= message %>
-          <% end %>
-        <% end %>
         <%= form_with model: @post, url: store_posts_path, local:true do |f| %>
           <div class="mb-3">
             <%= f.attachment_field :post_image, class: "w-100" %>

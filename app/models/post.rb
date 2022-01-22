@@ -8,13 +8,16 @@ class Post < ApplicationRecord
 
 	attachment :post_image
 
+	validates :post_image,presence:true
+	validates :body,presence:true
+
 	def favorited_by?(enduser)
 		favorites.where(enduser_id: enduser.id).exists?
 	end
 
 	def self.sort(selection)
 	  if selection == 'PV'
-	    @posts = Post.all.order(impressions_count: :DESC)
+	    @posts = Post.order(impressions_count: :DESC)
 	  elsif selection == 'new'
 	    @posts = Post.all.order(created_at: :DESC)
 	  elsif selection == 'old'

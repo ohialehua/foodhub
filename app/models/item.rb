@@ -12,6 +12,7 @@ class Item < ApplicationRecord
 
  validates :name,presence:true
  validates :body,presence:true
+ validates :image,presence:true
  validates :price_before_tax,presence:true
 
  def with_tax_price

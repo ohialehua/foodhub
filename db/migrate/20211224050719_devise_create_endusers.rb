@@ -16,7 +16,7 @@ class DeviseCreateEndusers < ActiveRecord::Migration[5.2]
 
       ##add
       t.string :name, null: false, default: ""
-      t.text :introduction, null: false
+      t.text :introduction
       t.string :profile_image_id
       t.string :full_name, null: false, default: ""
       t.string :full_name_kana, null: false, default: ""

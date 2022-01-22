@@ -17,8 +17,10 @@ class Store::StoresController < ApplicationController
     @store = Store.find(params[:id])
     if @store.update(store_params)
       redirect_to store_root_path(@store)
+      flash[:info] = "店舗情報を編集しました"
     else
-      render :edit
+      redirect_to request.referer
+      flash[:warning] = "入力漏れがあります！"
     end
   end
 
@@ -29,6 +31,7 @@ class Store::StoresController < ApplicationController
     current_store.update(is_deleted: true)
     reset_session
     redirect_to root_path
+    flash[:danger] = "foodhubを退会しました"
   end
 
   private

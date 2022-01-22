@@ -10,8 +10,13 @@ class Store::ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
-    @genres = current_store.genres
+    if current_store.genres.any?
+      @item = Item.new
+      @genres = current_store.genres
+    else
+      redirect_to store_genres_path
+      flash[:danger] = "ジャンルを追加してください"
+    end
   end
 
   def create
@@ -19,9 +24,11 @@ class Store::ItemsController < ApplicationController
     @item.store_id = current_store.id
     if @item.save
       redirect_to store_item_path(@item)
+      flash[:success] = "新しい商品が追加されました。"
     else
       @genres = current_store.genres
-      render :new
+      redirect_to request.referer
+      flash[:warning] = "入力漏れがあります！"
     end
   end
 
@@ -34,8 +41,10 @@ class Store::ItemsController < ApplicationController
     @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to store_item_path(@item)
+      flash[:info] = "商品情報が変更されました。"
     else
       redirect_to request.referer
+      flash[:warning] = "入力漏れがあります！"
     end
   end
 

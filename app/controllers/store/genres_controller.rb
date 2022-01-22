@@ -11,6 +11,7 @@ class Store::GenresController < ApplicationController
     @genre.store_id = current_store.id
     @genre.save
     redirect_to request.referer
+    flash[:success] = "新しい商品ジャンルが追加されました。"
   end
 
   def edit
@@ -21,8 +22,10 @@ class Store::GenresController < ApplicationController
     @genre = Genre.find(params[:id])
     if @genre.update(genre_params)
       redirect_to store_genres_path
+      flash[:info] = "商品ジャンルが変更されました。"
     else
       redirect_to request.referer
+      flash[:warning] = "未入力はできません。"
     end
   end
 

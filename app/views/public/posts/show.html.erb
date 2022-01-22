@@ -15,7 +15,7 @@
   		  <% if @post.enduser_id.present? %>
         <div class="col-lg-6 pl-5 text-center">
           <div class="text-right d-inline-flex">
-            <h4>コメント数: <%= @post.post_comments.count %></h4>
+            <h4><i class="fas fa-comment"> <%= @post.post_comments.count %></i></h4>
             <h4>
               <div class="favorite-btn_<%= @post.id %> mx-3">
                 <%= render 'public/favorites/favorite-btn', post: @post %>
@@ -46,7 +46,7 @@
       <% else %>
         <div class="col-md-6 pl-5 text-center">
           <div class="text-right d-inline-flex">
-            <h4>コメント数: <%= @post.post_comments.count %></h4>
+            <h4><i class="fas fa-comment"> <%= @post.post_comments.count %></i></h4>
             <h4>
               <div class="favorite-btn_<%= @post.id %> mx-3">
                 <%= render 'public/favorites/favorite-btn', post: @post %>
