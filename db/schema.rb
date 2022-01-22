@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name", default: "", null: false
-    t.text "introduction", default: "", null: false
+    t.text "introduction", null: false
     t.string "profile_image_id"
     t.string "full_name", default: "", null: false
     t.string "full_name_kana", default: "", null: false
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
     t.integer "genre_id", null: false
     t.string "image_id", null: false
     t.string "name", default: "", null: false
-    t.text "body", default: "", null: false
+    t.text "body", null: false
     t.integer "price_before_tax", null: false
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", null: false
@@ -170,7 +170,7 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
     t.integer "store_id"
     t.integer "enduser_id"
     t.integer "post_id", null: false
-    t.text "comment", default: "", null: false
+    t.text "comment", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
     t.integer "store_id"
     t.integer "enduser_id"
     t.string "post_image_id", null: false
-    t.text "body", default: "", null: false
+    t.text "body", null: false
     t.integer "impressions_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -218,7 +218,7 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
     t.string "post_address", default: "", null: false
     t.string "address", default: "", null: false
     t.string "phone_number", default: "", null: false
-    t.text "introduction", default: "", null: false
+    t.text "introduction", null: false
     t.string "profile_image_id"
     t.boolean "is_deleted", default: true, null: false
     t.datetime "created_at", null: false

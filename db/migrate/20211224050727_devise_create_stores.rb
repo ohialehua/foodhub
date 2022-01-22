@@ -20,7 +20,7 @@ class DeviseCreateStores < ActiveRecord::Migration[5.2]
       t.string :post_address, null: false, default: ""
       t.string :address, null: false, default: ""
       t.string :phone_number, null: false, default: ""
-      t.text :introduction, null: false, default: ""
+      t.text :introduction, null: false
       t.string :profile_image_id
       t.boolean :is_deleted,null: false, default: true
 
