@@ -13,7 +13,7 @@
         <div class="field">
           <th>ユーザーネーム</th>
           <td>
-            <%= f.text_field :name, autofocus: true, class: "name" %>
+            <%= f.text_field :name, autofocus: true, class: "text-dark" %>
           </td>
         </div>
       </tr>
@@ -21,7 +21,7 @@
         <div class="field">
           <th>メールアドレス</th>
           <td colspan="2">
-            <%= f.email_field :email, size: 60, autofocus: true, autocomplete: "email" %>
+            <%= f.email_field :email, size: 60, autofocus: true, autocomplete: "email", class: "text-dark" %>
           </td>
         </div>
       </tr>
@@ -32,7 +32,7 @@
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> characters minimum)</em>
             <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password" %>
+            <%= f.password_field :password, autocomplete: "new-password", class: "text-dark" %>
           </td>
         </div>
       </tr>
@@ -40,7 +40,7 @@
         <div class="field">
           <th>パスワード(確認用)<</th>
           <td>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "text-dark" %>
           </td>
         </div>
       </tr>
