@@ -4,7 +4,7 @@ class CreateMessages < ActiveRecord::Migration[5.2]
 
       t.integer :enduser_id, null: false
       t.integer :room_id, null: false
-      t.text :message, null: false, default: ""
+      t.text :message, null: false
 
       t.timestamps
     end

@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
   create_table "messages", force: :cascade do |t|
     t.integer "enduser_id", null: false
     t.integer "room_id", null: false
-    t.text "message", default: "", null: false
+    t.text "message", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
