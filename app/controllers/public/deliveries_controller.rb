@@ -15,9 +15,11 @@ def create
   delivery = Delivery.new(delivery_params)
   delivery.enduser_id = current_enduser.id
   if delivery.save
-    redirect_back(fallback_location:items_path)
+    redirect_to request.referer
+    flash[:success] = "新しい配送先を追加しました"
   else
     redirect_to request.referer
+    flash[:warning] = "入力漏れがあります！"
   end
 end
 
@@ -25,6 +27,7 @@ def destroy
   delivery = Delivery.find(params[:id])
   delivery.destroy
   redirect_back(fallback_location:root_path)
+  flash[:danger] = "宛名「#{delivery.name}」様の配送先情報を削除しました"
 end
 
 def edit
@@ -35,8 +38,10 @@ def update
   @delivery = Delivery.find(params[:id])
   if @delivery.update(delivery_params)
     redirect_to  deliveries_path
+    flash[:info] = "配送先情報を変更しました"
   else
     redirect_to request.referer
+    flash[:warning] = "入力漏れがあります！"
   end
 end
 

@@ -8,7 +8,7 @@ class Store::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.store_id = current_store.id
-    if @post.save!
+    if @post.save
       redirect_to store_root_path
       flash[:success] = "新規投稿に成功しました"
     else

@@ -9,16 +9,16 @@
               <th colspan = "4">お届け先情報入力欄</th>
             </tr>
             <tr>
-              <td>郵便番号（ハイフンなし）</td>
-              <td><%= f.text_field :post_address,  placeholder:"1234567" %></td>
+              <td colspan="2">郵便番号（ハイフンなし）</td>
+              <td><%= f.text_field :post_address,  placeholder:"1234567", class:"text-dark" %></td>
             </tr>
             <tr>
               <td>住所</td>
-              <td><%= f.text_field :address, :size => "50",  placeholder:"モンスターボール1-2-3" %></td>
+              <td colspan="2"><%= f.text_field :address, :size => "50",  placeholder:"モンスターボール1-2-3", class:"text-dark" %></td>
             </tr>
             <tr>
               <td>宛名</td>
-              <td><%= f.text_field :name, placeholder:"コダック" %></td>
+              <td><%= f.text_field :name, placeholder:"コダック", class:"text-dark" %></td>
               <td class="text-right" colspan = "2"><%= f.submit "新規登録", class:"btn btn-info" %></td>
             </tr>
           </table>
@@ -29,7 +29,7 @@
             <th>郵便番号</th>
             <th>住所</th>
             <th>宛名</th>
-            <th></th>
+            <th colspan="2"></th>
           </thead>
           <% @deliveries.each do |delivery| %>
             <tr>
@@ -38,6 +38,8 @@
               <td><%= delivery.name %></td>
               <td>
                 <%= link_to "編集する", edit_delivery_path(delivery), class:"btn btn-warning" %>
+              </td>
+              <td>
                 <%= link_to "削除する", delivery_path(delivery), method: :delete, "data-confirm" => "本当に削除しますか?👀", class:"btn btn-danger" %>
               </td>
             </tr>

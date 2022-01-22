@@ -11,8 +11,10 @@ class Public::PostsController < ApplicationController
     @post.enduser_id = current_enduser.id
     if @post.save
       redirect_to root_path
+      flash[:success] = "新規投稿に成功しました"
     else
-      render :new
+      redirect_to request.referer
+      flash[:warning] = "入力漏れがあります！"
     end
   end
 
@@ -32,7 +34,8 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path
+    redirect_to root_path
+    flash[:danger] = "投稿を削除しました"
   end
 
   private

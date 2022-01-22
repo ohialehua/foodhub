@@ -6,22 +6,25 @@
       <%= f.select :selection, [['新しい順','new'],['古い順','old']], { include_blank: "選択してください" } %>
       <%= f.submit "sort" %>
     <% end %>
-        <table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
-          <thead>
-            <td></td>
-            <td>ユーザー名</td>
-            <td>当店の利用回数</td>
-          </thead>
-          <tbody>
-          <% @markers.each do |marker| %>
+      <table class="table table-borderless table-dark text-center" style="opacity: 0.8;">
+        <thead>
+          <td></td>
+          <td>ユーザー名</td>
+          <td>当店の利用回数</td>
+        </thead>
+        <tbody>
+        <% @markers.each do |marker| %>
+          <% if marker.store == current_store %>
             <tr>
               <td><%= attachment_image_tag(marker.enduser, :profile_image, :fill, 100, 100, size:"30x30", fallback: "no_image.png") %></td>
               <td><%= link_to marker.enduser.name, store_marker_path(marker), class:"text-white" %></td>
               <td><%= marker.enduser.orders.joins(:store_orders).where(store_orders: {store_id:current_store}).distinct.count %></td>
             </tr>
           <% end %>
-          </tbody>
-        </table>
-      </div>
+        <% end %>
+        </tbody>
+      </table>
+      <%= paginate @markers %>
     </div>
-    </div>
+  </div>
+</div>

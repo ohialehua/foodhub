@@ -2,12 +2,17 @@ class Public::OrdersController < ApplicationController
   before_action :authenticate_enduser!
 
   def new
-    @order = Order.new
-    @credit_card = Order.pay_methods.key(0)
-    @transfer = Order.pay_methods.key(1)
-    @credit_card_ja = Order.pay_methods_i18n[:credit_card]
-    @transfer_ja = Order.pay_methods_i18n[:transfer]
-    @deliveries = Delivery.where(enduser_id:current_enduser)
+    if current_enduser.deliveries.present?
+      @order = Order.new
+      @credit_card = Order.pay_methods.key(0)
+      @transfer = Order.pay_methods.key(1)
+      @credit_card_ja = Order.pay_methods_i18n[:credit_card]
+      @transfer_ja = Order.pay_methods_i18n[:transfer]
+      @deliveries = Delivery.where(enduser_id:current_enduser)
+    else
+      redirect_to deliveries_path
+      flash[:info] = "配送先を登録してください"
+    end
   end
 
   def confirm

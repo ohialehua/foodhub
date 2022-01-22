@@ -11,7 +11,7 @@
         <br>
         <div class="mb-5 mr-5 d-inline-flex">
           <%= attachment_image_tag @post, :post_image, size: "300x300", fallback: "no_image.png" %>
-          <div class="mt-5">
+          <div class="ml-5 mt-5">
             <%= link_to "Delete", store_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", local: true, class: "btn btn-danger", style:"height: 35px;" %>
           </div>
         </div>
@@ -24,9 +24,10 @@
       </div>
     </div>
   </div>
-  <div class="col-md-11 offset-1 mt-4">
+
+  <h4 class="mt-5">Post Comments</h4>
+  <div class="col-md-11 offset-1 border">
     <div class="comment_index">
-      <h4>Post Comments</h4>
       <table class='table'>
         <tbody>
           <% @post.post_comments.each do |post_comment| %>
@@ -50,7 +51,7 @@
         </tbody>
       </table>
     </div>
-    <div class="text-right">
+    <div class="text-right mt-5 mb-3">
       <%= form_with model:[@post, @comment], url: store_post_post_comments_path(@post), local: true do |f| %>
 　　　　<%= f.text_area :comment %>
         <%= f.submit "送信" %>
