@@ -26,7 +26,7 @@ class Store::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to store_root_path
-    flash[:success] = "投稿を削除しました"
+    flash[:danger] = "投稿を削除しました"
   end
 
   private

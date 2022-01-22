@@ -20,8 +20,10 @@ class Public::EndusersController < ApplicationController
     @enduser = Enduser.find(params[:id])
     if @enduser.update(enduser_params)
       redirect_to enduser_path(@enduser)
+      flash[:info] = "ユーザー情報を編集しました"
     else
-      render :edit
+      redirect_to request.referer
+      flash[:warning] = "入力漏れがあります！"
     end
   end
 

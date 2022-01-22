@@ -3,7 +3,8 @@ class Public::DeliveriesController < ApplicationController
 
 def index
   if current_enduser.full_name.blank? || current_enduser.full_name_kana.blank? || current_enduser.phone_number.blank?
-    redirect_to edit_enduser_path(current_enduser.id), notice: "個人情報を入力してください"
+    redirect_to edit_enduser_path(current_enduser.id)
+    flash[:info] = "個人情報を入力してください"
   else
     @delivery = Delivery.new
     @deliveries = current_enduser.deliveries.page(params[:page])

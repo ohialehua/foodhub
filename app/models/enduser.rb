@@ -26,6 +26,7 @@ class Enduser < ApplicationRecord
   has_many :rooms, through: :entries
 
   attachment :profile_image, destroy: false
+  validates :name,presence:true
 
 
   def follow(enduser_id)

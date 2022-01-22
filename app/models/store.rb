@@ -24,18 +24,18 @@ class Store < ApplicationRecord
 	end
 
 	def self.sort(selection)
-	  if selection == 'markers'  #退会していない店舗
-	    @stores = Store.where(is_deleted:false).joins(:markers).group(:id).order(Arel.sql('count(store_id) desc'))
+	  if selection == 'markers'
+	    @stores = Store.joins(:markers).group(:id).order(Arel.sql('count(store_id) desc'))
 	  elsif selection == 'items'
-	    @stores = Store.where(is_deleted:false).joins(:items).group(:id).order(Arel.sql('count(store_id) desc'))
+	    @stores = Store.joins(:items).group(:id).order(Arel.sql('count(store_id) desc'))
 	  elsif selection == 'posts'
-	    @stores = Store.where(is_deleted:false).joins(:posts).group(:id).order(Arel.sql('count(store_id) desc'))
+	    @stores = Store.joins(:posts).group(:id).order(Arel.sql('count(store_id) desc'))
 	  elsif selection == 'old'
-	    @stores = Store.where(is_deleted:false).all.order(created_at: :ASC)
+	    @stores = Store.all.order(created_at: :ASC)
 	  elsif selection == 'new'
-	    @stores = Store.where(is_deleted:false).all.order(created_at: :DESC)
+	    @stores = Store.all.order(created_at: :DESC)
 	  else
-      @stores = Store.where(is_deleted:false).all.order(created_at: :DESC)
+      @stores = Store.all.order(created_at: :DESC)
     end
 	end
 

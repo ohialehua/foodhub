@@ -8,10 +8,15 @@ class Public::StoresController < ApplicationController
 
   def show
     @store = Store.find(params[:id])
-    @genres = @store.genres
-    @items = @store.items.page(params[:item_page]).per(9)
-    @posts = @store.posts.page(params[:post_page])
-    @store_orders = @store.store_orders.where(enduser_id:current_enduser)
+    if @store.is_deleted == false
+      @genres = @store.genres
+      @items = @store.items.page(params[:item_page]).per(9)
+      @posts = @store.posts.page(params[:post_page])
+      @store_orders = @store.store_orders.where(enduser_id:current_enduser)
+    else
+      redirect_to stores_path
+      flash[:warning] = "アクセスされた加盟店のアカウントが有効ではないため閲覧できません"
+    end
   end
 
   private
