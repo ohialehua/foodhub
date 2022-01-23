@@ -8,8 +8,10 @@ class Store::OrderDetailsController < ApplicationController
     @order_detail.update(order_detail_params)
     if @order_detail.working?
        @store_order.production!
+       flash[:warning] = "まだ製作中の商品があります"
     elsif @order_details.count == @order_details.complete.count
       @store_order.ready_to_delivery!
+      flash[:success] = "すべての商品の製作が完了しました"
     end
     redirect_to store_store_order_path(@store_order)
   end

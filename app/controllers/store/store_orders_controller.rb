@@ -19,6 +19,9 @@ class Store::StoreOrdersController < ApplicationController
         @order_details.each do |order_detail|
           order_detail.waiting!
         end
+        flash[:info] = "入金が確認されました"
+      elsif @store_order.delivery_finish?
+        flash[:success] = "発送が完了しました"
       end
     redirect_to store_store_order_path(@store_order)
   end
