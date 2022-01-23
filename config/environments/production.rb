@@ -102,5 +102,6 @@ Rails.application.configure do
   password: ENV["SECRET_PASSWORD"],
   authentication: 'login',
   enable_starttls_auto: true
+  }
 
 end
