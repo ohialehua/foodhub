@@ -27,7 +27,8 @@ class Item < ApplicationRecord
 	  elsif selection == 'old'
 	    @items = Item.all.order(created_at: :ASC)
 	  else
-	    @items = Item.all.order(impressions_count: :DESC)
+	    @items = Item.all.order(created_at: :DESC)
+	    # @items = Item.all.order(impressions_count: :DESC)
    end
 	end
 
