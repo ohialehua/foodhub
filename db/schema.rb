@@ -32,16 +32,6 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "coupons", force: :cascade do |t|
-    t.integer "store_id", null: false
-    t.string "discount", default: "", null: false
-    t.string "reason", default: "", null: false
-    t.boolean "is_active", default: true, null: false
-    t.integer "limit", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "deliveries", force: :cascade do |t|
     t.integer "enduser_id", null: false
     t.string "post_address", default: "", null: false
@@ -67,13 +57,6 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_endusers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_endusers_on_reset_password_token", unique: true
-  end
-
-  create_table "entries", force: :cascade do |t|
-    t.integer "enduser_id", null: false
-    t.integer "room_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -135,14 +118,6 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.integer "enduser_id", null: false
-    t.integer "room_id", null: false
-    t.text "message", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "order_details", force: :cascade do |t|
     t.integer "order_id", null: false
     t.integer "store_order_id", null: false
@@ -188,12 +163,6 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id", null: false
     t.integer "followed_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "rooms", force: :cascade do |t|
-    t.integer "enduser_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
