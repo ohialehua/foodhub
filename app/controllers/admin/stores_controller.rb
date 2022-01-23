@@ -12,13 +12,9 @@ class Admin::StoresController < ApplicationController
     @store = Store.find(params[:id])
     @store.update(store_params)
     if @store.is_deleted == false
-    p "------------"
       Admin::AdminMailer.with(store: @store).welcome_email.deliver
-    p "------------"
     else
-    p "------------"
       Admin::AdminMailer.with(store: @store).warning_email.deliver
-    p "------------"
     end
     redirect_to request.referer
   end
