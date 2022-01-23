@@ -1,5 +1,6 @@
 class Store::StoresController < ApplicationController
   before_action :authenticate_store!
+  before_action :ensure_correct_store, only: [:edit, :update]
 
   def index
     @stores = Store.page(params[:page])
@@ -37,5 +38,13 @@ class Store::StoresController < ApplicationController
   private
   def store_params
     params.require(:store).permit(:email,:name,:name_kana,:post_address,:address,:phone_number,:introduction,:profile_image,:is_deleted)
+  end
+
+  def ensure_correct_store
+    @store = Store.find(params[:id])
+    unless @store == current_store
+      redirect_to store_store_path(current_store)
+      flash[:danger] = "他の加盟店の編集画面は閲覧できません"
+    end
   end
 end

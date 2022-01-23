@@ -1,5 +1,6 @@
 class Public::EndusersController < ApplicationController
   before_action :authenticate_enduser!
+  before_action :ensure_correct_enduser, only: [:edit, :update]
 
   def index
     @endusers = Enduser.page(params[:enduser_page]).per(1)
@@ -32,4 +33,13 @@ class Public::EndusersController < ApplicationController
   def enduser_params
     params.require(:enduser).permit(:name, :introduction, :profile_image, :full_name, :full_name_kana, :phone_number)
   end
+
+  def ensure_correct_enduser
+    @enduser = Enduser.find(params[:id])
+    unless @enduser == current_enduser
+      redirect_to enduser_path(current_enduser)
+      flash[:danger] = "他の会員の編集画面は閲覧できません"
+    end
+  end
+
 end
