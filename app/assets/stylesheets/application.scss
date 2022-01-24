@@ -42,3 +42,36 @@
   text-align: center;
   background-color:#696969 ;
 }
+
+.search {
+  position: absolute;
+  right: 0%;
+  top: 8%;
+  font-size: 15px;
+  z-index: 10;
+}
+
+.search input[type="text"] {
+  width: 150px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.search select[name="range"] {
+  width: 85px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.search select[name="search"] {
+  width: 85px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.search input[type="submit"] {
+  width: 45px;
+  height: 23px;
+  background-color: white;
+  border-radius: 10px;
+}
