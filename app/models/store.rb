@@ -38,5 +38,15 @@ class Store < ApplicationRecord
       @stores = Store.all.order(created_at: :DESC)
     end
 	end
+	
+	def self.search(search,word)
+   if search == "forward"
+     @stores = Store.where("name LIKE?","#{word}%")
+   elsif search =="partial"
+     @stores = Store.where("name LIKE?","%#{word}%")
+   else
+     @stores = Store.all
+   end
+  end
 
 end

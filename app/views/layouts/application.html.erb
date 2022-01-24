@@ -46,6 +46,13 @@
           </div>
         </div>
       </nav>
+      <% if admin_signed_in? %>
+        <%= render 'layouts/admin_search' %>
+      <% elsif store_signed_in? %>
+        <%= render 'layouts/store_search' %>
+      <% else %>
+        <%= render 'layouts/public_search' %>
+      <% end %>
     </header>
     <main class="mb-auto">
       <div class="container">

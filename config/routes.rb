@@ -14,12 +14,14 @@ Rails.application.routes.draw do
 
 namespace :admin do
   root to: 'homes#top'
+  get 'search' => 'search#search'
   resources :stores,only:[:show,:update] do
   end
 end
 
 namespace :store do
   root to: 'homes#top'
+  get 'search' => 'search#search'
   resources :stores,only:[:edit,:update]
   get 'unsubscribe' => 'stores#unsubscribe'
   patch 'withdraw' => 'stores#withdraw'
@@ -35,6 +37,7 @@ end
 
 scope module: :public do
   root to: 'homes#top'
+  get 'search' => 'search#search'
   get 'about' => 'homes#about'
   resources :endusers,except:[:destroy] do
    post 'edit' => 'endusers#edit'

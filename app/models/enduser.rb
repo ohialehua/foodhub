@@ -40,5 +40,15 @@ class Enduser < ApplicationRecord
   def follower?(enduser)
     followings.include?(enduser)
   end
+  
+  def self.search(search,word)
+   if search == "forward"
+     @endusers = Enduser.where("name LIKE?","#{word}%")
+   elsif search =="partial"
+     @endusers = Enduser.where("name LIKE?","%#{word}%")
+   else
+     @endusers = Enduser.all
+   end
+  end
 
 end

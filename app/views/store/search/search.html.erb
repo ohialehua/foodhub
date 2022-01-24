@@ -1,0 +1,8 @@
+<div class="container px-5 px-sm-0">
+  <h1><%= @search %>の注文</h1>
+  <% if @store_orders.count == 0 %>
+    <h2><%= @search %>の注文がありませんでした</h2>
+  <% else %>
+    <%= render 'store/store_orders/index', store_orders: @store_orders %>
+  <% end %>
+</div>

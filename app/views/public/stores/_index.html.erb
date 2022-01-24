@@ -1,0 +1,24 @@
+<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+      <% stores.each do |store| %>
+      <% if store.is_deleted == false %>
+        <div class="col">
+          <div class="card mx-auto mt-4 bg-dark text-white">
+            <%= link_to store_path(store) do %>
+              <%= attachment_image_tag store, :profile_image, size:"200x200", class:"card-img-top", fallback:"no_image.png" %>
+            <% end %>
+            <div class="card-body">
+              <div class="card-title d-inline-flex">
+                <%= link_to store.name, store_path(store), class:"text-white mr-3" %>
+                <div class="marker-btn_<%= store.id %>">
+                  <%= render "public/markers/marker-btn", store: store %>
+                </div>
+              </div>
+              <div class="markers_count_<%= store.id %> card-text">
+                <p>フォロワー数：&ensp;<%= store.markers.count %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% end %>
+      </div>

@@ -32,4 +32,14 @@ class Item < ApplicationRecord
    end
 	end
 
+	def self.search(search,word)
+   if search == "forward"
+     @items = Item.where("name LIKE?","#{word}%")
+   elsif search =="partial"
+     @items = Item.where("name LIKE?","%#{word}%")
+   else
+     @items = Item.all
+   end
+ end
+
 end

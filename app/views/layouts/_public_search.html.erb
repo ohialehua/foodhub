@@ -1,0 +1,10 @@
+<div class='container my-1'>
+  <div class='text-right'>
+    <%= form_tag(search_path, method: :get) do %>
+      <%= text_field_tag (:word) %>
+      <%= select_tag 'range', options_for_select([['選択してください', ''],['ユーザー', '1'],['加盟店', '2'],['商品', '3']]) %>
+      <%= select_tag 'search', options_for_select([["選択してください",""],["前方一致","forward"],["部分一致","partial"]]) %>
+      <%= submit_tag "検索" %>
+    <% end %>
+  </div>
+</div>

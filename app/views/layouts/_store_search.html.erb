@@ -1,0 +1,8 @@
+<div class='container my-1'>
+  <div class='text-right'>
+    <%= form_tag(store_search_path, method: :get) do %>
+      <%= select_tag 'search', options_for_select([["選択してください",""],["発送完了"],["未発送"]]) %>
+      <%= submit_tag "検索" %>
+    <% end %>
+  </div>
+</div>

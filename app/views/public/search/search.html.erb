@@ -1,0 +1,28 @@
+<div class="container px-5 px-sm-0">
+  <h1>"<%= @word %>"での検索結果</h1>
+<% if @range == '1' %>
+  <% if @endusers.count == 0 %>
+    <h2>検索結果がありませんでした</h2>
+  <% else %>
+    <%= render 'public/endusers/index', endusers: @endusers %>
+  <% end %>
+<% elsif @range == '2' %>
+  <% if @stores.count == 0 %>
+    <h2>検索結果がありませんでした</h2>
+  <% else %>
+    <div class="row">
+      <div class="col-md-11">
+        <%= render 'public/stores/index', stores: @stores %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <% if @items.count == 0 %>
+    <h2>検索結果がありませんでした</h2>
+  <% else %>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+      <%= render 'public/items/index', items: @items %>
+    </div>
+  <% end %>
+<% end %>
+</div>
