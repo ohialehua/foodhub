@@ -11,6 +11,9 @@ class Public::StoresController < ApplicationController
     if @store.is_deleted == false
       @genres = @store.genres
       @items = @store.items.page(params[:item_page]).per(9)
+      if @items.count > 2
+        @rank_items = @store.items.find(OrderDetail.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
+      end
       @posts = @store.posts.page(params[:post_page])
       @store_orders = @store.store_orders.where(enduser_id:current_enduser)
     else
