@@ -2,7 +2,7 @@
   <h2 class=""><%= @store.name %> 詳細ページ</h2>
   <div class="row">
     <% if @items.count > 2 %>
-    <div class="col-lg-7 mt-4" id="theTarget">
+    <div class="col mt-4" id="theTarget">
       <% @rank_items.each do |rank_item| %>
         <%= link_to item_path(rank_item) do %>
           <%= attachment_image_tag rank_item, :image, :fill, 500, 500, style:"height: auto; width: 100%;" %>

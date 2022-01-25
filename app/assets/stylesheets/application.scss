@@ -76,6 +76,6 @@
   border-radius: 10px;
 }
 
-.skippr> :not(.visible) {
-  opacity: 0;
+.skippr> :not(.visible)>img {
+  display: none;
 }
