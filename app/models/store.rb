@@ -6,6 +6,7 @@ class Store < ApplicationRecord
 
   has_many :items, dependent: :destroy
   has_many :store_orders
+  has_many :order_details
   # has_many :orders, through: :store_orders
   has_many :genres, dependent: :destroy
   has_many :posts, dependent: :destroy
@@ -38,7 +39,7 @@ class Store < ApplicationRecord
       @stores = Store.all.order(created_at: :DESC)
     end
 	end
-	
+
 	def self.search(search,word)
    if search == "forward"
      @stores = Store.where("name LIKE?","#{word}%")
