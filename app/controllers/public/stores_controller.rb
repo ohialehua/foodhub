@@ -12,7 +12,7 @@ class Public::StoresController < ApplicationController
       @genres = @store.genres
       @items = @store.items.page(params[:item_page]).per(9)
       if @items.count >= 3
-        @rank_items = @store.items.find(OrderDetail.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
+        @rank_items = @store.items.find(OrderDetail.where(store_order_id: StoreOrder.where(store_id: @store.id).ids).group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
       end
       @posts = @store.posts.page(params[:post_page])
       @store_orders = @store.store_orders.where(enduser_id:current_enduser)
