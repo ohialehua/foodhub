@@ -1,7 +1,7 @@
 <div class="container">
   <h2 class=""><%= @store.name %> 詳細ページ</h2>
   <div class="row">
-    <% if @items.count > 2 %>
+    <% if @items.count >= 3 %>
     <div class="col-lg-8 mt-4" id="theTarget">
       <% @rank_items.each do |rank_item| %>
         <div>
