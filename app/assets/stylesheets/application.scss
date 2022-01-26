@@ -14,6 +14,8 @@
  *= require_self
  */
 @import "bootstrap";
+@import "slick-theme";
+@import "slick";
 
 .card-title, .card-text {
   overflow: hidden;
@@ -74,8 +76,4 @@
   height: 23px;
   background-color: white;
   border-radius: 10px;
-}
-
-.skippr> :not(.visible)>img {
-  display: none;
 }

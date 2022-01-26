@@ -21,22 +21,13 @@
 //= require turbolinks
 //= require_tree .
 
-document.addEventListener("turbolinks:load"
-, function () {
   $(document).ready(function() {
-    $("#theTarget").skippr({
-      transition : 'fade',
-      speed : 3000,
+    $("#theTarget").slick({
+      dots: true,
+      speed : 5000,
+      autoplay : true,
+      autoplaySpeed : 3000,
+      fade: true,
       easing : 'easeOutQuint',
-      navType : 'none',
-      childrenElementType : 'div',
-      infinite: true,
-      arrows : true,
-      autoPlay : true,
-      autoPlayDuration : 3000,
-      keyboardOnAlways : false,
-      hidePrevious : false,
-      pauseOnHover: true,
     });
    });
-  });

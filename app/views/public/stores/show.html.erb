@@ -2,19 +2,69 @@
   <h2 class=""><%= @store.name %> 詳細ページ</h2>
   <div class="row">
     <% if @items.count > 2 %>
-    <div class="col mt-4" id="theTarget">
+    <div class="col-lg-8 mt-4" id="theTarget">
       <% @rank_items.each do |rank_item| %>
-        <%= link_to item_path(rank_item) do %>
-          <%= attachment_image_tag rank_item, :image, :fill, 500, 500, style:"height: auto; width: 100%;" %>
+        <div>
+          <%= link_to item_path(rank_item) do %>
+            <%= attachment_image_tag rank_item, :image, :fill, 300, 200, style:"height: auto; width: 100%;" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-lg-3 offset-1 mt-4 my-auto">
+      <% @rank_items.each.with_index(1) do |rank_item, i| %>
+        <%= link_to item_path(rank_item), class:"text-dark" do %>
+          <label class="bg-warning px-3 py-1"style="border-radius:5px;">
+            <%= i %>番人気　：
+            <%= rank_item.name %><br>
+          </label>
+          <div class="col text-center mt-1 mb-5 border" style="border-radius:10px;">
+            <h5><%= rank_item.body %></h5>
+          </div>
         <% end %>
       <% end %>
     </div>
     <% end %>
     <div class="col-lg-5 mt-5">
       <%= render 'show', store: @store, genres: @genres %>
+      <h3 class=""><%= @store.name %>での注文履歴</h3>
+    <% if @store_orders.any? %>
+		  <table class="table table-borderless table-dark mt-5" style="opacity: 0.8;">
+		    <thead class="thead-dark">
+          <tr>
+            <td>注文日</td>
+            <td>配送先</td>
+            <td>注文商品</td>
+            <td>支払金額</td>
+          </tr>
+        </thead>
+        <tbody>
+        <% @store_orders.each do |store_order| %>
+          <tr>
+            <td><%= store_order.created_at.strftime("%Y/%m/%d") %></td>
+            <td>
+              〒<%= store_order.order.post_address %><br>
+              <%= store_order.order.address %><br>
+              <%= store_order.order.name %><br>
+            </td>
+            <td>
+            <% @store_order_total_price = 0 %>
+				    <% store_order.order_details.each do |order_detail| %>
+				      <%= order_detail.item.name %>×<%= order_detail.order_quantity %></br>
+				      <% @store_order_total_price += order_detail.subtotal %>
+				    <% end %>
+			      </td>
+            <td><%= @store_order_total_price.to_s(:delimited) %>円</td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <h4>&ensp;注文履歴がありません。</h4>
+    <% end %>
     </div>
 
-    <div class="col-lg-11 pl-5">
+    <div class="col-lg-7 pl-5">
       <h2 class="mt-5 mb-3">商品一覧</h2>
     <% if @items.any? %>
       <div class="row row-cols-2 row-cols-md-3 row-eq-height">
@@ -79,41 +129,6 @@
     <% end %>
     </div>
     <div class="col-lg-11">
-       <h3 class=""><%= @store.name %>での注文履歴</h3>
-    <% if @store_orders.any? %>
-		  <table class="table table-borderless table-dark mt-5" style="opacity: 0.8;">
-		    <thead class="thead-dark">
-          <tr>
-            <td>注文日</td>
-            <td>配送先</td>
-            <td>注文商品</td>
-            <td>支払金額</td>
-          </tr>
-        </thead>
-        <tbody>
-        <% @store_orders.each do |store_order| %>
-          <tr>
-            <td><%= store_order.created_at.strftime("%Y/%m/%d") %></td>
-            <td>
-              〒<%= store_order.order.post_address %><br>
-              <%= store_order.order.address %><br>
-              <%= store_order.order.name %><br>
-            </td>
-            <td>
-            <% @store_order_total_price = 0 %>
-				    <% store_order.order_details.each do |order_detail| %>
-				      <%= order_detail.item.name %>×<%= order_detail.order_quantity %></br>
-				      <% @store_order_total_price += order_detail.subtotal %>
-				    <% end %>
-			      </td>
-            <td><%= @store_order_total_price.to_s(:delimited) %>円</td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <h4>&ensp;注文履歴がありません。</h4>
-    <% end %>
     </div>
     </div>
   </div>
