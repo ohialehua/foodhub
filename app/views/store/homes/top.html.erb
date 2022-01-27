@@ -65,7 +65,6 @@
     <table class="table table-borderless table-dark" style="opacity: 0.8;">
       <thead>
         <tr>
-          <th scope="col">商品ID</th>
           <th scope="col">商品名</th>
           <th scope="col">税抜価格</th>
           <th scope="col">ジャンル</th>
@@ -76,7 +75,6 @@
       <tbody>
         <% @items.each do |item| %>
         <tr>
-          <th scope="low"><%= item.id %></th>
           <th scope="low"><%= link_to item.name, store_item_path(item), class:"text-white" %></th>
           <th scope="low"><%= item.price_before_tax.to_s(:delimited) %>円</th>
     	    <th scope="low"><%= item.genre.name %></th>
