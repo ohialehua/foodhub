@@ -14,13 +14,13 @@
   <body>
      <body class="d-flex flex-column vh-100">
     <header>
-      <nav class="navbar navbar-expand-lg  navbar-light shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
         <div class="container">
           <a class="logo" href="/"><%= image_tag 'logo.png' %></a>
           <button class="navbar-toggler"type="button" data-toggle="collapse"data-target="#navbarSupportedContent"aria-controls="navbarSupportedContent"aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse mt-3" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
               <% if enduser_signed_in? %>
                 <li class="nav-item mt-4">ようこそ、<%= current_enduser.name %>様！</li>

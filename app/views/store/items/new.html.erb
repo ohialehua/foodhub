@@ -28,7 +28,7 @@
        <%= f.label :is_active, "販売停止中" %>
        </td>
       </table>
-       <%= f.submit '新規登録', class: 'btn btn-success' %>
+       <%= f.submit '新規登録', class: 'btn btn-success', "data-confirm" => "商品名と金額は変更できません。今一度ご確認ください。" %>
       <% end %>
     </div>
    </div>

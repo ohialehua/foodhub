@@ -9,8 +9,6 @@
        <th><%= f.label :商品画像 %></th>
        <td><%= f.attachment_field :image, class:"text-dark" %></td>
        <tr></tr>
-       <th><%= f.label :商品名 %></th>
-       <td><%= f.text_field :name, class:"text-dark"  %></th>
        <tr></tr>
        <th><%= f.label :商品説明 %></th>
        <td><%= f.text_area :body, class:"text-dark" %></td>
@@ -18,8 +16,6 @@
        <th><%= f.label :ジャンル %></th>
        <td><%= f.collection_select(:genre_id, @genres, :id, :name, {prompt: "選択してください"}, class:"text-dark") %></td>
        <tr></tr>
-       <th><%= f.label :税抜価格 %></th>
-       <td><%= f.text_field :price_before_tax, class:"text-dark" %>円</td>
        <tr></tr>
        <th><%= f.label :販売ステータス %></th>
        <td><%= f.radio_button :is_active, true %>
