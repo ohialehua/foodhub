@@ -1,3 +1,4 @@
+  <% if posts.any? %>
     <% posts.each do |post| %>
       <% if post.store_id.present? %>
         <% if post.store.is_deleted == false %>
@@ -58,3 +59,6 @@
       <% end %>
     <% end %>
       <%= paginate posts %>
+  <% else %>
+    <h1>投稿がありません</h1>
+  <% end %>
