@@ -1,5 +1,5 @@
 <% items.each do |item| %>
-<% if item.store.is_deleted == false %>
+<% if item.store.is_deleted == false and item.is_active == true %>
 <div class="col">
   <div class="card mx-auto mt-4 bg-dark text-white">
     <%= link_to item_path(item) do %>
