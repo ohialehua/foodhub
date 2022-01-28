@@ -11,11 +11,11 @@ class Order < ApplicationRecord
   validates :address,presence:true
   validates :name,presence:true
 
-  def sum_order_price
+  def sum_order_price #この注文での合計
     total_price+postage
   end
 
-   def with_tax_price
+   def with_tax_price #税金(10%)
   (price_before_tax * 1.1).floor
    end
 

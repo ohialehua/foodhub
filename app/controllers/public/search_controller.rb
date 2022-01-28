@@ -1,7 +1,7 @@
 class Public::SearchController < ApplicationController
   
   def search
-    @range = params[:range]
+    @range = params[:range] #検索の範囲
     search = params[:search]
     @word = params[:word]
 

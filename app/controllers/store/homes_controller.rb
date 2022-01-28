@@ -9,7 +9,7 @@ class Store::HomesController < ApplicationController
   end
 
   private
-  #ステータスが無効の場合ログアウトする
+  #ステータスが無効の場合ログアウトする(sign_up後)
   def ensure_store_status
     if current_store.is_deleted == true
       sign_out_and_redirect(current_store)

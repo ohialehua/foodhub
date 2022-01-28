@@ -34,6 +34,7 @@ class Public::EndusersController < ApplicationController
     params.require(:enduser).permit(:name, :introduction, :profile_image, :full_name, :full_name_kana, :phone_number)
   end
 
+  # アクセス権限
   def ensure_correct_enduser
     @enduser = Enduser.find(params[:id])
     unless @enduser == current_enduser

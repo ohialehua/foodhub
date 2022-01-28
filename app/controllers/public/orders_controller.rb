@@ -4,10 +4,12 @@ class Public::OrdersController < ApplicationController
   def new
     if current_enduser.deliveries.present?
       @order = Order.new
+      #支払方法の定義
       @credit_card = Order.pay_methods.key(0)
       @transfer = Order.pay_methods.key(1)
       @credit_card_ja = Order.pay_methods_i18n[:credit_card]
       @transfer_ja = Order.pay_methods_i18n[:transfer]
+      #
       @deliveries = Delivery.where(enduser_id:current_enduser)
     else
       redirect_to deliveries_path
@@ -19,15 +21,19 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_enduser.cart_items
     @order = Order.new(order_params)
     @store_amount = @cart_items.joins(:item).select(:store_id).distinct.count
-    @order.postage = 200*@store_amount
+    #カート内商品にある加盟店の数を重複なく数える
+    @order.postage = 200*@store_amount #配送料は加盟店の数x200円
     @total_price_except_postage = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
+    #カート内商品の小計の合計
     @total_price = @total_price_except_postage + @order.postage
+    #請求額
 
-    if params[:order][:select_adress] == "0"
+    if params[:order][:select_adress] == "0" #注文の"配送先選択"の値が0(登録済み配送先)なら
       @delivery = Delivery.find(params[:order][:delivery_id])
       @order.post_address = @delivery.post_address
       @order.address = @delivery.address
       @order.name = @delivery.name
+  #(else それいがいならフォームに入力された値)
     end
   end
 
@@ -37,15 +43,16 @@ class Public::OrdersController < ApplicationController
     order.enduser_id = current_enduser.id
     if order.save
       ActiveRecord::Base.transaction do
+      #トランザクションブロック内のアクションはすべて終えるまでコミットされない。支払いと注文履歴との齟齬を防ぐため。
         cart_items.each do |c|
           # StoreOrderモデルの作成
           @store = c.item.store
           store_order_id = nil  #条件分岐する前に登録しておくとnullでのエラーがなくなる
-          if @store.store_orders.where(order_id:order).count == 0
+          if @store.store_orders.where(order_id:order).count == 0 #カート内商品の加盟店でまだこの注文のStoreOrderができていないなら
             store_order = StoreOrder.create(enduser_id: current_enduser.id, order_id: order.id, store_id: c.item.store_id)
             store_order_id = store_order.id
           else
-            store_order_id = @store.store_orders.where(order_id:order).first.id
+            store_order_id = @store.store_orders.where(order_id:order).first.id #first.idがないと二つ目以降がStoreOrderに登録されない
             #すでに店舗ごとの注文がある場合、この注文の店舗ごとの注文の一番目を取得
           end
           #

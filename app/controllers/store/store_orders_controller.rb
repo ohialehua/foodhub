@@ -15,12 +15,12 @@ class Store::StoreOrdersController < ApplicationController
     @store_order = StoreOrder.find(params[:id])
     @order_details = @store_order.order_details
     @store_order.update(store_order_params)
-      if @store_order.payment_finish?
+      if @store_order.payment_finish? #入金が確認出来たら
         @order_details.each do |order_detail|
-          order_detail.waiting!
+          order_detail.waiting! #注文詳細の製作ステータスを製作待ちに変える
         end
         flash[:info] = "入金が確認されました"
-      elsif @store_order.delivery_finish?
+      elsif @store_order.delivery_finish? # 発送完了になったら
         flash[:success] = "発送が完了しました"
       end
     redirect_to store_store_order_path(@store_order)

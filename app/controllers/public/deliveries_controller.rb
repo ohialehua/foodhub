@@ -3,6 +3,7 @@ class Public::DeliveriesController < ApplicationController
 
 def index
   if current_enduser.full_name.blank? || current_enduser.full_name_kana.blank? || current_enduser.phone_number.blank?
+    #このユーザーの氏名、カナ、電話番号のいずれかが未登録なら
     redirect_to edit_enduser_path(current_enduser.id)
     flash[:info] = "個人情報を入力してください"
   else
@@ -26,7 +27,7 @@ end
 def destroy
   delivery = Delivery.find(params[:id])
   delivery.destroy
-  redirect_back(fallback_location:root_path)
+  redirect_to request.referer
   flash[:danger] = "宛名「#{delivery.name}」様の配送先情報を削除しました"
 end
 

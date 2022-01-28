@@ -1,9 +1,10 @@
 class Post < ApplicationRecord
 
-  belongs_to :store, optional: true
+  belongs_to :store, optional: true #加盟店とユーザーどちらも投稿するため
   belongs_to :enduser, optional: true
 	has_many :favorites, dependent: :destroy
 	has_many :week_favorites, -> {where(created_at: ((Time.current.at_end_of_day - 6.day).at_beginning_of_day)..(Time.current.at_end_of_day)) }, class_name: 'Favorite'
+	#過去一週間のいいねの数
 	has_many :post_comments, dependent: :destroy
 
 	attachment :post_image

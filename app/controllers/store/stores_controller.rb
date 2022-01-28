@@ -39,7 +39,8 @@ class Store::StoresController < ApplicationController
   def store_params
     params.require(:store).permit(:email,:name,:name_kana,:post_address,:address,:phone_number,:introduction,:profile_image,:is_deleted)
   end
-
+  
+  # アクセス権限
   def ensure_correct_store
     @store = Store.find(params[:id])
     unless @store == current_store

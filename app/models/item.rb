@@ -20,7 +20,7 @@ class Item < ApplicationRecord
  end
 
  def self.sort(selection)
-	  if selection == 'bought'
+	  if selection == 'bought' #注文詳細にある商品IDを数えて多い順
 	    @items = Item.left_joins(:order_details).group(:id).order(Arel.sql('count(item_id) desc'))
 	  elsif selection == 'new'
 	    @items = Item.all.order(created_at: :DESC)
@@ -28,7 +28,6 @@ class Item < ApplicationRecord
 	    @items = Item.all.order(created_at: :ASC)
 	  else
 	    @items = Item.all.order(created_at: :DESC)
-	    # @items = Item.all.order(impressions_count: :DESC)
    end
 	end
 

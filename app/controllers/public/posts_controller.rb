@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_enduser!
-  impressionist :actions => [:show]
+  impressionist :actions => [:show] #詳細ページを閲覧された回数を計測
 
   def new
     @post = Post.new
@@ -21,7 +21,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = PostComment.new
-    if @post.enduser_id.present?  #条件分岐させないとfalseのとき@genresがnilになる
+    if @post.enduser_id.present?  #ユーザーの投稿か加盟店の投稿か分けて考える(条件分岐させないとfalseのとき@genresがnilになる)
       @enduser = @post.enduser
       @followings = @enduser.followings.page(params[:following_page])
       @followers = @enduser.followers.page(params[:follower_page])
