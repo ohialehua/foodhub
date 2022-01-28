@@ -11,17 +11,12 @@ class Admin::StoresController < ApplicationController
   def update
     @store = Store.find(params[:id])
     @store.update(store_params)
-    if @store.is_deleted == false
-      Admin::AdminMailer.with(store: @store).welcome_email.deliver
+    if @store.is_deleted == false #加盟店のステータスが無効なら
+      Admin::AdminMailer.with(store: @store).welcome_email.deliver #ウェルカムメールを送る
     else
-      Admin::AdminMailer.with(store: @store).warning_email.deliver
+      Admin::AdminMailer.with(store: @store).warning_email.deliver #警告メールを送る
     end
     redirect_to request.referer
-  end
-
-  def welcome_email
-    @store = params[:store]
-    AdminMailer.with(store: @store).welcome_email.deliver
   end
 
   private
