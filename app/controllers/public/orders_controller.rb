@@ -43,7 +43,7 @@ class Public::OrdersController < ApplicationController
     order.enduser_id = current_enduser.id
     if order.save
       ActiveRecord::Base.transaction do
-      #トランザクションブロック内のアクションはすべて終えるまでコミットされない。支払いと注文履歴との齟齬を防ぐため。
+      #支払いと注文履歴との齟齬を防ぐため。
         cart_items.each do |c|
           # StoreOrderモデルの作成
           @store = c.item.store
@@ -74,6 +74,7 @@ class Public::OrdersController < ApplicationController
       redirect_to orders_complete_path
     else
       redirect_to action: "new"
+      flash[:danger] = "注文の確定に失敗しました。入力情報などに誤りはありませんか？"
     end
   end
 
