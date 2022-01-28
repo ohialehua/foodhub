@@ -5,7 +5,7 @@
   <div class="row row-cols-3 row-cols-lg-5 row-eq-height">
   <% @rank_items.each.with_index(1) do |item, i| %>
   <% if item.store.is_deleted == false %>
-    <div class="col mx-auto my-5">
+    <div class="rank_item col mx-auto my-5">
       <% if i == 1 %>
         <i class="fas fa-crown" style="color:#DBB400"></i>
       <% elsif i == 2 %>
