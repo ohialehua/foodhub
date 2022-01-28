@@ -1,6 +1,7 @@
   <% if posts.any? %>
     <% posts.each do |post| %>
       <% if post.store_id.present? %>
+      <!--加盟店とユーザーで分けて考える-->
         <% if post.store.is_deleted == false %>
           <div class="col">
             <div class="card mx-4 mt-4 shadow-lg">
@@ -30,6 +31,7 @@
           </div>
         <% end %>
       <% else %>
+      <!--ユーザーの投稿-->
         <div class="col">
           <div class="card mx-4 mt-4 shadow-lg">
             <%= link_to post_path(post) do %>

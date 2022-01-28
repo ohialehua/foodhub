@@ -3,55 +3,58 @@
     <h3 class="">注文履歴一覧</h3>
 		<table class="table table-borderless table-dark mt-5" style="opacity: 0.8;">
 		  <thead class="thead-dark">
-    <tr>
-      <td>注文日</td>
-      <td>配送先</td>
-      <td>購入店舗名</td>
-      <td>注文商品</td>
-      <td>支払金額</td>
-      <td>ステータス</td>
-      <td>注文詳細</td>
-    </tr>
-    </thead>
-    <tbody>
-    <% @orders.each do |order| %>
-    <tr>
-      <td><%= order.created_at.strftime("%Y/%m/%d") %></td>
-      <td>〒<%= order.post_address %><br>
-            <%= order.address %><br>
-            <%= order.name %><br>
-      </td>
-      <td>
-				<% order.store_orders.each do |store_order| %>
-				  <%= store_order.store.name %>
-				  <% store_order.order_details.each do |order_detail| %>
-				    <% order_detail %></br>
+        <tr>
+          <td>注文日</td>
+          <td>配送先</td>
+          <td>購入店舗名</td>
+          <td>注文商品</td>
+          <td>支払金額</td>
+          <td>ステータス</td>
+          <td>注文詳細</td>
+        </tr>
+      </thead>
+      <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.created_at.strftime("%Y/%m/%d") %></td>
+          <td>〒<%= order.post_address %><br>
+              <%= order.address %><br>
+              <%= order.name %><br>
+          </td>
+        <!--StoreOrder毎に数えることで、商品の加盟店名が1つだけですむ-->
+          <td>
+				  <% order.store_orders.each do |store_order| %>
+				    <%= store_order.store.name %>
+				    <% store_order.order_details.each do |order_detail| %>
+				      <% order_detail %></br>
+				      <!--行をそろえるため注文詳細の商品の種類だけ改行を加える-->
+				    <% end %>
 				  <% end %>
-				<% end %>
-			</td>
-      <td>
-        <% order.store_orders.each do |store_order| %>
-				  <% store_order.order_details.each do |order_detail| %>
-				    <%= order_detail.item.name %>×<%= order_detail.order_quantity %></br>
+			    </td>
+          <td>
+          <% order.store_orders.each do |store_order| %>
+				    <% store_order.order_details.each do |order_detail| %>
+				      <%= order_detail.item.name %>×<%= order_detail.order_quantity %></br>
+				    <% end %>
 				  <% end %>
-				<% end %>
-			</td>
-      <td><%= order.total_price.to_s(:delimited) %>円</td>
-    <!--注文ステータスに"発送完了"以外のものがあればtrueを返す。-->
-    <% if order.store_orders.where(order_status: [0, 1, 2, 3]).any? %>
-      <td class="text-warning">
-          まだ発送されていない商品があります。
-      </td>
-    <% else %>
-      <td class="text-success">
-          すべての商品が発送されました。
-      </td>
-    <% end %>
-    <!---->
-      <td><%= link_to "表示する", order_path(order), class:'btn btn-primary text-white' %></td>
-      </tr>
-    <% end %>
-    </tbody>
+			    </td>
+			  <!---->
+          <td><%= order.total_price.to_s(:delimited) %>円</td>
+        <!--注文ステータスに"発送完了"以外のものがあればtrueを返す。-->
+        <% if order.store_orders.where(order_status: [0, 1, 2, 3]).any? %>
+          <td class="text-warning">
+            まだ発送されていない商品があります。
+          </td>
+        <% else %>
+          <td class="text-success">
+            すべての商品が発送されました。
+          </td>
+        <% end %>
+        <!---->
+          <td><%= link_to "表示する", order_path(order), class:'btn btn-primary text-white' %></td>
+        </tr>
+      <% end %>
+      </tbody>
     </table>
   </div>
 </div>

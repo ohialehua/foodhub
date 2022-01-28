@@ -73,13 +73,14 @@
         </div>
       </div>
       <% end %>
+      
       <div class="col-md-11 offset-1">
         <%= render "public/post_comments/comment_index", post: @post %>
         <div class="text-right">
-        <%= form_with model:[@post, @comment], local: true do |f| %>
-　　　  　<%= f.text_area :comment %>
-          <%= f.submit "送信" %>
-        <% end %>
+          <%= form_with model:[@post, @comment], local: true do |f| %>
+　　　  　  <%= f.text_area :comment %>
+            <%= f.submit "送信" %>
+          <% end %>
         </div>
       </div>
     </div>

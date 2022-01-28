@@ -24,28 +24,28 @@
           </table>
         <% end %>
       </div>
-        <table class="table table-hover table-borderless table-dark w-70 mt-3" style="opacity: 0.8;">
-          <thead>
-            <th>郵便番号</th>
-            <th>住所</th>
-            <th>宛名</th>
-            <th colspan="2"></th>
-          </thead>
-          <% @deliveries.each do |delivery| %>
-            <tr>
-              <td>〒<%= delivery.post_address %></td>
-              <td><%= delivery.address %></td>
-              <td><%= delivery.name %></td>
-              <td>
-                <%= link_to "編集する", edit_delivery_path(delivery), class:"btn btn-warning" %>
-              </td>
-              <td>
-                <%= link_to "削除する", delivery_path(delivery), method: :delete, "data-confirm" => "本当に削除しますか?👀", class:"btn btn-danger" %>
-              </td>
-            </tr>
-          <% end %>
-          <%= paginate @deliveries %>
-        </table>
+      <table class="table table-hover table-borderless table-dark w-70 mt-3" style="opacity: 0.8;">
+        <thead>
+          <th>郵便番号</th>
+          <th>住所</th>
+          <th>宛名</th>
+          <th colspan="2"></th>
+        </thead>
+        <% @deliveries.each do |delivery| %>
+          <tr>
+            <td>〒<%= delivery.post_address %></td>
+            <td><%= delivery.address %></td>
+            <td><%= delivery.name %></td>
+            <td>
+              <%= link_to "編集する", edit_delivery_path(delivery), class:"btn btn-warning" %>
+            </td>
+            <td>
+              <%= link_to "削除する", delivery_path(delivery), method: :delete, "data-confirm" => "本当に削除しますか?👀", class:"btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+        <%= paginate @deliveries %>
+      </table>
     </div>
   </div>
 </div>

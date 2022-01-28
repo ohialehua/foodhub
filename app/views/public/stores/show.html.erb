@@ -1,6 +1,7 @@
 <div class="container">
   <h2 class=""><%= @store.name %> 詳細ページ</h2>
   <div class="row">
+    <!--人気商品のスライダー-->
     <% if @items.count >= 3 %>
     <div class="col-lg-8 mt-4" id="theTarget">
       <% @rank_items.each do |rank_item| %>
@@ -11,6 +12,7 @@
         </div>
       <% end %>
     </div>
+    <!--人気商品の説明-->
     <div class="col-lg-3 offset-1 mt-4 my-auto">
       <% @rank_items.each.with_index(1) do |rank_item, i| %>
         <%= link_to item_path(rank_item), class:"text-dark" do %>
@@ -104,33 +106,27 @@
             <%= link_to post_path(post) do %>
               <%= attachment_image_tag post, :post_image, size:'200x200', class:"card-img-top"; %>
             <% end %>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-12 mx-auto">
-                <p class="card-text">説明：<%= post.body.truncate(10) %></p>
-                <div class="d-inline-flex">
-                  <span><i class="fas fa-utensils"></i> <%= post.store.name %> ｜ </span>
-                  <span><i class="fas fa-comment">  <%= link_to "#{post.post_comments.count}", post_path(post), class:"text-white" %></i></span>
-                  <div class="favorite-btn_<%= post.id %> ml-3">
-                    <%= render 'public/favorites/favorite-btn', post: post %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 mx-auto">
+                  <p class="card-text">説明：<%= post.body.truncate(10) %></p>
+                  <div class="d-inline-flex">
+                    <span><i class="fas fa-utensils"></i> <%= post.store.name %> ｜ </span>
+                    <span><i class="fas fa-comment">  <%= link_to "#{post.post_comments.count}", post_path(post), class:"text-white" %></i></span>
+                    <div class="favorite-btn_<%= post.id %> ml-3">
+                      <%= render 'public/favorites/favorite-btn', post: post %>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          </div>
         </div>
         <% end %>
-        </div>
-        <%= paginate @posts, :param_name => 'post_page' %>
-        </div>
       </div>
+        <%= paginate @posts, :param_name => 'post_page' %>
     <% else %>
       <h3><br>&ensp;投稿がありません。</h3>
     <% end %>
-    </div>
-    <div class="col-lg-11">
-    </div>
-    </div>
   </div>
 </div>

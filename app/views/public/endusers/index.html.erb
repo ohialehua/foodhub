@@ -3,8 +3,8 @@
     <div class="col-md-9 mx-auto">
       <%= render 'public/endusers/index', endusers: @endusers %>
       <div class="text-center">
-      <%= paginate @endusers, :param_name => 'enduser_page' %>
-    </div>
+        <%= paginate @endusers, :param_name => 'enduser_page' %>
+      </div>
     </div>
     <div class="col-md-3">
       <%= render 'public/endusers/followings', followings: @followings %>
