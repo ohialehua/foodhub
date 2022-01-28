@@ -22,6 +22,7 @@
   height: 75px;
 }
 
+/* 文字が多い場合改行せずに...に省略 */
 .card-title, .card-text {
   overflow: hidden;
   text-overflow: ellipsis;

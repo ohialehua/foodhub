@@ -19,6 +19,7 @@
               <td><%= attachment_image_tag(marker.enduser, :profile_image, :fill, 100, 100, size:"30x30", fallback: "no_image.png") %></td>
               <td><%= link_to marker.enduser.name, store_marker_path(marker), class:"text-white" %></td>
               <td><%= marker.enduser.orders.joins(:store_orders).where(store_orders: {store_id:current_store}).distinct.count %></td>
+              <!--この加盟店での購入履歴を重複なく数える-->
             </tr>
           <% end %>
         <% end %>

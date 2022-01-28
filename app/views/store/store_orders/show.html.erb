@@ -1,5 +1,5 @@
-<div class="row">
-  <h3 class="">注文履歴詳細</h3>
+  <div class="row">
+    <h3 class="">注文履歴詳細</h3>
     <div class="col-md-12 m-3 mx-auto d-inline-flex">
   	  <div class="col-6 mt-4">
   	    <h5 class="mt-6"><strog class="">注文情報</strog></h5>
@@ -39,6 +39,7 @@
           </tbody>
         </table>
       </div>
+      
       <div class="col-6 mt-4 pl-5">
         <h5 class="mt-3"><strog>注文内容</strog></h5>
         <table class="table table-borderless table-dark" style="opacity: 0.8;">
@@ -49,6 +50,7 @@
             <td>小計</td>
             <th>制作ステータス</th>
           </tr>
+        <!--加盟店ごとの商品合計-->
         <% @store_total_price = 0 %>
     　　<% @order_details.each do |order_detail| %>
        　　<tr>
@@ -68,26 +70,29 @@
         </table>
       </div>
     </div>
+    
     <div class="col-md-8"></div>
-    <div class="col-md-4 mt-4">
-      <h5 class="mt-6"><strog class="">請求情報</strog></h5>
-      <table class="table table-borderless table-dark" style="opacity: 0.8;">
-        <tbody>
-          <% @store_billing = 0 %>
-          <tr>
-            <th class="table-dark">商品合計</th>
-            <td><%= @store_total_price.to_s(:delimited) %>円</td>
-          </tr>
-          <tr>
-            <th class="table-dark">送料</th>
-            <td><%= @postage %>円</td>
-          </tr>
-          <% @store_billing = @store_total_price + @postage %>
-          <tr>
-            <th class="table-dark">ご請求額</th>
-            <th><%= @store_billing.to_s(:delimited) %>円</th>
-          </tr>
-        </tbody>
-      </table>
+      <div class="col-md-4 mt-4">
+        <h5 class="mt-6"><strog class="">請求情報</strog></h5>
+        <table class="table table-borderless table-dark" style="opacity: 0.8;">
+          <tbody>
+            <!--加盟店ごとの請求金額-->
+            <% @store_billing = 0 %>
+            <tr>
+              <th class="table-dark">商品合計</th>
+              <td><%= @store_total_price.to_s(:delimited) %>円</td>
+            </tr>
+            <tr>
+              <th class="table-dark">送料</th>
+              <td><%= @postage %>円</td>
+            </tr>
+            <% @store_billing = @store_total_price + @postage %>
+            <tr>
+              <th class="table-dark">ご請求額</th>
+              <th><%= @store_billing.to_s(:delimited) %>円</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-</div>
+  </div>
