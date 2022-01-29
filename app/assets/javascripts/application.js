@@ -18,8 +18,10 @@
 
 //= require rails-ujs
 //= require activestorage
+//= require turbolinks
 //= require_tree .
 
+$(document).on ("turbolinks:load", function(){
   $(document).ready(function() {
     $("#theTarget").slick({
       dots: true,
@@ -29,4 +31,5 @@
       fade: true,
       easing : 'easeOutQuint',
     });
-   });
+  });
+});
