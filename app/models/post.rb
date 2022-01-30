@@ -6,6 +6,8 @@ class Post < ApplicationRecord
 	has_many :week_favorites, -> {where(created_at: ((Time.current.at_end_of_day - 6.day).at_beginning_of_day)..(Time.current.at_end_of_day)) }, class_name: 'Favorite'
 	#過去一週間のいいねの数
 	has_many :post_comments, dependent: :destroy
+	has_many :public_notifications, dependent: :destroy
+	has_many :store_notifications, dependent: :destroy
 
 	attachment :post_image
 

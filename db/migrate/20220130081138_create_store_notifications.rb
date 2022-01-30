@@ -6,7 +6,7 @@ class CreateStoreNotifications < ActiveRecord::Migration[5.2]
       t.integer :enduser_id, null: false
       t.integer :store_order_id
       t.integer :post_id
-      t.integer :comment_id
+      t.integer :post_comment_id
       t.string :action, default: '', null: false
       t.boolean :checked, default: false, null: false
 

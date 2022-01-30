@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 2022_01_30_081138) do
     t.integer "sender_id", null: false
     t.integer "receiver_id", null: false
     t.integer "post_id"
-    t.integer "comment_id"
+    t.integer "post_comment_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 2022_01_30_081138) do
     t.integer "enduser_id", null: false
     t.integer "store_order_id"
     t.integer "post_id"
-    t.integer "comment_id"
+    t.integer "post_comment_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false

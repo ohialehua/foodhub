@@ -21,9 +21,9 @@ class Enduser < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
-  has_many :entries
-  has_many :messages
-  has_many :rooms, through: :entries
+  has_many :active_public_notifications, class_name: 'PublicNotification', foreign_key: 'sender_id', dependent: :destroy
+  has_many :passive_public_notifications, class_name: 'PublicNotification', foreign_key: 'receiver_id', dependent: :destroy
+  has_many :store_notifications, dependent: :destroy
 
   attachment :profile_image, destroy: false
   validates :name,presence:true
@@ -40,7 +40,7 @@ class Enduser < ApplicationRecord
   def follower?(enduser)
     followings.include?(enduser)
   end
-  
+
   def self.search(search,word)
    if search == "forward"
      @endusers = Enduser.where("name LIKE?","#{word}%")

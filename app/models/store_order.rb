@@ -4,6 +4,7 @@ class StoreOrder < ApplicationRecord
   belongs_to :enduser
   belongs_to :store
   belongs_to :order
+  has_many :store_notifications, dependent: :destroy
 
   enum order_status: { payment_waiting: 0, payment_finish: 1, production: 2, ready_to_delivery: 3, delivery_finish: 4 }
 
