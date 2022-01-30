@@ -30,5 +30,23 @@ class Post < ApplicationRecord
     end
 	end
 
+	def create_public_notification_like(current_enduser)
+    # すでに「いいね」されているか検索(重複通知回避)
+    notification = PublicNotification.where(["sender_id = ? and receiver_id = ? and post_id = ? and action = ? ", current_enduser.id, enduser_id, id, 'like'])
+    # いいねされていない場合のみ、通知レコードを作成
+    if notification.blank?
+      public_notification = current_enduser.active_public_notifications.new(
+        post_id: id,
+        receiver_id: enduser_id,
+        action: 'like'
+      )
+      # 自分の投稿に対するいいねの場合は、通知済みとする
+      if public_notification.sender_id == public_notification.receiver_id
+        public_notification.checked = true
+      end
+      public_notification.save if public_notification.valid?
+    end
+  end
+
 	is_impressionable counter_cache: true
 end
