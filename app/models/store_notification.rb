@@ -1,4 +1,6 @@
 class StoreNotification < ApplicationRecord
+  
+  default_scope -> { order(created_at: :desc) }
 
   belongs_to :store
   belongs_to :enduser
