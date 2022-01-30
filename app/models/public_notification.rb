@@ -1,0 +1,2 @@
+class PublicNotification < ApplicationRecord
+end

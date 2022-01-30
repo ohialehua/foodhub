@@ -1,0 +1,2 @@
+class StoreNotification < ApplicationRecord
+end

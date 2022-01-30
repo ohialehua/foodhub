@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_17_114734) do
+ActiveRecord::Schema.define(version: 2022_01_30_081138) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -160,9 +160,32 @@ ActiveRecord::Schema.define(version: 2022_01_17_114734) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "public_notifications", force: :cascade do |t|
+    t.integer "sender_id", null: false
+    t.integer "receiver_id", null: false
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id", null: false
     t.integer "followed_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "store_notifications", force: :cascade do |t|
+    t.integer "store_id", null: false
+    t.integer "enduser_id", null: false
+    t.integer "store_order_id"
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
