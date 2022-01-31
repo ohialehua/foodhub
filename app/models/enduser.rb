@@ -40,6 +40,18 @@ class Enduser < ApplicationRecord
   def follower?(enduser)
     followings.include?(enduser)
   end
+
+  def self.search(search,word)
+   if search == "forward"
+     @endusers = Enduser.where("name LIKE?","#{word}%")
+   elsif search =="partial"
+     @endusers = Enduser.where("name LIKE?","%#{word}%")
+   else
+     @endusers = Enduser.all
+   end
+  end
+  
+#ここからはPF完成後実装予定の機能
   
   #エンドユーザー同士のフォロー通知
   def create_public_notification_follow(current_enduser)
@@ -64,15 +76,18 @@ class Enduser < ApplicationRecord
       public_notification.save if public_notification.valid?
     end
   end
-
-  def self.search(search,word)
-   if search == "forward"
-     @endusers = Enduser.where("name LIKE?","#{word}%")
-   elsif search =="partial"
-     @endusers = Enduser.where("name LIKE?","%#{word}%")
-   else
-     @endusers = Enduser.all
-   end
+  
+  #エンドユーザー→加盟店の注文完了通知
+  def create_store_notification_complete(current_store)
+    notification = StoreNotification.where(["enduser_id = ? and store_id = ? and store_order_id = ? and action = ? ",current_enduser.id, store_id, store_order_id, 'complete'])
+    if notification.blank?
+      store_notification = current_enduser.store_notifications.new(
+        store_order_id: store_order_id,
+        store_id: store_id,
+        action: 'complete'
+      )
+      store_notification.save if store_notification.valid?
+    end
   end
 
 end

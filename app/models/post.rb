@@ -29,8 +29,12 @@ class Post < ApplicationRecord
       @posts = Post.left_joins(:week_favorites).group(:id).order(Arel.sql('count(post_id) desc'))
     end
 	end
-  
-  #エンドユーザー同士のいいね通知
+
+	is_impressionable counter_cache: true
+
+#ここからはPF完成後実装予定の機能
+
+	#エンドユーザー同士のいいね通知
 	def create_public_notification_like(current_enduser)
     notification = PublicNotification.where(["sender_id = ? and receiver_id = ? and post_id = ? and action = ? ", current_enduser.id, enduser_id, id, 'like'])
     # すでに「いいね」されているか検索し、いいねされていない場合のみ通知レコードを作成(重複通知回避)
@@ -47,7 +51,7 @@ class Post < ApplicationRecord
       public_notification.save if public_notification.valid?
     end
   end
-  
+
   #エンドユーザー同士のコメント通知
   def save_public_notification_comment(current_enduser, post_comment_id, receiver_id)
     # コメントは複数回することが考えられるため、likeとは違い重複可
@@ -63,7 +67,7 @@ class Post < ApplicationRecord
     end
     public_notification.save if public_notification.valid?
   end
-  
+
   #エンドユーザー→加盟店のいいね通知
   def create_store_notification_like(current_enduser)
     notification = StoreNotification.where(["enduser_id = ? and store_id = ? and post_id = ? and action = ? ", current_enduser.id, store_id, id, 'like'])
@@ -77,7 +81,7 @@ class Post < ApplicationRecord
       store_notification.save if store_notification.valid?
     end
   end
-  
+
   #加盟店→エンドユーザーのコメント通知
   def save_store_notification_comment(current_store, post_comment_id, enduser_id)
     # コメントは複数回することが考えられるため、likeとは違い重複可
@@ -89,7 +93,7 @@ class Post < ApplicationRecord
     )
     store_notification.save if store_notification.valid?
   end
-  
+
   #エンドユーザー→加盟店のコメント通知
   def save_store_notification_comment(current_enduser, post_comment_id, store_id)
     # コメントは複数回することが考えられるため、likeとは違い重複可
@@ -102,5 +106,4 @@ class Post < ApplicationRecord
     store_notification.save if store_notification.valid?
   end
 
-	is_impressionable counter_cache: true
 end

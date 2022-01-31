@@ -23,18 +23,6 @@ class Store < ApplicationRecord
   def marked_by?(enduser)
 		markers.where(enduser_id: enduser.id).exists?
 	end
-	
-	def create_store_notification_complete(current_store)
-    notification = StoreNotification.where(["store_id = ? and enduser_id = ? and action = ? ",current_store.id, id, 'complete
-    '])
-    if notification.blank?
-      store_notification = current_store.store_notifications.new(
-        enduser_id: id,
-        action: 'complete'
-      )
-      store_notification.save if store_notification.valid?
-    end
-  end
 
 	def self.sort(selection)
 	  if selection == 'markers'
@@ -60,6 +48,21 @@ class Store < ApplicationRecord
    else
      @stores = Store.all
    end
+  end
+
+#ここからはPF完成後実装予定の機能
+
+  #加盟店→エンドユーザーの発送完了通知
+  def create_store_notification_complete(current_store)
+    notification = StoreNotification.where(["store_id = ? and enduser_id = ? and store_order_id = ? and action = ? ",current_store.id, enduser_id, store_order_id, 'complete'])
+    if notification.blank?
+      store_notification = current_store.store_notifications.new(
+        store_order_id: store_order_id,
+        enduser_id: enduser_id,
+        action: 'complete'
+      )
+      store_notification.save if store_notification.valid?
+    end
   end
 
 end
