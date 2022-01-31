@@ -41,6 +41,7 @@ class Enduser < ApplicationRecord
     followings.include?(enduser)
   end
   
+  #エンドユーザー同士のフォロー通知
   def create_public_notification_follow(current_enduser)
     notification = PublicNotification.where(["sender_id = ? and receiver_id = ? and action = ? ",current_enduser.id, id, 'follow'])
     if notification.blank?
@@ -52,6 +53,7 @@ class Enduser < ApplicationRecord
     end
   end
   
+  #エンドユーザー→加盟店のお気に入り通知
   def create_store_notification_mark(current_enduser)
     notification = StoreNotification.where(["enduser_id = ? and store_id = ? and action = ? ",current_enduser.id, store_id, 'mark'])
     if notification.blank?

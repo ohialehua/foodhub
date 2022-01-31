@@ -29,7 +29,8 @@ class Post < ApplicationRecord
       @posts = Post.left_joins(:week_favorites).group(:id).order(Arel.sql('count(post_id) desc'))
     end
 	end
-
+  
+  #エンドユーザー同士のいいね通知
 	def create_public_notification_like(current_enduser)
     notification = PublicNotification.where(["sender_id = ? and receiver_id = ? and post_id = ? and action = ? ", current_enduser.id, enduser_id, id, 'like'])
     # すでに「いいね」されているか検索し、いいねされていない場合のみ通知レコードを作成(重複通知回避)
@@ -46,7 +47,8 @@ class Post < ApplicationRecord
       public_notification.save if public_notification.valid?
     end
   end
-
+  
+  #エンドユーザー同士のコメント通知
   def save_public_notification_comment(current_enduser, post_comment_id, receiver_id)
     # コメントは複数回することが考えられるため、likeとは違い重複可
     public_notification = current_enduser.active_public_notifications.new(
@@ -61,20 +63,8 @@ class Post < ApplicationRecord
     end
     public_notification.save if public_notification.valid?
   end
-
-  def create_store_notification_like(current_store)
-    notification = StoreNotification.where(["store_id = ? and enduser_id = ? and post_id = ? and action = ? ", current_store.id, enduser_id, id, 'like'])
-    # すでに「いいね」されているか検索し、いいねされていない場合のみ通知レコードを作成(重複通知回避)
-    if notification.blank?
-      store_notification = current_store.store_notifications.new(
-        post_id: id,
-        enduser_id: enduser_id,
-        action: 'like'
-      )
-      store_notification.save if store_notification.valid?
-    end
-  end
-
+  
+  #エンドユーザー→加盟店のいいね通知
   def create_store_notification_like(current_enduser)
     notification = StoreNotification.where(["enduser_id = ? and store_id = ? and post_id = ? and action = ? ", current_enduser.id, store_id, id, 'like'])
     # すでに「いいね」されているか検索し、いいねされていない場合のみ通知レコードを作成(重複通知回避)
@@ -87,7 +77,8 @@ class Post < ApplicationRecord
       store_notification.save if store_notification.valid?
     end
   end
-
+  
+  #加盟店→エンドユーザーのコメント通知
   def save_store_notification_comment(current_store, post_comment_id, enduser_id)
     # コメントは複数回することが考えられるため、likeとは違い重複可
     store_notification = current_store.store_notifications.new(
@@ -98,7 +89,8 @@ class Post < ApplicationRecord
     )
     store_notification.save if store_notification.valid?
   end
-
+  
+  #エンドユーザー→加盟店のコメント通知
   def save_store_notification_comment(current_enduser, post_comment_id, store_id)
     # コメントは複数回することが考えられるため、likeとは違い重複可
     store_notification = current_enduser.store_notifications.new(
