@@ -24,15 +24,15 @@ class Store < ApplicationRecord
 		markers.where(enduser_id: enduser.id).exists?
 	end
 	
-	def create_public_notification_complete(current_store)
-    notification = PublicNotification.where(["store_id = ? and enduser_id = ? and action = ? ",current_store.id, id, 'complete
+	def create_store_notification_complete(current_store)
+    notification = StoreNotification.where(["store_id = ? and enduser_id = ? and action = ? ",current_store.id, id, 'complete
     '])
     if notification.blank?
-      public_notification = current_store.active_public_notifications.new(
-        store_id: id,
+      store_notification = current_store.store_notifications.new(
+        enduser_id: id,
         action: 'complete'
       )
-      public_notification.save if public_notification.valid?
+      store_notification.save if store_notification.valid?
     end
   end
 

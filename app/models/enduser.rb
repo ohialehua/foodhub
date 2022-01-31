@@ -51,6 +51,17 @@ class Enduser < ApplicationRecord
       public_notification.save if public_notification.valid?
     end
   end
+  
+  def create_store_notification_mark(current_enduser)
+    notification = StoreNotification.where(["enduser_id = ? and store_id = ? and action = ? ",current_enduser.id, store_id, 'mark'])
+    if notification.blank?
+      store_notification = current_enduser.store_notifications.new(
+        store_id: id,
+        action: 'mark'
+      )
+      public_notification.save if public_notification.valid?
+    end
+  end
 
   def self.search(search,word)
    if search == "forward"
