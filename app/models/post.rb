@@ -31,9 +31,8 @@ class Post < ApplicationRecord
 	end
 
 	def create_public_notification_like(current_enduser)
-    # すでに「いいね」されているか検索(重複通知回避)
     notification = PublicNotification.where(["sender_id = ? and receiver_id = ? and post_id = ? and action = ? ", current_enduser.id, enduser_id, id, 'like'])
-    # いいねされていない場合のみ、通知レコードを作成
+    # すでに「いいね」されているか検索し、いいねされていない場合のみ通知レコードを作成(重複通知回避)
     if notification.blank?
       public_notification = current_enduser.active_public_notifications.new(
         post_id: id,
@@ -46,6 +45,21 @@ class Post < ApplicationRecord
       end
       public_notification.save if public_notification.valid?
     end
+  end
+  
+  def save_public_notification_comment(current_enduser, post_comment_id, receiver_id)
+    # コメントは複数回することが考えられるため、likeとは違い重複可
+    public_notification = current_enduser.active_public_notifications.new(
+      post_id: id,
+      post_comment_id: post_comment_id,
+      receiver_id: receiver_id,
+      action: 'post_comment'
+    )
+    # 自分の投稿に対するコメントの場合は、通知済みとする
+    if public_notification.sender_id == public_notification.receiver_id
+      public_notification.checked = true
+    end
+    public_notification.save if public_notification.valid?
   end
 
 	is_impressionable counter_cache: true

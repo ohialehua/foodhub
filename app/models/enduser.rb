@@ -40,6 +40,17 @@ class Enduser < ApplicationRecord
   def follower?(enduser)
     followings.include?(enduser)
   end
+  
+  def create_public_notification_follow(current_enduser)
+    notification = PublicNotification.where(["sender_id = ? and receiver_id = ? and action = ? ",current_enduser.id, id, 'follow'])
+    if notification.blank?
+      public_notification = current_enduser.active_public_notifications.new(
+        receiver_id: id,
+        action: 'follow'
+      )
+      public_notification.save if public_notification.valid?
+    end
+  end
 
   def self.search(search,word)
    if search == "forward"
