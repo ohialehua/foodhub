@@ -14,6 +14,7 @@ class Public::StoresController < ApplicationController
       if @items.count >= 3 #商品の数が3つ以上なら
         @rank_items = Item.find(OrderDetail.where(store_order_id: StoreOrder.where(store_id: @store.id).ids).rank(3).pluck(:item_id))
         #注文詳細の店舗ごとの注文の、加盟店にある商品のランキング上位3つ
+        #OrderDetailとStoreに直接アソシエーションをもたせれば、@rank_items = Item.find(OrderDetail.where(store_id: @store.id).ids).rank(3).pluck(:item_id))で書き換え可能
       end
       @posts = @store.posts.page(params[:post_page])
       @store_orders = @store.store_orders.where(enduser_id:current_enduser)

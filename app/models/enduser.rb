@@ -78,7 +78,7 @@ class Enduser < ApplicationRecord
   end
   
   #エンドユーザー→加盟店の注文完了通知
-  def create_store_notification_complete(current_store)
+  def create_store_notification_complete(current_enduser)
     notification = StoreNotification.where(["enduser_id = ? and store_id = ? and store_order_id = ? and action = ? ",current_enduser.id, store_id, store_order_id, 'complete'])
     if notification.blank?
       store_notification = current_enduser.store_notifications.new(
