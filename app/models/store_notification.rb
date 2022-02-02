@@ -1,5 +1,7 @@
 class StoreNotification < ApplicationRecord
   
+  #PF完成後実装予定の機能
+  
   default_scope -> { order(created_at: :desc) }
   # デフォルトの並びを新しい順に
 
