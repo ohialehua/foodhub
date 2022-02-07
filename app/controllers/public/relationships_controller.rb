@@ -2,9 +2,8 @@ class Public::RelationshipsController < ApplicationController
   before_action :authenticate_enduser!
 
   def create
-    @enduser = Enduser.find(params[:relationship][:followed_id])
     current_enduser.follow(params[:enduser_id])
-    @enduser.create_public_notification_follow(current_enduser)
+    current_enduser.create_public_notification_follow(current_enduser)
     redirect_to request.referer
   end
 
