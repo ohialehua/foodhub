@@ -22,6 +22,7 @@ class Store::StoreOrdersController < ApplicationController
         flash[:info] = "入金が確認されました"
       elsif @store_order.delivery_finish? # 発送完了になったら
         flash[:success] = "発送が完了しました"
+        @store_order.create_store_notification_complete(current_store, @store_order.id, @store_order.enduser_id)
       end
     redirect_to store_store_order_path(@store_order)
   end

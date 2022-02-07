@@ -17,5 +17,35 @@ class StoreOrder < ApplicationRecord
      @store_orders = StoreOrder.all
    end
   end
+  
+  #ここからはPF完成後実装予定の機能
+  
+  #エンドユーザー→加盟店の注文完了通知
+  def create_store_notification_order(current_enduser, store_order_id, store_id)
+    notification = StoreNotification.where(["enduser_id = ? and store_id = ? and store_order_id = ? and action = ? ",current_enduser.id, store_id, store_order_id, 'complete'])
+    #検索が複数条件で複雑化しているのでプレースホルダを記述(SQLインジェクション対策)
+    if notification.blank?
+      store_notification = current_enduser.store_notifications.new(
+        store_order_id: store_order_id,
+        store_id: store_id,
+        action: 'complete'
+      )
+      store_notification.save if store_notification.valid?
+    end
+  end
+
+  #加盟店→エンドユーザーの発送完了通知
+  def create_store_notification_complete(current_store, store_order_id, enduser_id)
+    notification = StoreNotification.where(["store_id = ? and enduser_id = ? and store_order_id = ? and action = ? ",current_store.id, enduser_id, store_order_id, 'complete'])
+    #検索が複数条件で複雑化しているのでプレースホルダを記述(SQLインジェクション対策)
+    if notification.blank?
+      store_notification = current_store.store_notifications.new(
+        store_order_id: store_order_id,
+        enduser_id: enduser_id,
+        action: 'complete'
+      )
+      store_notification.save if store_notification.valid?
+    end
+  end
 
 end

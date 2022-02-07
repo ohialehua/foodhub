@@ -49,20 +49,4 @@ class Store < ApplicationRecord
    end
   end
 
-#ここからはPF完成後実装予定の機能
-
-  #加盟店→エンドユーザーの発送完了通知
-  def create_store_notification_complete(current_store)
-    notification = StoreNotification.where(["store_id = ? and enduser_id = ? and store_order_id = ? and action = ? ",current_store.id, enduser_id, store_order_id, 'complete'])
-    #検索が複数条件で複雑化しているのでプレースホルダを記述(SQLインジェクション対策)
-    if notification.blank?
-      store_notification = current_store.store_notifications.new(
-        store_order_id: store_order_id,
-        enduser_id: enduser_id,
-        action: 'complete'
-      )
-      store_notification.save if store_notification.valid?
-    end
-  end
-
 end

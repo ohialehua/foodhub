@@ -7,6 +7,11 @@ class Public::PostCommentsController < ApplicationController
     @comment.enduser_id = current_enduser.id
     @comment.post_id = @post.id
     if @comment.save
+      if @post.store_id.blank?
+        @post.create_public_notification_comment(current_enduser, @comment.id, @post.enduser_id)
+      else
+        @post.create_store_notification_comment(current_enduser, @comment.id, @post.store_id)
+      end
       redirect_to request.referer
     end
   end

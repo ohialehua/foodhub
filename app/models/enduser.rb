@@ -50,9 +50,9 @@ class Enduser < ApplicationRecord
      @endusers = Enduser.all
    end
   end
-  
+
 #ここからはPF完成後実装予定の機能
-  
+
   #エンドユーザー同士のフォロー通知
   def create_public_notification_follow(current_enduser)
     notification = PublicNotification.where(["sender_id = ? and receiver_id = ? and action = ? ",current_enduser.id, id, 'follow'])
@@ -65,7 +65,7 @@ class Enduser < ApplicationRecord
       public_notification.save if public_notification.valid?
     end
   end
-  
+
   #エンドユーザー→加盟店のお気に入り通知
   def create_store_notification_mark(current_enduser)
     notification = StoreNotification.where(["enduser_id = ? and store_id = ? and action = ? ",current_enduser.id, store_id, 'mark'])
@@ -76,20 +76,6 @@ class Enduser < ApplicationRecord
         action: 'mark'
       )
       public_notification.save if public_notification.valid?
-    end
-  end
-  
-  #エンドユーザー→加盟店の注文完了通知
-  def create_store_notification_complete(current_enduser)
-    notification = StoreNotification.where(["enduser_id = ? and store_id = ? and store_order_id = ? and action = ? ",current_enduser.id, store_id, store_order_id, 'complete'])
-    #検索が複数条件で複雑化しているのでプレースホルダを記述(SQLインジェクション対策)
-    if notification.blank?
-      store_notification = current_enduser.store_notifications.new(
-        store_order_id: store_order_id,
-        store_id: store_id,
-        action: 'complete'
-      )
-      store_notification.save if store_notification.valid?
     end
   end
 
