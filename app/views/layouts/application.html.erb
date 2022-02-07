@@ -44,6 +44,17 @@
               <% end %>
             </ul>
           </div>
+          <div class="notifications">
+            <% if enduser_signed_in? %>
+              <%= link_to notifications_path, class:"text-dark" do %>
+                <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
+              <% end %>
+            <% elsif store_signed_in? %>
+              <%= link_to store_notifications_path, class:"text-dark" do %>
+                <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
+              <% end %>
+            <% end %>
+          </div>
         </div>
       </nav>
       <% if admin_signed_in? %>
