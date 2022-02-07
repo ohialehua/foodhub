@@ -22,6 +22,12 @@
   height: 75px;
 }
 
+.notifications {
+  position: absolute;
+  right: 10%;
+  top: 4%;
+}
+
 /* 文字が多い場合改行せずに...に省略 */
 .card-title, .card-text {
   overflow: hidden;
