@@ -37,6 +37,7 @@ class Post < ApplicationRecord
 	#エンドユーザー同士のいいね通知
 	def create_public_notification_like(current_enduser)
     notification = PublicNotification.where(["sender_id = ? and receiver_id = ? and post_id = ? and action = ? ", current_enduser.id, enduser_id, id, 'like'])
+    #検索が複数条件で複雑化しているのでプレースホルダを記述(SQLインジェクション対策)
     # すでに「いいね」されているか検索し、いいねされていない場合のみ通知レコードを作成(重複通知回避)
     if notification.blank?
       public_notification = current_enduser.active_public_notifications.new(
@@ -71,6 +72,7 @@ class Post < ApplicationRecord
   #エンドユーザー→加盟店のいいね通知
   def create_store_notification_like(current_enduser)
     notification = StoreNotification.where(["enduser_id = ? and store_id = ? and post_id = ? and action = ? ", current_enduser.id, store_id, id, 'like'])
+    
     # すでに「いいね」されているか検索し、いいねされていない場合のみ通知レコードを作成(重複通知回避)
     if notification.blank?
       store_notification = current_store.store_notifications.new(
