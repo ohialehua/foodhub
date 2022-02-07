@@ -33,6 +33,7 @@ namespace :store do
   resources :markers,only:[:index,:show]
   resources :store_orders,only:[:index,:show,:update]
   resources :order_details,only:[:update]
+  resources :notifications, only: [:index]
 end
 
 scope module: :public do
@@ -60,6 +61,7 @@ scope module: :public do
     resources :post_comments,only: [:create,:destroy]
     resource :favorites,only: [:create,:destroy]
   end
+  resources :notifications, only: [:index]
 end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
