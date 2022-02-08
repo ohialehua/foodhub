@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-lg-5">
       <div class="d-inline-flex">
-        <h2 class=""><%= @store.name %> 詳細ページ</h2>
+        <h2 class=""><%= @store.name %> 詳細</h2>
         <%= form_with model:@store, url: admin_store_path(@store), local: true do |f| %>
         <div class="ml-5">
           <%= f.label :is_deleted, '無効', value: true %>
           <%= f.radio_button :is_deleted, 'true' %>
           <%= f.label :is_deleted, '有効', value: false %>
           <%= f.radio_button :is_deleted, 'false' %>
-          <%= f.submit "編集する", "data-confirm" => "    WARNING！！ 　ステータス変更のメールが自動で送信されます。本当に変更しますか？",class:"btn btn-sm btn-warning my-5 ml-3" %>
+          <%= f.submit "ステータスの変更", "data-confirm" => "    WARNING！！ 　ステータス変更のメールが自動で送信されます。本当に変更しますか？",class:"btn btn-sm btn-warning my-5 ml-3" %>
         </div>
         <% end %>
       </div>
