@@ -52,6 +52,7 @@ class Public::OrdersController < ApplicationController
             store_order = StoreOrder.create(enduser_id: current_enduser.id, order_id: order.id, store_id: c.item.store_id)
             store_order_id = store_order.id
             store_order.create_store_notification_order(current_enduser, store_order.id, @store.id)
+            #エンドユーザー → 加盟店に注文完了の通知
           else
             store_order_id = @store.store_orders.where(order_id:order).first.id #first.idがないと二つ目以降がStoreOrderに登録されない
             #すでに店舗ごとの注文がある場合、この注文の店舗ごとの注文の一番目を取得

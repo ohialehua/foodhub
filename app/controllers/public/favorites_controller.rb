@@ -7,8 +7,10 @@ class Public::FavoritesController < ApplicationController
     if favorite.save
       if @post.enduser_id.present?
         @post.create_public_notification_like(current_enduser)
+        #エンドユーザー同士のいいね通知
       else
         @post.create_store_notification_like(current_enduser)
+        #エンドユーザー → 加盟店のいいね通知
       end
       
   end

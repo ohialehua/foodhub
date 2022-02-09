@@ -9,8 +9,10 @@ class Public::PostCommentsController < ApplicationController
     if @comment.save
       if @post.store_id.blank?
         @post.create_public_notification_comment(current_enduser, @comment.id, @post.enduser_id)
+        #エンドユーザー同士のコメント通知
       else
         @post.create_store_notification_comment(current_enduser, @comment.id, @post.store_id)
+        #エンドユーザー → 加盟店のコメント通知
       end
       redirect_to request.referer
     end

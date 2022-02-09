@@ -60,7 +60,7 @@ class Post < ApplicationRecord
       post_id: id,
       post_comment_id: post_comment_id,
       receiver_id: receiver_id,
-      action: 'post_comment'
+      action: 'comment'
     )
     # 自分の投稿に対するコメントの場合は、通知済みとする
     if public_notification.sender_id == public_notification.receiver_id
@@ -103,7 +103,7 @@ class Post < ApplicationRecord
       post_id: id,
       post_comment_id: post_comment_id,
       store_id: store_id,
-      action: 'post_comment'
+      action: 'comment'
     )
     store_notification.save if store_notification.valid?
   end
