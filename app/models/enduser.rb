@@ -67,15 +67,15 @@ class Enduser < ApplicationRecord
   end
 
   #エンドユーザー→加盟店のお気に入り通知
-  def create_store_notification_mark(current_enduser)
+  def create_store_notification_mark(current_enduser, store_id)
     notification = StoreNotification.where(["enduser_id = ? and store_id = ? and action = ? ",current_enduser.id, store_id, 'mark'])
     #検索が複数条件で複雑化しているのでプレースホルダを記述(SQLインジェクション対策)
     if notification.blank?
       store_notification = current_enduser.store_notifications.new(
-        store_id: id,
+        store_id: store_id,
         action: 'mark'
       )
-      public_notification.save if public_notification.valid?
+      store_notification.save if store_notification.valid?
     end
   end
 

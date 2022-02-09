@@ -4,8 +4,9 @@ class Public::MarkersController < ApplicationController
   def create
     @store = Store.find(params[:store_id])
     marker = current_enduser.markers.new(store_id: @store.id)
-    marker.save
-    @store.create_store_notification_mark(current_enduser)
+    if marker.save
+      current_enduser.create_store_notification_mark(current_enduser, @store.id)
+    end
   end
 
   def destroy

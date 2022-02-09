@@ -17,9 +17,9 @@ class StoreOrder < ApplicationRecord
      @store_orders = StoreOrder.all
    end
   end
-  
+
   #ここからはPF完成後実装予定の機能
-  
+
   #エンドユーザー→加盟店の注文完了通知
   def create_store_notification_order(current_enduser, store_order_id, store_id)
     notification = StoreNotification.where(["enduser_id = ? and store_id = ? and store_order_id = ? and action = ? ",current_enduser.id, store_id, store_order_id, 'complete'])
