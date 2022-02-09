@@ -75,7 +75,7 @@ class Post < ApplicationRecord
     #検索が複数条件で複雑化しているのでプレースホルダを記述(SQLインジェクション対策)
     # すでに「いいね」されているか検索し、いいねされていない場合のみ通知レコードを作成(重複通知回避)
     if notification.blank?
-      store_notification = current_store.store_notifications.new(
+      store_notification = current_enduser.store_notifications.new(
         post_id: id,
         store_id: store_id,
         action: 'like'
