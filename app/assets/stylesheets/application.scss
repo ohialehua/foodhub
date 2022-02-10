@@ -23,6 +23,8 @@
 }
 
 .notifications {
+  width: 30px;
+  height: 30px;
   position: absolute;
   right: 10%;
   top: 4%;
@@ -30,9 +32,13 @@
 
 .unchecked {
   text-align: center;
-  width: 20px;
-  background-color: blue;
-  border-radius: 10px;
+  height: 17px;
+  width: 17px;
+  background:rgba(255,69,0,0.8) ;
+  border-radius: 9px;
+  position: absolute;
+  right: 0%;
+  top: 0%;
 }
 
 /* 文字が多い場合改行せずに...に省略 */
