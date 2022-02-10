@@ -41,6 +41,16 @@
           <% when 'mark' then %>
             <td><%= notification.created_at.strftime('%Y/%m/%d') %></td>
             <td><%=link_to notification.enduser.name, store_marker_path(current_store.markers.find_by(enduser_id: notification.enduser.id)) %>さんがあなたをお気に入り登録しました</td>
+          <% when 'complete' then %>
+            <td><%= notification.created_at.strftime('%Y/%m/%d') %></td>
+            <td>
+            <% if current_store.marked_by?(notification.enduser) %>
+              <%=link_to notification.enduser.name, store_marker_path(current_store.markers.find_by(enduser_id: notification.enduser.id)) %>
+            <% else %>
+              <%= notification.enduser.name %>
+            <% end %>
+              さんへ<%= link_to '注文商品', store_store_order_path(notification.store_order) %>を発送しました
+            </td>
         <% end %>
         </tr>
       <% end %>
