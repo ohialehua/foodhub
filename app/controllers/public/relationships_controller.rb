@@ -3,7 +3,7 @@ class Public::RelationshipsController < ApplicationController
 
   def create
     current_enduser.follow(params[:enduser_id])
-    current_enduser.create_public_notification_follow(current_enduser)
+    current_enduser.create_public_notification_follow(current_enduser, params[:enduser_id])
     #フォロー通知
     redirect_to request.referer
   end

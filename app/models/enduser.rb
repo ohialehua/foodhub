@@ -53,13 +53,14 @@ class Enduser < ApplicationRecord
 
 #ここからはPF完成後実装予定の機能
 
-  #エンドユーザー同士のフォロー通知
-  def create_public_notification_follow(current_enduser)
-    notification = PublicNotification.where(["sender_id = ? and receiver_id = ? and action = ? ",current_enduser.id, id, 'follow'])
+  #エンドユーザー同士のフォロー通知                     #receiver_id がないとsender_idと一致してしまう
+  def create_public_notification_follow(current_enduser, receiver_id)
+    notification = PublicNotification.where(["sender_id = ? and receiver_id = ? and action = ? ",current_enduser.id, receiver_id, 'follow'])
     #検索が複数条件で複雑化しているのでプレースホルダを記述(SQLインジェクション対策)
+    #receiver_id: id にしてしまうとsender_idと一致してしまう
     if notification.blank?
       public_notification = current_enduser.active_public_notifications.new(
-        receiver_id: id,
+        receiver_id: receiver_id,
         action: 'follow'
       )
       public_notification.save if public_notification.valid?
