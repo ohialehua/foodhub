@@ -3,7 +3,7 @@
     <h2>未読通知一覧</h2>
     <div class="col-12 mt-5">
     <% if @notifications.exists? || @order_notifications.exists? %>
-      <table class="table table-dark">
+      <table class="table table-light">
       <% @notifications.each do |notification| %>
         <tr>
         <% case notification.action %>
@@ -20,7 +20,7 @@
         </tr>
       <% end %>
       </table>
-      <table class="table table-dark">
+      <table class="table table-light">
       <% @order_notifications.each do |notification| %>
         <tr>
           <td><%= notification.created_at.strftime('%Y/%m/%d') %></td>
