@@ -12,7 +12,7 @@ class Public::FavoritesController < ApplicationController
         @post.create_store_notification_like(current_enduser)
         #エンドユーザー → 加盟店のいいね通知
       end
-      
+    end
   end
 
   def destroy
