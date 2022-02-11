@@ -1,6 +1,6 @@
   <div class="row">
     <h2>通知一覧</h2>
-    <div class="col-12 mt-5">
+    <div class="col-12">
     <% unless @notifications.where(checked: false).any? || @order_notifications.where(checked: false).any? %>
     <!--どちらの通知もすべて既読ならtrueをかえす-->
       <h4 class="text-right text-success">未読の通知はありません。</h4>

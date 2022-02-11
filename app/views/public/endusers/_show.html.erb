@@ -6,6 +6,14 @@
     <h4 class="">登録情報</h4>
     <%= link_to "編集", edit_enduser_path(enduser), class:"btn btn-primary ml-3" %>
   </div>
+<% else %>
+  <div class="col-8 d-inline-block text-right">
+  <% if current_enduser.follower?(enduser) %>
+    <%= link_to "フォローを外す", enduser_relationships_path(enduser.id), class:"btn btn-sm btn-danger", method: :delete %>
+  <% else %>
+    <%= link_to "フォローする", enduser_relationships_path(enduser.id), class:"btn btn-sm btn-info", method: :post %>
+  <% end %>
+  </div>
 <% end %>
   <table class="table table-borderless table-dark" style="opacity: 0.8;">
     <tr>
