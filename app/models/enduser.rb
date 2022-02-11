@@ -23,7 +23,8 @@ class Enduser < ApplicationRecord
 
   has_many :active_public_notifications, class_name: 'PublicNotification', foreign_key: 'sender_id', dependent: :destroy
   has_many :passive_public_notifications, class_name: 'PublicNotification', foreign_key: 'receiver_id', dependent: :destroy
-  has_many :store_notifications, dependent: :destroy
+  has_many :public_notifications, dependent: :destroy
+  has_many :store_notifications
 
   attachment :profile_image, destroy: false
   validates :name,presence:true

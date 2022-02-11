@@ -50,9 +50,10 @@
         <% if enduser_signed_in? %>
           <%= link_to notifications_path, class:"text-dark" do %>
             <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
-            <% if PublicNotification.where(checked: false, receiver_id: current_enduser).any? %>
+            <% if PublicNotification.where(checked: false, receiver_id: current_enduser).any? || PublicNotification.where(checked: false, enduser_id: current_enduser).any? %>
               <div class="unchecked">
-                <%= PublicNotification.where(checked: false, receiver_id: current_enduser).count %>
+                <%= PublicNotification.where(checked: false, receiver_id: current_enduser).count + PublicNotification.where(checked: false, enduser_id: current_enduser).count %>
+                <!--通知の数の合計-->
               </div>
             <% end %>
           <% end %>

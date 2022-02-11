@@ -12,6 +12,7 @@ class Store < ApplicationRecord
   has_many :markers, dependent: :destroy
   has_many :endusers, through: :markers
   has_many :store_notifications, dependent: :destroy
+  has_many :public_notifications
 
   attachment :profile_image, destroy: false
 

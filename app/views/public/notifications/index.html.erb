@@ -1,32 +1,47 @@
-<div class="container">
   <div class="row">
     <h2>通知一覧</h2>
     <div class="col-12 mt-5">
-    <% if @notifications.exists? || @order_notifications.exists? %>
-      <table class="table table-light">
-      <% @notifications.each do |notification| %>
-        <tr>
+    <% unless @notifications.where(checked: false).any? || @order_notifications.where(checked: false).any? %>
+    <!--どちらの通知もすべて既読ならtrueをかえす-->
+      <h4 class="text-right text-success">未読の通知はありません。</h4>
+    <% end %>
+    <% if @total_notifications.any? %>
+      <table class="table">
+      <% @total_notifications.each do |notification| %>
+        <% if notification.checked == true %>
+          <tr class="table-light">
+            <td>
+              <%= link_to notification_path(notification), method: :patch, class:"text-success" do %>
+                <i class="fa fa-check"></i>
+              <% end %>
+            </td>
+        <% else %>
+          <tr class="table-warning">
+            <td>
+              <%= link_to notification_path(notification), method: :patch, class:"text-success", style:"opacity: 40%;" do %>
+                <i class="fa fa-check"></i>
+              <% end %>
+            </td>
+        <% end %>
         <% case notification.action %>
           <% when 'like' then %>
             <td><%= notification.created_at.strftime('%Y/%m/%d') %></td>
             <td><%= link_to notification.sender.name, enduser_path(notification.sender) %>さんが<%= link_to 'あなたの投稿', post_path(notification.post) %>にいいねしました</td>
+            <td></td>
           <% when 'follow' then %>
             <td><%= notification.created_at.strftime('%Y/%m/%d') %></td>
             <td><%= link_to notification.sender.name, enduser_path(notification.sender) %>さんがあなたをフォローしました</td>
+            <td></td>
           <% when 'comment' then %>
             <td><%= notification.created_at.strftime('%Y/%m/%d') %></td>
             <td><%= link_to notification.sender.name, enduser_path(notification.sender) %>さんが<%= link_to 'あなたの投稿', post_path(notification.post) %>にコメントしました</td>
+            <td></td>
+          <% when 'complete' then %>
+            <td><%= notification.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= notification.store_order.created_at.strftime('%m/%d') %>に<%= link_to notification.store.name, store_path(notification.store) %>で注文した商品が届きました</td>
+            <td><%= link_to '詳細を見る', order_path(notification.store_order.order) %></td>
         <% end %>
-        </tr>
-      <% end %>
-      </table>
-      <table class="table table-light">
-      <% @order_notifications.each do |notification| %>
-        <tr>
-          <td><%= notification.created_at.strftime('%Y/%m/%d') %></td>
-          <td><%= notification.store_order.created_at.strftime('%m/%d') %>に<%= link_to notification.store.name, store_path(notification.store) %>で注文した商品が届きました</td>
-          <td><%= link_to '詳細を見る', order_path(notification.store_order.order) %></td>
-        </tr>
+          </tr>
       <% end %>
       </table>
     <% else %>
@@ -34,4 +49,3 @@
     <% end %>
     </div>
   </div>
-</div>
