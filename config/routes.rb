@@ -27,7 +27,7 @@ namespace :store do
   get 'unsubscribe' => 'stores#unsubscribe'
   patch 'withdraw' => 'stores#withdraw'
   resources :genres,except:[:show,:destroy]
-  resources :items,except:[:index,:destroy]
+  resources :items,except:[:index]
   resources :posts,except:[:edit,:index] do
     resources :post_comments,only: [:create,:destroy]
   end
