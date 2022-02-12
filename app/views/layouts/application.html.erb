@@ -66,6 +66,15 @@
               </div>
             <% end %>
           <% end %>
+        <% elsif admin_signed_in? %>
+          <%= link_to admin_notifications_path, class:"text-dark" do %>
+            <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
+            <% if AdminNotification.where(checked: false, admin_id: current_admin).any? %>
+              <div class="unchecked">
+                <%= AdminNotification.where(checked: false, admin_id: current_admin).count %>
+              </div>
+            <% end %>
+          <% end %>
         <% end %>
       </div>
       <% if admin_signed_in? %>

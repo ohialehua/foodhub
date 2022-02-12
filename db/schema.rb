@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_30_081138) do
+ActiveRecord::Schema.define(version: 2022_02_12_033909) do
+
+  create_table "admin_notifications", force: :cascade do |t|
+    t.integer "admin_id", null: false
+    t.integer "store_id", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false

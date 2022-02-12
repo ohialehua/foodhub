@@ -1,12 +1,12 @@
-class Store::NotificationsController < ApplicationController
-  before_action :authenticate_store!
+class Admin::NotificationsController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
-    @notifications = current_store.store_notifications.page(params[:page]).per(20)
+    @notifications = current_admin.admin_notifications.page(params[:page]).per(20)
   end
 
   def update
-    notification = StoreNotification.find(params[:id])
+    notification = AdminNotification.find(params[:id])
     if notification.checked == false
       notification.update_attributes(checked: true)
       redirect_to request.referer
@@ -20,8 +20,7 @@ class Store::NotificationsController < ApplicationController
 
   private
 
-  def store_notification_params
+  def admin_notification_params
     params.require(:public_notification).permit(:checked)
   end
-
 end

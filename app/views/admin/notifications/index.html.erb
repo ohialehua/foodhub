@@ -1,0 +1,34 @@
+  <div class="row">
+    <h2>通知一覧</h2>
+    <div class="col-12">
+    <% unless @notifications.where(checked: false).any? %>
+      <h4 class="text-right text-success">未読の通知はありません。</h4>
+    <% end %>
+    <% if @notifications.exists? %>
+      <table class="table table-light">
+      <% @notifications.each do |notification| %>
+        <% if notification.checked == true %>
+          <tr class="table-light">
+            <td>
+              <%= link_to admin_notification_path(notification), method: :patch, class:"text-success" do %>
+                <i class="fa fa-check"></i>
+              <% end %>
+            </td>
+        <% else %>
+          <tr class="table-warning">
+            <td>
+              <%= link_to admin_notification_path(notification), method: :patch, class:"text-success", style:"opacity: 40%;" do %>
+                <i class="fa fa-check"></i>
+              <% end %>
+            </td>
+        <% end %>
+            <td><%= notification.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%=link_to notification.store.name, admin_store_path(notification.store) %>さんが新規登録しました</td>
+          </tr>
+      <% end %>
+      </table>
+    <% else %>
+      <h4>通知はありません</h4>
+    <% end %>
+    </div>
+  </div>

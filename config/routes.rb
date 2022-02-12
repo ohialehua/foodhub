@@ -17,6 +17,7 @@ namespace :admin do
   get 'search' => 'search#search'
   resources :stores,only:[:show,:update] do
   end
+  resources :notifications, only: [:index,:update]
 end
 
 namespace :store do
