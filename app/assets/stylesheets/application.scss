@@ -22,12 +22,16 @@
   height: 75px;
 }
 
+.navbar-toggler {
+  margin-right: 80px;
+}
+
 .notifications {
   width: 30px;
   height: 30px;
   position: absolute;
-  right: 3%;
-  top: 4%;
+  right: 8%;
+  top: 33%;
 }
 
 .unchecked {
@@ -37,7 +41,18 @@
   background:rgba(255,69,0,0.8) ;
   border-radius: 9px;
   position: absolute;
-  right: 0%;
+  right: -200%;
+  top: 0%;
+}
+
+.unchecked_items {
+  text-align: center;
+  height: 17px;
+  width: 17px;
+  background:rgba(255,69,0,0.8) ;
+  border-radius: 9px;
+  position: absolute;
+  right: -30%;
   top: 0%;
 }
 

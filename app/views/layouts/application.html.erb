@@ -44,39 +44,55 @@
               <% end %>
             </ul>
           </div>
+          <div class="notifications d-inline-flex mr-3">
+            <% if enduser_signed_in? %>
+            <div class="cart mr-5">
+              <% if current_enduser.cart_items.exists? %>
+                <%= link_to item_path(current_enduser.cart_items.last.item), class:"text-dark" do %>
+                <!--最後に追加した商品の詳細ページ-->
+                  <i class="fa fa-cart-arrow-down fa-2x" style="color: #747a80;"></i>
+                  <div class="unchecked_items">
+                    <%= current_enduser.cart_items.count %>
+                  </div>
+                <% end %>
+              <% else %>
+                <%= link_to items_path, "data-confirm" => "カートに商品を追加してください", class:"text-dark" do %>
+                  <i class="fa fa-cart-arrow-down fa-2x" style="color: #747a80;"></i>
+                <% end %>
+              <% end %>
+            </div>
+            <%= link_to notifications_path, class:"text-dark" do %>
+              <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
+              <% if PublicNotification.where(checked: false, receiver_id: current_enduser).any? || PublicNotification.where(checked: false, enduser_id: current_enduser).any? %>
+                <div class="unchecked">
+                  <%= PublicNotification.where(checked: false, receiver_id: current_enduser).count + PublicNotification.where(checked: false, enduser_id: current_enduser).count %>
+                  <!--通知の数の合計-->
+                </div>
+              <% end %>
+            <% end %>
+          <% elsif store_signed_in? %>
+            <%= link_to store_notifications_path, class:"text-dark" do %>
+              <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
+              <% if StoreNotification.where(checked: false, store_id: current_store).any? %>
+                <div class="unchecked">
+                  <%= StoreNotification.where(checked: false, store_id: current_store).count %>
+                </div>
+              <% end %>
+            <% end %>
+          <% elsif admin_signed_in? %>
+            <%= link_to admin_notifications_path, class:"text-dark" do %>
+              <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
+              <% if AdminNotification.where(checked: false, admin_id: current_admin).any? %>
+                <div class="unchecked">
+                  <%= AdminNotification.where(checked: false, admin_id: current_admin).count %>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+          </div>
         </div>
       </nav>
-      <div class="notifications">
-        <% if enduser_signed_in? %>
-          <%= link_to notifications_path, class:"text-dark" do %>
-            <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
-            <% if PublicNotification.where(checked: false, receiver_id: current_enduser).any? || PublicNotification.where(checked: false, enduser_id: current_enduser).any? %>
-              <div class="unchecked">
-                <%= PublicNotification.where(checked: false, receiver_id: current_enduser).count + PublicNotification.where(checked: false, enduser_id: current_enduser).count %>
-                <!--通知の数の合計-->
-              </div>
-            <% end %>
-          <% end %>
-        <% elsif store_signed_in? %>
-          <%= link_to store_notifications_path, class:"text-dark" do %>
-            <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
-            <% if StoreNotification.where(checked: false, store_id: current_store).any? %>
-              <div class="unchecked">
-                <%= StoreNotification.where(checked: false, store_id: current_store).count %>
-              </div>
-            <% end %>
-          <% end %>
-        <% elsif admin_signed_in? %>
-          <%= link_to admin_notifications_path, class:"text-dark" do %>
-            <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
-            <% if AdminNotification.where(checked: false, admin_id: current_admin).any? %>
-              <div class="unchecked">
-                <%= AdminNotification.where(checked: false, admin_id: current_admin).count %>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
+
       <% if admin_signed_in? %>
         <%= render 'layouts/admin_search' %>
       <% elsif store_signed_in? %>
