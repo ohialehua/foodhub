@@ -48,13 +48,6 @@ class Store::ItemsController < ApplicationController
     end
   end
 
-  def destroy
-    @item = Item.find(params[:id])
-    @item.destroy
-    redirect_to store_root_path
-    flash[:danger] = "商品名[#{@item.name}]を削除しました"
-  end
-
   private
   def item_params
     params.require(:item).permit(:genre_id, :name, :body, :price_before_tax, :image, :is_active)
