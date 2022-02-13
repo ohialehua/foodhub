@@ -2,6 +2,7 @@ class Public::NotificationsController < ApplicationController
   before_action :authenticate_enduser!
 
   def index
+    # 紐づいてるidがreceiver_idとenduser_idと違うので分けて考える
     @notifications = current_enduser.passive_public_notifications.page(params[:page])
     @order_notifications = current_enduser.public_notifications.where(action: 'complete').page(params[:page])
     @total_notifications = @notifications | @order_notifications

@@ -13,6 +13,7 @@ class Store::HomesController < ApplicationController
   def ensure_store_status
     if current_store.is_deleted == true
       current_store.create_admin_notification_sign_up(current_store, 1)
+      # 管理者に新規登録の通知
       sign_out_and_redirect(current_store)
     end
   end
