@@ -68,7 +68,7 @@ class Enduser < ApplicationRecord
     end
   end
 
-  #エンドユーザー→加盟店のお気に入り通知
+  #エンドユーザー → 加盟店のお気に入り追加通知
   def create_store_notification_mark(current_enduser, store_id)
     notification = StoreNotification.where(["enduser_id = ? and store_id = ? and action = ? ",current_enduser.id, store_id, 'mark'])
     #検索が複数条件で複雑化しているのでプレースホルダを記述(SQLインジェクション対策)

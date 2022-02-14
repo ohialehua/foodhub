@@ -69,7 +69,7 @@ class Post < ApplicationRecord
     public_notification.save if public_notification.valid?
   end
 
-  #エンドユーザー→加盟店のいいね通知
+  #エンドユーザー → 加盟店のいいね通知
   def create_store_notification_like(current_enduser)
     notification = StoreNotification.where(["enduser_id = ? and store_id = ? and post_id = ? and action = ? ", current_enduser.id, store_id, id, 'like'])
     #検索が複数条件で複雑化しているのでプレースホルダを記述(SQLインジェクション対策)

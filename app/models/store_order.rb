@@ -35,7 +35,7 @@ class StoreOrder < ApplicationRecord
     end
   end
 
-  #加盟店→エンドユーザーの発送完了通知
+  #加盟店 → エンドユーザーの発送完了通知
   def create_public_notification_complete(current_store, store_order_id, enduser_id)
     notification = PublicNotification.where(["store_id = ? and enduser_id = ? and store_order_id = ? and action = ? ",current_store.id, enduser_id, store_order_id, 'complete'])
     #検索が複数条件で複雑化しているのでプレースホルダを記述(SQLインジェクション対策)
