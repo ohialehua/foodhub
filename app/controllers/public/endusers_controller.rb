@@ -3,9 +3,9 @@ class Public::EndusersController < ApplicationController
   before_action :ensure_correct_enduser, only: [:edit, :update]
 
   def index
-    @endusers = Enduser.page(params[:enduser_page]).per(1)
-    @followings = current_enduser.followings.page(params[:following_page]).per(1)
-    @followers = current_enduser.followers.page(params[:follower_page]).per(1)
+    @endusers = Enduser.page(params[:enduser_page])
+    @followings = current_enduser.followings.page(params[:following_page])
+    @followers = current_enduser.followers.page(params[:follower_page])
   end
 
   def show
