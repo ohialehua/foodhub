@@ -25,10 +25,10 @@
               <div class="card-text text-right">
                 <%= (item.with_tax_price).to_s(:delmited) + "円" %>
               <% if item.is_active? == true %>
-					      <span class="badge" style="background:#8BCE9A">販売中</span>
-				      <% else %>
-					      <span class="badge" style="background:#D52438">販売停止中</span>
-				      <% end %>
+                <span class="badge" style="background:#8BCE9A">販売中</span>
+              <% else %>
+                <span class="badge" style="background:#D52438">販売停止中</span>
+              <% end %>
               </div>
             </div>
           </div>
