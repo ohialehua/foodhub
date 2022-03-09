@@ -67,7 +67,7 @@
                 <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
                 <% if PublicNotification.where(checked: false, receiver_id: current_enduser).any? || PublicNotification.where(checked: false, enduser_id: current_enduser).any? %>
                 <!--PublicNotificatiionでチェックのされていないもので、receiver_idもしくはenduser_idがcurrent_enduser.idと一致するものが一個でもある場合-->
-                  <div class="unchecked">
+                  <div class="unchecked-public">
                     <%= PublicNotification.where(checked: false, receiver_id: current_enduser).count + PublicNotification.where(checked: false, enduser_id: current_enduser).count %>
                     <!--通知の数の合計-->
                   </div>
