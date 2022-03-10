@@ -13,6 +13,7 @@
             <h4 class="mx-3"><%= @item.body %></h4>
           </div>
           <div class="text-right mt-2 mb-5">
+          <!--アイテムが販売中なら-->
           <% if @item.is_active == true %>
             <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true do |f| %>
               <%= f.hidden_field :item_id, value: @item.id %>
@@ -71,7 +72,7 @@
       </table>
       <table class="table table-borderless table-dark" style="opacity: 0.8;">
         <tr>
-          <td>合計金額</td>
+          <td>合計金額</td><!--切り捨て標示-->
           <td><%= @total.round.to_s(:delimited) + "円" %></td>
         </tr>
       </table>
