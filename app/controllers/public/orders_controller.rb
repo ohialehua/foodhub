@@ -63,7 +63,7 @@ class Public::OrdersController < ApplicationController
           #
           # 支払方法がカードなら
           if params[:order][:pay_method] == "credit_card"
-            order.store_orders.update(order_status: 1)
+            @store.store_orders.update(order_status: 1)
             order_detail.update(product_status: 1)
             # 注文ステータスを"入金確認"、製作ステータスを"製作待ち"に変更
           end
