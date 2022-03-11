@@ -59,7 +59,14 @@ class Public::OrdersController < ApplicationController
           end
           #
           # OrderDetailモデルの作成
-          OrderDetail.create(store_order_id: store_order_id, order_id: order.id, item_id: c.item_id, order_quantity: c.quantity, price_after_tax: c.item.with_tax_price)
+          order_detail = OrderDetail.create(store_order_id: store_order_id, order_id: order.id, item_id: c.item_id, order_quantity: c.quantity, price_after_tax: c.item.with_tax_price)
+          #
+          # 支払方法がカードなら
+          if params[:order][:pay_method] == "credit_card"
+            order.store_orders.update(order_status: 1)
+            order_detail.update(product_status: 1)
+            # 注文ステータスを"入金確認"、製作ステータスを"製作待ち"に変更
+          end
           #
         end
         cart_items.destroy_all
