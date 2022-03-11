@@ -3,12 +3,14 @@
   <table class="table table-borderless table-dark table-hover text-center" style="opacity: 0.8;">
     <tbody>
       <tr>
-        <th class="text-center"><h5>followers</h5></th>
+        <th class="text-center" colspan="2"><h5>followers</h5></th>
       </tr>
     <% followers.each do |follower| %>
       <tr>
         <td>
           <%= attachment_image_tag(follower, :profile_image, size:"30x30", fallback: "no_image.png") %>
+        </td>
+        <td class="text-left">
           <%= link_to follower.name, enduser_path(follower), class:"text-white" %>
         </td>
       </tr>
