@@ -1,5 +1,7 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_enduser!
+  # 本来のcontrollerの役割以上のことを書いて見づらくなっているものをfat controllerという。
+  # mvcアーキテクチャの問題点である。 
 
   def new
     if current_enduser.deliveries.present?
