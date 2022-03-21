@@ -2,6 +2,7 @@ class Public::OrdersController < ApplicationController
   before_action :authenticate_enduser!
   # 本来のcontrollerの役割以上のことを書いて見づらくなっているものをfat controllerという。
   # mvcアーキテクチャだと3つまでにしか分担できないためこのような事態が起こって可読性が下がるのは問題点である。 
+  # modelとviewの結びつきを疎にしたMVP(Presenter)や双方向データバインディングの形で結びつけるMVVM(ViewModel)などがある。
 
   def new
     if current_enduser.deliveries.present?
