@@ -36,7 +36,7 @@ class Public::OrdersController < ApplicationController
       @order.post_address = @delivery.post_address
       @order.address = @delivery.address
       @order.name = @delivery.name
-  #(else それいがいならフォームに入力された値)
+  #(else それ以外ならフォームに入力された値)
     end
   end
 
@@ -73,7 +73,7 @@ class Public::OrdersController < ApplicationController
           #
         end
         cart_items.destroy_all
-        #カード決済
+        #カード決済(Pay.jpのテストモード)
         if params[:order][:pay_method] == "credit_card"
           Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
           Payjp::Charge.create(
