@@ -1,6 +1,7 @@
 class Public::EndusersController < ApplicationController
   before_action :authenticate_enduser!
   before_action :ensure_correct_enduser, only: [:edit, :update]
+  # @enduser = Enduser.find(params[:id])をbefore_actionで呼び出すと記述量が減る
 
   def index
     @endusers = Enduser.page(params[:enduser_page])
