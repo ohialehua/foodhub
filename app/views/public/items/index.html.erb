@@ -3,7 +3,9 @@
     <div class="col-md-10">
       <h3 class="mt-5">ランキング</h3>
       <div class="row row-cols-3 row-cols-lg-5 row-eq-height">
+      <!--@rank_itemsと1から始まる数値iのそれぞれに対して-->
       <% @rank_items.each.with_index(1) do |item, i| %>
+        <!--加盟店が退会していないなら-->
         <% if item.store.is_deleted == false %>
         <div class="rank_item col mx-auto my-5">
           <% if i == 1 %>
