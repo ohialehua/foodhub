@@ -76,6 +76,7 @@
           <td><%= @total.round.to_s(:delimited) + "円" %></td>
         </tr>
       </table>
+      <!--カート内商品が1個以上あるなら-->
       <% if @cart_items.count != 0 %>
         <p class="text-center"><%= link_to "注文に進む", new_order_path, class:"btn btn-primary ml-4 mb-3" %></p>
       <% end %>
