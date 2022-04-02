@@ -23,6 +23,7 @@
               <% end %>
             </td>
         <% end %>
+        <!--通知の種類によって場合分け-->
         <% case notification.action %>
           <% when 'like' then %>
             <td><%= notification.created_at.strftime('%Y/%m/%d') %></td>
