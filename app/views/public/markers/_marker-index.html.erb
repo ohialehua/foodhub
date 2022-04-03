@@ -6,6 +6,7 @@
   </thead>
   <tbody>
   <% markers.each do |marker| %>
+    <!--店舗のステータスが有効ならば-->
     <% if marker.store.is_deleted == false %>
       <tr>
         <td><%= link_to marker.store.name, store_path(marker.store), class:"text-white" %></td>
