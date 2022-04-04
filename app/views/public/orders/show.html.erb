@@ -72,6 +72,7 @@
             <td>小計</td>
           </tr>
         <% @store_total = 0 %>
+        <!--加盟店ごとの合計金額-->
         <% store_order.order_details.each do |order_detail| %>
           <tr>
             <td><%= order_detail.item.name %></td>
