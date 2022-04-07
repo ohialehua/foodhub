@@ -19,6 +19,7 @@
       </td>
       <td><%= post_comment.comment %></td>
       <td>
+      <!--コメントした当人なら削除ボタンが表示-->
       <% if post_comment.enduser == current_enduser %>
         <%= link_to 'Destroy', post_post_comment_path(post_comment.post, post_comment), method: :delete, local: true, class: "btn btn-sm btn-danger" %>
       <% end %>
