@@ -13,6 +13,7 @@
     <div class='col-md-8'>
       <h2>Post detail</h2>
       <div class="row">
+        <!--投稿をエンドユーザーのものと加盟店のものとで場合分けする-->
   		  <% if @post.enduser_id.present? %>
         <div class="col-lg-6 pl-5 text-center">
           <div class="text-right d-inline-flex">
