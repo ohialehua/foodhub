@@ -27,6 +27,7 @@
           </div>
           <br>
           <%= attachment_image_tag @post, :post_image, size: "300x300", fallback: "no_image.png" %><br>
+          <!--このエンドユーザーが投稿したエンドユーザーと一緒なら-->
           <% if @enduser == current_enduser %>
             <p class="text-right mt-2 mr-5"><%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@post.id}"%></p>
           <% end %>
