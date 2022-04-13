@@ -1,11 +1,13 @@
 <div class="container px-5 px-sm-0">
   <h1>"<%= @word %>"での検索結果</h1>
+<!--エンドユーザー検索-->
 <% if @range == '1' %>
   <% if @endusers.count == 0 %>
     <h2>検索結果がありませんでした</h2>
   <% else %>
     <%= render 'public/endusers/index', endusers: @endusers %>
   <% end %>
+<!--加盟店検索-->
 <% elsif @range == '2' %>
   <% if @stores.count == 0 %>
     <h2>検索結果がありませんでした</h2>
@@ -16,6 +18,7 @@
       </div>
     </div>
   <% end %>
+<!--商品検索-->
 <% else %>
   <% if @items.count == 0 %>
     <h2>検索結果がありませんでした</h2>
