@@ -1,6 +1,7 @@
 <div class="col-3 d-inline-block mb-3">
   <%= attachment_image_tag(store, :profile_image, :fill, 100, 100, size:"100x100", fallback: "no_image.png") %>
 </div>
+<!--管理者以外がログインしているならば-->
 <% unless admin_signed_in? %>
   <div class="col-7 offset-1 d-inline-flex">
     <div class="markers_count_<%= store.id %> py-4 mx-5">
