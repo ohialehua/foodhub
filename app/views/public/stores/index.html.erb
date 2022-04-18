@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-10">
       <h2 class="mt-5">加盟店一覧</h2>
+      <!--加盟店の並び替え方法-->
       <%= form_with model: @store, url: stores_path, method: :get, class:"text-right mt-5", local: true do |f| %>
         <%= f.select :selection, [['フォロワーが多い順','markers'],['商品が多い順','items'],['投稿が多い順','posts'],['古い順','old'],['新しい順','new']], { include_blank: "選択してください" } %>
         <%= f.submit "sort" %>
