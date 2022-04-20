@@ -52,6 +52,7 @@
               <%= store_order.order.name %><br>
             </td>
             <td>
+            <!--この加盟店での購入金額累計-->
             <% @store_order_total_price = 0 %>
 				    <% store_order.order_details.each do |order_detail| %>
 				      <%= order_detail.item.name %>×<%= order_detail.order_quantity %></br>
