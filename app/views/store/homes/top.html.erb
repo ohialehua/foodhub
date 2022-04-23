@@ -27,6 +27,7 @@
           </tr>
           <tr>
             <td>ステータス</td>
+          <!--加盟店が退会していないなら-->
           <% if @store.is_deleted? == false %>
 				     <td class="text-success">有効なアカウント</td>
 				  <% else %>
