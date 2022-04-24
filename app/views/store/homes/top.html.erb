@@ -82,6 +82,7 @@
     	      <th scope="low"><%= item.genre.name %></th>
     	      <th></th>
     	      <th scope="low">
+    	       <!--商品ステータスが有効なら-->
     	      <% if item.is_active? == true %>
 					    <span class="badge" style="background:#8BCE9A">販売中</span>
 				    <% else %>
