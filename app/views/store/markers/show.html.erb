@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-11">
     <h3 class=""><%= @enduser.name %> さんの注文履歴一覧</h3>
+    <!--この加盟店での注文履歴があるのならば-->
     <% if @store_orders.present? %>
 		  <table class="table table-borderless table-dark mt-5" style="opacity: 0.8;">
 		    <thead class="thead-dark">
