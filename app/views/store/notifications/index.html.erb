@@ -1,6 +1,7 @@
   <div class="row">
     <h2>通知一覧</h2>
     <div class="col-12">
+    <!--未読のメッセージが無いのならば-->
     <% unless @notifications.where(checked: false).any? %>
       <h4 class="text-right text-success">未読の通知はありません。</h4>
     <% end %>
