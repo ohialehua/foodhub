@@ -5,6 +5,7 @@
     <% unless @notifications.where(checked: false).any? %>
       <h4 class="text-right text-success">未読の通知はありません。</h4>
     <% end %>
+    <!--通知があるならば-->
     <% if @notifications.exists? %>
       <table class="table table-light">
       <% @notifications.each do |notification| %>
