@@ -17,7 +17,7 @@
         </div>
   		</div>
     </div>
-    
+
     <div class="col-md-5 offset-1">
       <h4><strong>紹介文</strong></h4>
       <div class="m-3">
@@ -35,6 +35,7 @@
             <tr>
               <td>
                 <%= attachment_image_tag(post_comment.store, :profile_image, :fill, 100, 100, fallback: "no_image.png", size:'50x50') %><br>
+                <!--コメントしたユーザーが会員か加盟店化で場合分け-->
                 <% if post_comment.enduser_id.present? %>
                   <%= post_comment.enduser.name %>
                 <% else %>
@@ -52,7 +53,7 @@
         </tbody>
       </table>
     </div>
-    
+
     <div class="text-right mt-5 mb-3">
       <%= form_with model:[@post, @comment], url: store_post_post_comments_path(@post), local: true do |f| %>
 　　　　<%= f.text_area :comment %>
