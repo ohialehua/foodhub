@@ -44,6 +44,7 @@
               </td>
               <td><%= post_comment.comment %></td>
               <td>
+                <!--コメントしたのが加盟店だったら-->
                 <% if post_comment.store == current_store %>
                   <%= link_to 'Destroy', store_post_post_comment_path(post_comment.post, post_comment), method: :delete, local: true, class: "btn btn-sm btn-danger" %>
                 <% end %>
